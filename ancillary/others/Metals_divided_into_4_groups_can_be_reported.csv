@@ -1,0 +1,58 @@
+Name,ID,Groups,"U01, U02, U03 (Energy recovery)",H10 (Metal recovery),H20 (Solvent recovey),H39 (Other recovery)
+Antimony,7440360,Parent Metals,NO,YES,NO,YES
+Arsenic,7440382,Parent Metals,NO,YES,NO,YES
+Barium,7440393,Parent Metals,NO,YES,NO,YES
+Beryllium,7440417,Parent Metals,NO,YES,NO,YES
+Cadmium,7440439,Parent Metals,NO,YES,NO,YES
+Chromium,7440473,Parent Metals,NO,YES,NO,YES
+Cobalt,7440484,Parent Metals,NO,YES,NO,YES
+Copper,7440508,Parent Metals,NO,YES,NO,YES
+Lead,7439921,Parent Metals,NO,YES,NO,YES
+Manganese,7439965,Parent Metals,NO,YES,NO,YES
+Mercury,7439976,Parent Metals,NO,YES,NO,YES
+Nickel,7440020,Parent Metals,NO,YES,NO,YES
+Selenium,7782492,Parent Metals,NO,YES,NO,YES
+Silver,7440224,Parent Metals,NO,YES,NO,YES
+Thallium,7440280,Parent Metals,NO,YES,NO,YES
+Antimony Compounds,N010,Metal Compound Categories,NO,YES,NO,YES
+Arsenic Compounds,N020,Metal Compound Categories,NO,YES,NO,YES
+Barium Compounds,N040,Metal Compound Categories,NO,YES,NO,YES
+Beryllium Compounds,N050,Metal Compound Categories,NO,YES,NO,YES
+Cadmium Compounds,N078,Metal Compound Categories,NO,YES,NO,YES
+Chromium Compounds,N090,Metal Compound Categories,NO,YES,NO,YES
+Cobalt Compounds,N096,Metal Compound Categories,NO,YES,NO,YES
+Copper Compounds,N100,Metal Compound Categories,NO,YES,NO,YES
+Lead Compounds,N420,Metal Compound Categories,NO,YES,NO,YES
+Manganese Compounds,N450,Metal Compound Categories,NO,YES,NO,YES
+Mercury Compounds,N458,Metal Compound Categories,NO,YES,NO,YES
+Nickel Compounds,N495,Metal Compound Categories,NO,YES,NO,YES
+Selenium Compounds,N725,Metal Compound Categories,NO,YES,NO,YES
+Silver Compounds,N740,Metal Compound Categories,NO,YES,NO,YES
+Thallium Compounds,N760,Metal Compound Categories,NO,YES,NO,YES
+Vanadium Compounds,N770,Metal Compound Categories,NO,YES,NO,YES
+Zinc Compounds,N982,Metal Compound Categories,NO,YES,NO,YES
+Aluminum (fume or dust),7429905,Metals with Qualifiers,NO,YES,NO,YES
+Vanadium (except when in an alloy) ,7440622,Metals with Qualifiers,NO,YES,NO,YES
+Zinc (fume or dust),7440666,Metals with Qualifiers,NO,YES,NO,YES
+Bis(tributyltin) oxide,56359,Individually-Listed Metal Compounds,YES,YES,YES,YES
+Triphenyltin hydroxide,76879,Individually-Listed Metal Compounds,YES,YES,YES,YES
+Triphenyltin chloride,639587,Individually-Listed Metal Compounds,YES,YES,YES,YES
+Molybdenum trioxide,1313275,Individually-Listed Metal Compounds,YES,YES,YES,YES
+Thorium dioxide,1314201,Individually-Listed Metal Compounds,YES,YES,YES,YES
+Asbestos (friable),1332214,Individually-Listed Metal Compounds,NO,YES,YES,YES
+Aluminum oxide (fibrous forms),1344281,Individually-Listed Metal Compounds,YES,YES,YES,YES
+Tributyltin fluoride,1983104,Individually-Listed Metal Compounds,YES,YES,YES,YES
+Tributyltin methacrylate,2155706,Individually-Listed Metal Compounds,YES,YES,YES,YES
+Titanium tetrachloride,7550450,Individually-Listed Metal Compounds,YES,YES,YES,YES
+Boron trifluoride,7637072,Individually-Listed Metal Compounds,YES,YES,YES,YES
+Metiram,9006422,Individually-Listed Metal Compounds,YES,YES,YES,YES
+Boron trichloride,10294345,Individually-Listed Metal Compounds,YES,YES,YES,YES
+Zineb,12122677,Individually-Listed Metal Compounds,YES,YES,YES,YES
+Maneb,12427382,Individually-Listed Metal Compounds,YES,YES,YES,YES
+Fenbutatin oxide,13356086,Individually-Listed Metal Compounds,YES,YES,YES,YES
+Iron pentacarbonyl,13463406,Individually-Listed Metal Compounds,YES,YES,YES,YES
+Ferbam,14484641,Individually-Listed Metal Compounds,YES,YES,YES,YES
+C.I. Direct Brown 95,16071866,Individually-Listed Metal Compounds,YES,YES,YES,YES
+Osmium tetroxide,20816120,Individually-Listed Metal Compounds,YES,YES,YES,YES
+Aluminum phosphide,20859738,Individually-Listed Metal Compounds,YES,YES,YES,YES
+C.I. Direct Blue 218,28407376,Individually-Listed Metal Compounds,YES,YES,YES,YES

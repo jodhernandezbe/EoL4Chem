@@ -1,0 +1,68 @@
+2007 NAICS US Code,Industrial Sector Code,Title
+11,IS1,"Agriculture, Forestry, Fishing and Hunting"
+211,IS2,"Oil and Gas Drilling, Extraction, and Support Activities"
+212,IS3,Mining (except Oil and Gas)
+22,IS4,Utilities
+23,IS5,Construction
+311,IS6,"Food, beverage, and tobacco product manufacturing"
+312,IS6,"Food, beverage, and tobacco product manufacturing"
+313,IS7,"Textiles, apparel, and leather manufacturing"
+314,IS7,"Textiles, apparel, and leather manufacturing"
+315,IS7,"Textiles, apparel, and leather manufacturing"
+316,IS7,"Textiles, apparel, and leather manufacturing"
+321,IS8,Wood Product Manufacturing
+322,IS9,Paper Manufacturing
+323,IS10,Printing and Related Support Activities
+32411,IS11,Petroleum Refineries
+32412,IS12,"Asphalt Paving, Roofing, and Coating Materials Manufacturing"
+324191,IS13,Petroleum Lubricating Oil and Grease Manufacturing
+324199,IS14,All Other Petroleum and Coal Products Manufacturing
+32511,IS15,Petrochemical Manufacturing
+32512,IS16,Industrial Gas Manufacturing
+32513,IS17,Synthetic Dye and Pigment Manufacturing
+325182,IS18,Carbon Black Manufacturing
+32518,IS19,All Other Basic Inorganic Chemical Manufacturing
+325192,IS20,Cyclic Crude and Intermediate Manufacturing
+32519,IS21,All Other Basic Organic Chemical Manufacturing
+325211,IS22,Plastics Material and Resin Manufacturing
+325212,IS23,Synthetic Rubber Manufacturing
+325221,IS24,Organic Fiber Manufacturing
+325222,IS24,Organic Fiber Manufacturing
+3253,IS25,"Pesticide, Fertilizer, and Other Agricultural Chemical Manufacturing"
+3254,IS26,Pharmaceutical and Medicine Manufacturing
+32551,IS27,Paint and Coating Manufacturing
+32552,IS28,Adhesive Manufacturing
+3256,IS29,"Soap, Cleaning Compound, and Toilet Preparation Manufacturing"
+32591,IS30,Printing Ink Manufacturing
+32592,IS31,Explosives Manufacturing
+325991,IS32,Custom Compounding of Purchased Resins
+325992,IS33,"Photographic Film, Paper, Plate, and Chemical Manufacturing"
+325998,IS34,All Other Chemical Product and Preparation Manufacturing
+3261,IS35,Plastics Product Manufacturing
+3262,IS36,Rubber Product Manufacturing
+327,IS37,"Nonmetallic Mineral Product Manufacturing (includes clay, glass, cement, concrete, lime, gypsum, and other nonmetallic mineral product manufacturing)"
+331,IS38,Primary Metal Manufacturing
+332,IS39,Fabricated Metal Product Manufacturing
+333,IS40,Machinery Manufacturing
+334,IS41,Computer and Electronic Product Manufacturing
+335,IS42,"Electrical Equipment, Appliance, and Component Manufacturing"
+336,IS43,Transportation Equipment Manufacturing
+337,IS44,Furniture and Related Product Manufacturing
+339,IS45,Miscellaneous Manufacturing
+42,IS44,Wholesale and Retail Trade
+44,IS45,Wholesale and Retail Trade
+45,IS46,Wholesale and Retail Trade
+48,IS46,Wholesale and Retail Trade
+49,IS46,Wholesale and Retail Trade
+51,IS47,Services
+52,IS47,Services
+53,IS47,Services
+54,IS47,Services
+55,IS47,Services
+56,IS47,Services
+61,IS47,Services
+62,IS47,Services
+71,IS47,Services
+72,IS47,Services
+81,IS47,Services
+,IS48,Other

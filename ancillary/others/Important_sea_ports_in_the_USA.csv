@@ -1,0 +1,108 @@
+Container Ports,Dry Bulk Ports,Tonnage Ports,Latitude,Longitude,Port ID,Port Profile Name,Region,Dry only
+Container,,,42.350939,-71.05229,149,Port of Boston,Atlantic Coast,No
+Container,,,42.350939,-71.05229,149,Port of Boston,Atlantic Coast,No
+Container,,,42.350939,-71.05229,149,Port of Boston,Atlantic Coast,No
+Container,,,42.350939,-71.05229,149,Port of Boston,Atlantic Coast,No
+Container,,,42.350939,-71.05229,149,Port of Boston,Atlantic Coast,No
+Container,,,30.322757,-81.665125,2017,Port of Jacksonville,Atlantic Coast,No
+Container,,,30.322757,-81.665125,2017,Port of Jacksonville,Atlantic Coast,No
+Container,,,30.322757,-81.665125,2017,Port of Jacksonville,Atlantic Coast,No
+Container,,,26.76904,-80.05267,2162,Port of Palm Beach,Atlantic Coast,No
+Container,,,26.76904,-80.05267,2162,Port of Palm Beach,Atlantic Coast,No
+Container,,,26.093392,-80.117801,2163,Port Everglades,Atlantic Coast,No
+Container,,,26.093392,-80.117801,2163,Port Everglades,Atlantic Coast,No
+Container,,,26.093392,-80.117801,2163,Port Everglades,Atlantic Coast,No
+Container,,,25.782862,-80.181642,2164,Port of Miami,Atlantic Coast,No
+Container,,,25.782862,-80.181642,2164,Port of Miami,Atlantic Coast,No
+Container,Dry Bulk,Tonnage,40.673949,-74.038357,398,Port of New York and New Jersey,Atlantic Coast,No
+Container,Dry Bulk,Tonnage,40.673949,-74.038357,398,Port of New York and New Jersey,Atlantic Coast,No
+Container,Dry Bulk,Tonnage,40.673949,-74.038357,398,Port of New York and New Jersey,Atlantic Coast,No
+Container,Dry Bulk,Tonnage,40.673949,-74.038357,398,Port of New York and New Jersey,Atlantic Coast,No
+Container,,Tonnage,39.91882,-75.202191,552,Port of Philadelphia,Atlantic Coast,No
+Container,,Tonnage,39.91882,-75.202191,552,Port of Philadelphia,Atlantic Coast,No
+Container,,Tonnage,39.91882,-75.202191,552,Port of Philadelphia,Atlantic Coast,No
+Container,,,39.71589,-75.50697,554,Port of Wilmington (DE),Atlantic Coast,No
+Container,,,39.71589,-75.50697,554,Port of Wilmington (DE),Atlantic Coast,No
+Container,,,39.71589,-75.50697,554,Port of Wilmington (DE),Atlantic Coast,No
+Container,Dry Bulk,Tonnage,36.86642,-76.31174,5700,Port of Virginia,Atlantic Coast,No
+Container,Dry Bulk,Tonnage,36.86642,-76.31174,5700,Port of Virginia,Atlantic Coast,No
+Container,Dry Bulk,Tonnage,39.20899,-76.51712,700,Port of Baltimore,Atlantic Coast,No
+Container,Dry Bulk,Tonnage,39.20899,-76.51712,700,Port of Baltimore,Atlantic Coast,No
+Container,,,34.239278,-77.953954,766,Port of Wilmington (NC),Atlantic Coast,No
+Container,,,34.239278,-77.953954,766,Port of Wilmington (NC),Atlantic Coast,No
+Container,,,34.239278,-77.953954,766,Port of Wilmington (NC),Atlantic Coast,No
+Container,,,32.788781,-79.921595,773,Port of Charleston,Atlantic Coast,No
+Container,,,32.788781,-79.921595,773,Port of Charleston,Atlantic Coast,No
+Container,,,32.788781,-79.921595,773,Port of Charleston,Atlantic Coast,No
+Container,,,32.788781,-79.921595,773,Port of Charleston,Atlantic Coast,No
+Container,,,32.788781,-79.921595,773,Port of Charleston,Atlantic Coast,No
+Container,,Tonnage,32.084711,-81.095382,776,Port of Savannah,Atlantic Coast,No
+Container,,Tonnage,32.084711,-81.095382,776,Port of Savannah,Atlantic Coast,No
+Container,,Tonnage,32.084711,-81.095382,776,Port of Savannah,Atlantic Coast,No
+Container,,Tonnage,32.084711,-81.095382,776,Port of Savannah,Atlantic Coast,No
+,Dry Bulk,,41.47852,-81.67191,3217,Port of Cleveland,Great Lakes,Yes
+,Dry Bulk,,42.269094,-83.109586,3321,Port of Detroit,Great Lakes,Yes
+,Dry Bulk,,41.67586,-87.44547,3738,Port of Indiana Harbor,Great Lakes,Yes
+,Dry Bulk,,41.88662,-87.63799,3749,Port of Chicago,Great Lakes,Yes
+,Dry Bulk,Tonnage,46.778362,-92.096408,3924,Port of Duluth-Superior,Great Lakes,No
+,Dry Bulk,,47.00428,-91.66261,3926,Port of Two Harbors,Great Lakes,Yes
+,,Tonnage,30.34802,-88.55879,2004,Port of Pascagoula,Gulf Coast & Mississippi River,No
+Container,Dry Bulk,Tonnage,30.72527,-88.04113,2005,Port of Mobile,Gulf Coast & Mississippi River,No
+,Dry Bulk,Tonnage,27.78534,-82.52235,2021,Port of Tampa,Gulf Coast & Mississippi River,No
+,Dry Bulk,Tonnage,27.78534,-82.52235,2021,Port of Tampa,Gulf Coast & Mississippi River,No
+Container,Dry Bulk,Tonnage,29.72789,-95.1535,2031,Port of Houston,Gulf Coast & Mississippi River,No
+Container,Dry Bulk,Tonnage,29.72789,-95.1535,2031,Port of Houston,Gulf Coast & Mississippi River,No
+Container,Dry Bulk,Tonnage,29.72789,-95.1535,2031,Port of Houston,Gulf Coast & Mississippi River,No
+Container,,,30.35216,-89.08533,2083,Port of Gulfport,Gulf Coast & Mississippi River,No
+Container,,,30.35216,-89.08533,2083,Port of Gulfport,Gulf Coast & Mississippi River,No
+Container,,,18.442329,-66.09989,2136,Port of San Juan,Gulf Coast & Mississippi River,No
+Container,,,18.442329,-66.09989,2136,Port of San Juan,Gulf Coast & Mississippi River,No
+Container,,,18.442329,-66.09989,2136,Port of San Juan,Gulf Coast & Mississippi River,No
+Container,Dry Bulk,Tonnage,29.91414,-90.085256,2251,Port of New Orleans,Gulf Coast & Mississippi River,No
+Container,Dry Bulk,Tonnage,29.91414,-90.085256,2251,Port of New Orleans,Gulf Coast & Mississippi River,No
+,Dry Bulk,Tonnage,30.42292,-91.19934,2252,Port of Greater Baton Rouge,Gulf Coast & Mississippi River,No
+,Dry Bulk,Tonnage,30.42292,-91.19934,2252,Port of Greater Baton Rouge,Gulf Coast & Mississippi River,No
+,Dry Bulk,Tonnage,30.03345,-90.61794,2253,Port of South Louisiana,Gulf Coast & Mississippi River,No
+,,Tonnage,30.106406,-93.286839,2254,Port of Lake Charles,Gulf Coast & Mississippi River,No
+,Dry Bulk,Tonnage,29.480004,-89.687447,2255,Port of Plaquemines,Gulf Coast & Mississippi River,No
+,Dry Bulk,Tonnage,38.56954,-90.22961,2310,Port of Metropolitan St. Louis,Gulf Coast & Mississippi River,No
+,Dry Bulk,Tonnage,38.56954,-90.22961,2310,Port of Metropolitan St. Louis,Gulf Coast & Mississippi River,No
+,Dry Bulk,Tonnage,39.09403,-84.5045,2338,Ports of Cincinnati-Northern KY,Gulf Coast & Mississippi River,No
+,Dry Bulk,Tonnage,38.43361,-82.41998,2348,Port of Huntington-Tristate,Gulf Coast & Mississippi River,No
+,Dry Bulk,,40.44234,-80.01612,2358,Port of Pittsburgh,Gulf Coast & Mississippi River,Yes
+,,Tonnage,30.087163,-94.088112,2395,Port of Beaumont,Gulf Coast & Mississippi River,No
+,,Tonnage,30.087163,-94.088112,2395,Port of Beaumont,Gulf Coast & Mississippi River,No
+,,Tonnage,30.087163,-94.088112,2395,Port of Beaumont,Gulf Coast & Mississippi River,No
+,,Tonnage,29.363068,-94.918091,2404,Port of Texas City,Gulf Coast & Mississippi River,No
+,,Tonnage,29.363068,-94.918091,2404,Port of Texas City,Gulf Coast & Mississippi River,No
+,,Tonnage,29.83142,-93.96069,2416,Port of Port Arthur,Gulf Coast & Mississippi River,No
+,,Tonnage,27.81277,-97.39789,2423,Port of Corpus Christi,Gulf Coast & Mississippi River,No
+,,Tonnage,27.81277,-97.39789,2423,Port of Corpus Christi,Gulf Coast & Mississippi River,No
+,,Tonnage,27.81277,-97.39789,2423,Port of Corpus Christi,Gulf Coast & Mississippi River,No
+Container,Dry Bulk,Tonnage,33.73957,-118.2095,4110,Port of Long Beach,Pacific Coast,No
+Container,Dry Bulk,Tonnage,33.73957,-118.2095,4110,Port of Long Beach,Pacific Coast,No
+Container,Dry Bulk,Tonnage,33.73957,-118.2095,4110,Port of Long Beach,Pacific Coast,No
+Container,,Tonnage,33.77728,-118.241,4120,Port of Los Angeles,Pacific Coast,No
+Container,,Tonnage,33.77728,-118.241,4120,Port of Los Angeles,Pacific Coast,No
+Container,,,37.82152,-122.3081,4345,Port of Oakland,Pacific Coast,No
+Container,,,37.82152,-122.3081,4345,Port of Oakland,Pacific Coast,No
+Container,,,37.82152,-122.3081,4345,Port of Oakland,Pacific Coast,No
+Container,,,37.82152,-122.3081,4345,Port of Oakland,Pacific Coast,No
+Container,,,37.82152,-122.3081,4345,Port of Oakland,Pacific Coast,No
+,,Tonnage,37.924237,-122.374233,4350,Port of Richmond (CA),Pacific Coast,No
+,,Tonnage,37.924237,-122.374233,4350,Port of Richmond (CA),Pacific Coast,No
+Container,,,21.31111,-157.8717,4420,Port of Honolulu,Pacific Coast,No
+,Dry Bulk,,46.14222,-122.914,4622,Port of Longview,Pacific Coast,Yes
+,Dry Bulk,,46.02048,-122.8628,4626,Port of Kalama,Pacific Coast,Yes
+,Dry Bulk,,45.47881,-122.6653,4644,Port of Portland,Pacific Coast,Yes
+,Dry Bulk,,45.47881,-122.6653,4644,Port of Portland,Pacific Coast,Yes
+,Dry Bulk,,45.47881,-122.6653,4644,Port of Portland,Pacific Coast,Yes
+Container,,,47.28966,-122.4515,4720,Port of Tacoma,Pacific Coast,No
+Container,,,47.28966,-122.4515,4720,Port of Tacoma,Pacific Coast,No
+Container,,,47.28966,-122.4515,4720,Port of Tacoma,Pacific Coast,No
+Container,,,47.28966,-122.4515,4720,Port of Tacoma,Pacific Coast,No
+Container,Dry Bulk,,47.587711,-122.359218,4722,Port of Seattle,Pacific Coast,No
+Container,Dry Bulk,,47.587711,-122.359218,4722,Port of Seattle,Pacific Coast,No
+Container,Dry Bulk,,47.587711,-122.359218,4722,Port of Seattle,Pacific Coast,No
+Container,,,61.23778,-149.895,4820,Port of Anchorage,Pacific Coast,No
+Container,,,61.23778,-149.895,4820,Port of Anchorage,Pacific Coast,No

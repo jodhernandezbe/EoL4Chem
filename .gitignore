@@ -1,0 +1,12 @@
+/extract/frs/csv/*.pdf
+/extract/frs/csv/*.CSV
+/extract/rcrainfo/csv/*.csv
+/extract/tri/csv/*.csv
+/transform/tri/2018/*.csv
+/transform/waste_tracking/csv/on_site_tracking/*.csv
+/transform/waste_tracking/csv/off_site_tracking/*.csv
+/transform/tri/2018/TRI_SRS_FRS_CompTox_RETDF_2018_EoL.csv
+**/__pycache__/
+*.pyc
+/transform/pau4chem/statistics/db_for_general/*.csv
+/transform/pau4chem/datasets/intermediate_pau_datasets/*.csv

@@ -1,0 +1,86 @@
+Code 2004 and prior,Method 2004 and prior,Code 2005 and after,Method 2005 and after,Type of waste management,"If it is treatment, what kind of?",Objective,Output carrier,Output by products,Note,Support
+A01,Flare,A01,Flare,Treatment,Incineration,Destruction,,S/L/A,Residual (bottom) ash and fly ash (from incombustible materials)/Liquid that was in waste stream (knock-out drum)/traces of organic and inorganic compounds may be in the exhaust gases,Tb/Tf/Metal_indicator
+A02,Condenser,A02,Condenser,Treatment,Physical,Removal,L,,*The gaseous waste may have water,
+A03,Scrubber,A03,Scrubber,Treatment,Physical,Removal,L/W,,The absorbent could be water or other liquid,Kow
+A04,Absorber,A04,Absorber,Treatment,Physical,Removal,L/W,,The absorbent could be water or other liquid,Kow
+A05,Electrostatic Precipitator,A05,Electrostatic Precipitator,Treatment,Physical,Removal,S,,,
+A06,Mechanical Separation,A06,Mechanical Separation,Treatment,Physical,Removal,S,,,
+A07,Other Air Emission Treatment,A07,Other Air Emission Treatment,Treatment,Physical,Removal,Unknown,,,
+B11,Aerobic,H081,Biological treatment with or without precipitation,Treatment,Biological,Degradation,,,,
+B21,Anaerobic,H081,Biological treatment with or without precipitation,Treatment,Biological,Degradation,,,,
+B31,Facultative,H081,Biological treatment with or without precipitation,Treatment,Biological,Degradation,,,,
+B99,Other Biological Treatment,H081,Biological treatment with or without precipitation,Treatment,Biological,Degradation,,,,
+C01,Chemical Precipitation - Lime or Sodium Hydroxide,H071,Chemical reduction with or without precipitation,Treatment,Chemical,Conversion,,,,
+C02,Chemical Precipitation - Sulfide,H071,Chemical reduction with or without precipitation,Treatment,Chemical,Conversion,,,,
+C09,Chemical Precipitation - Other,H077,Other chemical precipitation with or without pretreatment,Treatment,Chemical,Conversion,,,,
+C11,Neutralization,H121,Neutralization,Treatment,Chemical,Conversion,,,,
+C21,Chromium Reduction,H071,Chemical reduction with or without precipitation,Treatment,Chemical,Conversion,,,,
+C31,Complexed Metals Treatment (other than pH adjustment),H129,Other treatment,Treatment,Chemical,Conversion,,,,
+C41,Cyanide Oxidation - Alkaline Chlorination,H073,Cyanide destruction with or without precipitation,Treatment,Chemical,Conversion,,,,
+C42,Cyanide Oxidation - Electrochemical,H073,Cyanide destruction with or without precipitation,Treatment,Chemical,Conversion,,,,
+C43,Cyanide Oxidation - Other,H073,Cyanide destruction with or without precipitation,Treatment,Chemical,Conversion,,,,
+C44,General Oxidation (including Disinfection) - Chlorination,H075,Chemical oxidation,Treatment,Chemical,Conversion,,,,
+C45,General Oxidation (including Disinfection) - Ozonation,H075,Chemical oxidation,Treatment,Chemical,Conversion,,,,
+C46,General Oxidation (including Disinfection) - Other,H075,Chemical oxidation,Treatment,Chemical,Conversion,,,,
+C99,Other Chemical Treatment,H129,Other treatment,Treatment,Chemical,Conversion,,,,
+F01,Liquid Injection,H040,Incineration - thermal destruction other than use as a fuel,Treatment,Incineration,Destruction,,S/A,"*Even though the waste is not gaseous, traces of organic and inorganic compounds may be in the exhaust gases/Residual (bottom) ash and fly ash (from incombustible materials)",Tb/Tf/Metal_indicator
+F11,Rotary Kiln with Liquid Injection Unit,H040,Incineration - thermal destruction other than use as a fuel,Treatment,Incineration,Destruction,,S/A,"*Even though the waste is not gaseous, traces of organic and inorganic compounds may be in the exhaust gases/Residual (bottom) ash and fly ash (from incombustible materials)",Tb/Tf/Metal_indicator
+F19,Other Rotary Kiln,H040,Incineration - thermal destruction other than use as a fuel,Treatment,Incineration,Destruction,,S/A,"*Even though the waste is not gaseous, traces of organic and inorganic compounds may be in the exhaust gases/Residual (bottom) ash and fly ash (from incombustible materials)",Tb/Tf/Metal_indicator
+F31,Two Stage,H040,Incineration - thermal destruction other than use as a fuel,Treatment,Incineration,Destruction,,S/A,"*Even though the waste is not gaseous, traces of organic and inorganic compounds may be in the exhaust gases/Residual (bottom) ash and fly ash (from incombustible materials)",Tb/Tf/Metal_indicator
+F41,Fixed Hearth,H040,Incineration - thermal destruction other than use as a fuel,Treatment,Incineration,Destruction,,S/A,"*Even though the waste is not gaseous, traces of organic and inorganic compounds may be in the exhaust gases/Residual (bottom) ash and fly ash (from incombustible materials)",Tb/Tf/Metal_indicator
+F42,Multiple Hearth,H040,Incineration - thermal destruction other than use as a fuel,Treatment,Incineration,Destruction,,S/A,"*Even though the waste is not gaseous, traces of organic and inorganic compounds may be in the exhaust gases/Residual (bottom) ash and fly ash (from incombustible materials)",Tb/Tf/Metal_indicator
+F51,Fluidized Bed,H040,Incineration - thermal destruction other than use as a fuel,Treatment,Incineration,Destruction,,S/A,"*Even though the waste is not gaseous, traces of organic and inorganic compounds may be in the exhaust gases/Residual (bottom) ash and fly ash (from incombustible materials)",Tb/Tf/Metal_indicator
+F61,Infra-Red,H040,Incineration - thermal destruction other than use as a fuel,Treatment,Incineration,Destruction,,S/A,"*Even though the waste is not gaseous, traces of organic and inorganic compounds may be in the exhaust gases/Residual (bottom) ash and fly ash (from incombustible materials)",Tb/Tf/Metal_indicator
+F71,Fume/Vapor,H040,Incineration - thermal destruction other than use as a fuel,Treatment,Incineration,Destruction,,S/A,"*Even though the waste is not gaseous, traces of organic and inorganic compounds may be in the exhaust gases/Residual (bottom) ash and fly ash (from incombustible materials)",Tb/Tf/Metal_indicator
+F81,Pyrolytic Destructor,H040,Incineration - thermal destruction other than use as a fuel,Treatment,Incineration,Destruction,,S/A,"*Even though the waste is not gaseous, traces of organic and inorganic compounds may be in the exhaust gases/Residual (bottom) ash and fly ash (from incombustible materials)",Tb/Tf/Metal_indicator
+F82,Wet Air Oxidation,H076,Wet air oxidation,Treatment,Chemical,Conversion,,,,
+F83,Thermal Drying/Dewatering,H122,Evaporation,Treatment,Thermal,Removal,A,,,Pv/Tb/Tf
+F99,Other Incineration/Thermal Treatment,H040,Incineration - thermal destruction other than use as a fuel,Treatment,Incineration,Destruction,,S/A,"*Even though the waste is not gaseous, traces of organic and inorganic compounds may be in the exhaust gases/Residual (bottom) ash and fly ash (from incombustible materials)",Tb/Tf/Metal_indicator
+P01,Equalization,H129,Other treatment,Treatment,Physical,Controlling flow rate and composition,,,,
+P09,Other Blending,H129,Other treatment,Treatment,Physical,Controlling flow rate and composition,,,,
+P11,Settling/Clarification,H123,Settling or clarification,Treatment,Physical,Removal,S,,,
+P12,Filtration,H123,Settling or clarification,Treatment,Physical,Removal,S,,,
+P13,Sludge Dewatering (non-thermal),H101,Sludge treatment and/or dewatering,Treatment,Physical,Removal,S/L/W,,The chemical may flow with the solid or liquid (analyze the case),Tb/Tf/Metal_indicator
+P14,Air Flotation,H124,Phase separation,Treatment,Physical,Removal,S,,,
+P15,Oil Skimming,H124,Phase separation,Treatment,Physical,Removal,L,,,
+P16,Emulsion Breaking - Thermal,H124,Phase separation,Treatment,Physical,Removal,L/W,,The chemical may flow in the aqueous phase or non-aqueous (analyze the case),Kow
+P17,Emulsion Breaking - Chemical,H124,Phase separation,Treatment,Physical,Removal,L/W,,The chemical may flow in the aqueous phase or non-aqueous (analyze the case),Kow
+P18,Emulsion Breaking - Other,H124,Phase separation,Treatment,Physical,Removal,L/W,,The chemical may flow in the aqueous phase or non-aqueous (analyze the case),Kow
+P19,Other Liquid Phase Separation,H124,Phase separation,Treatment,Physical,Removal,L/W,,The chemical may flow in the aqueous phase or non-aqueous (analyze the case),Kow
+P21,Adsorption - Carbon,H082,Adsorption,Treatment,Physical,Removal,S,,,Kow
+P22,Adsorption - Ion Exchange (other than for recovery/reuse),H082,Adsorption,Treatment,Physical,Removal,S,,,
+P23,Adsorption - Resin,H082,Adsorption,Treatment,Physical,Removal,S,,,
+P29,Adsorption - Other,H082,Adsorption,Treatment,Physical,Removal,S,,,
+P31,Reverse Osmosis (other than for recovery/reuse),H129,Other treatment,Treatment,Physical,Removal,L/W,,The solid may be removed from aqueous or non-aqueous phase (analyze the case),
+P41,Stripping - Air,H083,Air or steam stripping,Treatment,Physical,Removal,A,,,MW/VP/Kow
+P42,Stripping - Steam,H083,Air or steam stripping,Treatment,Physical,Removal,A,,*The carrier is steam,MW/VP/Kow
+P49,Stripping - Other,H083,Air or steam stripping,Treatment,Physical,Removal,A,,*The carrier is neither steam nor air,MW/VP/Kow
+P51,Acid Leaching (other than for recovery/reuse),H129,Other treatment,Treatment,Physical,Removal,W,,,
+P61,Solvent Extraction (other than recovery/reuse),H129,Other treatment,Treatment,Physical,Removal,L,,,
+P99,Other Physical Treatment,H129,Other treatment,Treatment,Physical,Removal,Unknown,,,
+U01,Industrial Kiln,U01,Industrial Kiln,Energy recovery,,Energy,E,S/A,"Even though the waste is not gaseous, traces of organic and inorganic compounds may be in the exhaust gases/Residual (bottom) ash and fly ash (from incombustible materials)",Tb/Tf/Metal_indicator
+U02,Industrial Furnace,U02,Industrial Furnace,Energy recovery,,Energy,E,S/A,"Even though the waste is not gaseous, traces of organic and inorganic compounds may be in the exhaust gases/Residual (bottom) ash and fly ash (from incombustible materials)",Tb/Tf/Metal_indicator
+U03,Industrial Boiler,U03,Industrial Boiler,Energy recovery,,Energy,E,S/A,"Even though the waste is not gaseous, traces of organic and inorganic compounds may be in the exhaust gases/Residual (bottom) ash and fly ash (from incombustible materials)",Tb/Tf/Metal_indicator
+U09,Other Energy Recovery Methods,U09,Other Energy Recovery Methods,Energy recovery,,Energy,E,S/A,"Even though the waste is not gaseous, traces of organic and inorganic compounds may be in the exhaust gases/Residual (bottom) ash and fly ash (from incombustible materials)",Tb/Tf/Metal_indicator
+R11,Solvents/Organics Recovery - Batch Still Distillation,H20,"Solvent recovery (including distillation, evaporation, fractionation or extraction)",Recycling,,Reclamation,P,,,
+R12,Solvents/Organics Recovery - Thin-Film Evaporation,H20,"Solvent recovery (including distillation, evaporation, fractionation or extraction)",Recycling,,Reclamation,P,,,
+R13,Solvents/Organics Recovery - Fractionation,H20,"Solvent recovery (including distillation, evaporation, fractionation or extraction)",Recycling,,Reclamation,P,,,
+R14,Solvents/Organics Recovery - Solvent Extraction,H20,"Solvent recovery (including distillation, evaporation, fractionation or extraction)",Recycling,,Reclamation,P,,,
+R19,Solvents/Organics Recovery - Other,H20,"Solvent recovery (including distillation, evaporation, fractionation or extraction)",Recycling,,Reclamation,P,,,
+R21,Metals Recovery - Electrolytic,H10,"Metal recovery (by retorting, smelting, or chemical or physical extraction)",Recycling,,Reclamation,P,,,
+R22,Metals Recovery - Ion Exchange,H10,"Metal recovery (by retorting, smelting, or chemical or physical extraction)",Recycling,,Reclamation,P,S,,
+R23,Metals Recovery - Acid Leaching,H10,"Metal recovery (by retorting, smelting, or chemical or physical extraction)",Recycling,,Reclamation,P,,,
+R24,Metals Recovery - Reverse Osmosis,H10,"Metal recovery (by retorting, smelting, or chemical or physical extraction)",Recycling,,Reclamation,P,,,
+R26,Metals Recovery - Solvent Extraction,H10,"Metal recovery (by retorting, smelting, or chemical or physical extraction)",Recycling,,Reclamation,P,,,
+R27,Metals Recovery - High Temperature,H10,"Metal recovery (by retorting, smelting, or chemical or physical extraction)",Recycling,,Reclamation,P,,,
+R28,Metals Recovery - Retorting,H10,"Metal recovery (by retorting, smelting, or chemical or physical extraction)",Recycling,,Reclamation,P,,,
+R29,Metals Recovery - Second Smelting,H10,"Metal recovery (by retorting, smelting, or chemical or physical extraction)",Recycling,,Reclamation,P,,,
+R30,Metals Recovery - Other,H10,"Metal recovery (by retorting, smelting, or chemical or physical extraction)",Recycling,,Reclamation,P,,,
+R40,Acid Regeneration,H39,Other recovery or reclamation for reuse (including acid regeneration or other chemical reaction process),Recycling,,Reclamation,P,,,
+R99,Other Reuse or Recovery,H39,Other recovery or reclamation for reuse (including acid regeneration or other chemical reaction process),Recycling,,Reclamation,P,,,
+H20,"Solvent recovery (including distillation, evaporation, fractionation or extraction)",H20,"Solvent recovery (including distillation, evaporation, fractionation or extraction)",Recycling,,Reclamation,P,,,
+H10,"Metal recovery (by retorting, smelting, or chemical or physical extraction)",H10,"Metal recovery (by retorting, smelting, or chemical or physical extraction)",Recycling,,Reclamation,P,,,
+H39,Other recovery or reclamation for reuse (including acid regeneration or other chemical reaction process),H39,Other recovery or reclamation for reuse (including acid regeneration or other chemical reaction process),Recycling,,Reclamation,P,,,
+,,H103,Absorption,Treatment,Physical,Removal,L/W,,The absorbent could be water or other liquid,
+,,H111,Stabilization or chemical fixation prior to disposal,Treatment,Physical,Safer disposal (RCRA Subtitle C),,,,
+,,H112,Macro-encapsulation prior to disposal,Treatment,Physical,Safer disposal (RCRA Subtitle C),,,,

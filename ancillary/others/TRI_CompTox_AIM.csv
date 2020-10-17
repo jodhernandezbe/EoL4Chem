@@ -1,0 +1,624 @@
+DTXSID,PREFERRED_NAME,CASRN,SMILES,CHEMICAL CATEGORY 1,CHEMICAL CATEGORY 2,CHEMICAL CATEGORY 3,ID
+DTXSID1020807,2-Mercaptobenzothiazole,149-30-4,SC1=NC2=C(S1)C=CC=C2,Thiols,,,149304
+DTXSID5020601,Ethylene thiourea,96-45-7,S=C1NCCN1,,,,96457
+DTXSID6023947,Carbon disulfide,75-15-0,S=C=S,,,,75150
+DTXSID4024149,Hydrogen sulfide,7783-06-4,S,,,,7783064
+DTXSID2021157,Phosphine,7803-51-2,P,,,,7803512
+DTXSID80886703,"[1,1'-Biphenyl]-4,4'-diamine, 3,3'-dichloro-, sulfate (1:2)",64969-34-2,OS(O)(=O)=O.OS(O)(=O)=O.NC1=CC=C(C=C1Cl)C1=CC=C(N)C(Cl)=C1,Anilines,,,64969342
+DTXSID7020398,"2,4-Diaminoanisole sulfate",39156-41-7,OS(O)(=O)=O.COC1=C(N)C=C(N)C=C1,Anilines,,,39156417
+DTXSID5029683,Sulfuric acid,7664-93-9,OS(O)(=O)=O,,,,7664939
+DTXSID3020885,N-Methylolacrylamide,924-42-5,OCNC(=O)C=C,Acrylamides,,,924425
+DTXSID8020597,Ethylene glycol,107-21-1,OCCO,Neutral organics,,,107211
+DTXSID3021932,Diethanolamine,111-42-2,OCCNCCO,Aliphatic Amines,,,111422
+DTXSID4020666,Glycidol,556-52-5,OCC1CO1,Epoxides,,,556525
+DTXSID8020044,Allyl alcohol,107-18-6,OCC=C,,,,107186
+DTXSID5021883,Propargyl alcohol,107-19-7,OCC#C,Neutral organics,,,107197
+DTXSID9020164,Pentaerythritol dibromide,3296-90-0,OCC(CO)(CBr)CBr,Neutral organics,,,3296900
+DTXSID4021894,Cyclohexanol,108-93-0,OC1CCCCC1,Neutral organics,,,108930
+DTXSID5021124,Phenol,108-95-2,OC1=CC=CC=C1,Phenols,,,108952
+DTXSID4021135,C.I. Solvent Yellow 14,842-07-9,OC1=CC=C2C=CC=CC2=C1N=NC1=CC=CC=C1,Phenols,,,842079
+DTXSID7020716,Hydroquinone,123-31-9,OC1=CC=C(O)C=C1,Phenols,,,123319
+DTXSID6021824,Dichlorophen,97-23-4,OC1=CC=C(Cl)C=C1CC1=CC(Cl)=CC=C1O,Phenols,,,97234
+DTXSID0021125,Phenolphthalein,77-09-8,OC1=CC=C(C=C1)C1(OC(=O)C2=C1C=CC=C2)C1=CC=C(O)C=C1,Phenolphthaleins,,,77098
+DTXSID0021834,4-Nitrophenol,100-02-7,OC1=CC=C(C=C1)[N+]([O-])=O,Phenols,,,100027
+DTXSID3020257,Catechol,120-80-9,OC1=C(O)C=CC=C1,Phenols,,,120809
+DTXSID5021386,"2,4,6-Trichlorophenol",88-06-2,OC1=C(Cl)C=C(Cl)C=C1Cl,Phenols,,,88062
+DTXSID1020439,"2,4-Dichlorophenol",120-83-2,OC1=C(Cl)C=C(Cl)C=C1,Phenols,,,120832
+DTXSID4024359,"2,4,5-Trichlorophenol",95-95-4,OC1=C(Cl)C=C(Cl)C(Cl)=C1,Phenols,,,95954
+DTXSID7021106,Pentachlorophenol,87-86-5,OC1=C(Cl)C(Cl)=C(Cl)C(Cl)=C1Cl,Phenols,,,87865
+DTXSID6020690,Hexachlorophene,70-30-4,OC1=C(CC2=C(Cl)C(Cl)=CC(Cl)=C2O)C(Cl)=C(Cl)C=C1Cl,Phenols,,,70304
+DTXSID2021151,2-Phenylphenol,90-43-7,OC1=C(C=CC=C1)C1=CC=CC=C1,Phenols,,,90437
+DTXSID1021790,2-Nitrophenol,88-75-5,OC1=C(C=CC=C1)[N+]([O-])=O,Phenols,,,88755
+DTXSID4025909,Picric acid,88-89-1,OC1=C(C=C(C=C1[N+]([O-])=O)[N+]([O-])=O)[N+]([O-])=O,Phenols,Polynitroaromatics,,88891
+DTXSID0020523,"2,4-Dinitrophenol",51-28-5,OC1=C(C=C(C=C1)[N+]([O-])=O)[N+]([O-])=O,Phenols,Polynitroaromatics,,51285
+DTXSID3022162,Bromoxynil,1689-84-5,OC1=C(Br)C=C(C=C1Br)C#N,Phenols,,,1689845
+DTXSID2024115,Formic acid,64-18-6,OC=O,,,,64186
+DTXSID2032390,Fenarimol,60168-88-9,OC(C1=CC=C(Cl)C=C1)(C1=CN=CN=C1)C1=CC=CC=C1Cl,,,,60168889
+DTXSID4020450,Dicofol,115-32-2,OC(C1=CC=C(Cl)C=C1)(C1=CC=C(Cl)C=C1)C(Cl)(Cl)Cl,,,,115322
+DTXSID0020442,"2,4-Dichlorophenoxyacetic acid",94-75-7,OC(=O)COC1=C(Cl)C=C(Cl)C=C1,,,,94757
+DTXSID6020939,Nitrilotriacetic acid,139-13-9,OC(=O)CN(CC(O)=O)CC(O)=O,Aliphatic Amines,,,139139
+DTXSID4020901,Chloroacetic acid,79-11-8,OC(=O)CCl,,,,79118
+DTXSID7024035,"2,4-Dichlorophenoxybutyric acid",94-82-6,OC(=O)CCCOC1=CC=C(Cl)C=C1Cl,,,,94826
+DTXSID2020268,Chlorendic acid,115-28-6,OC(=O)C1C(C(O)=O)C2(Cl)C(Cl)=C(Cl)C1(Cl)C2(Cl)Cl,,,,115286
+DTXSID0039229,Acrylic acid,79-10-7,OC(=O)C=C,,,,79107
+DTXSID2021993,Dibenzofuran,132-64-9,O1C2=CC=CC=C2C2=C1C=CC=C2,,,,132649
+DTXSID6020646,Furan,110-00-9,O1C=CC=C1,,,,110009
+DTXSID8021195,"1,3-Propane sultone",1120-71-4,O=S1(=O)CCCO1,Esters,,,1120714
+DTXSID4021056,N-Nitrosomorpholine,59-89-2,O=NN1CCOCC1,Aliphatic Amines,,,59892
+DTXSID8021060,N-Nitrosopiperidine,100-75-4,O=NN1CCCCC1,Aliphatic Amines,,,100754
+DTXSID4021476,N'-Nitrosonornicotine,16543-55-8,O=NN1CCC[C@H]1C1=CC=CN=C1,,,,16543558
+DTXSID6021030,N-Nitrosodiphenylamine,86-30-6,O=NN(C1=CC=CC=C1)C1=CC=CC=C1,,,,86306
+DTXSID1021031,4-Nitrosodiphenylamine,156-10-5,O=NC1=CC=C(NC2=CC=CC=C2)C=C1,,,,156105
+DTXSID2021159,Phthalic anhydride,85-44-9,O=C1OC(=O)C2=C1C=CC=C2,"Anhydrides, Carboxylic Acid",,,85449
+DTXSID7024166,"2,5-Furandione",108-31-6,O=C1OC(=O)C=C1,"Anhydrides, Carboxylic Acid",,,108316
+DTXSID5021251,Saccharin,81-07-2,O=C1NS(=O)(=O)C2=C1C=CC=C2,,,,81072
+DTXSID8020541,"5,5-Diphenylhydantoin",57-41-0,O=C1NC(=O)C(N1)(C1=CC=CC=C1)C1=CC=CC=C1,Imides,,,57410
+DTXSID8021197,beta-Propiolactone,57-57-8,O=C1CCO1,Esters,,,57578
+DTXSID6021454,C.I. Vat Yellow 4,128-66-5,O=C1C2=CC=CC=C2C2=CC=C3C(=O)C4=CC=CC=C4C4=CC=C1C2=C34,Cationic Dyes,,,128665
+DTXSID6020145,"1,4-Benzoquinone",106-51-4,O=C1C=CC(=O)C=C1,,,,106514
+DTXSID1021370,Triaziquone,68-76-8,O=C1C=C(N2CC2)C(=O)C(N2CC2)=C1N1CC1,,,,68768
+DTXSID6023949,Carbonyl sulfide,463-58-1,O=C=S,,,,463581
+DTXSID6024591,Benzoyl peroxide,94-36-0,O=C(OOC(=O)C1=CC=CC=C1)C1=CC=CC=C1,Peroxides,,,94360
+DTXSID0051657,Thorium(IV) oxide,1314-20-1,O=[Th]=O,,,,1314201
+DTXSID5042245,Osmium tetroxide,20816-12-0,O=[Os](=O)(=O)=O,,,,20816120
+DTXSID7020899,Molybdenum trioxide,1313-27-5,O=[Mo](=O)=O,,,,1313275
+DTXSID2041593,Alumina,1344-28-1,O=[Al]O[Al]=O,,,,1344281
+DTXSID1021409,Triphenyltin hydroxide,76-87-9,O[Sn](C1=CC=CC=C1)(C1=CC=CC=C1)C1=CC=CC=C1,Organotins,,,76879
+DTXSID5029685,Nitric acid,7697-37-2,O[N+]([O-])=O,,,,7697372
+DTXSID9021346,Thiosemicarbazide,79-19-6,NNC(N)=S,Hydrazines and Related Compounds,,,79196
+DTXSID8020703,Hydrazine sulfate,10034-93-2,NN.OS(O)(=O)=O,Hydrazines and Related Compounds,,,10034932
+DTXSID3020702,Hydrazine,302-01-2,NN,Hydrazines and Related Compounds,,,302012
+DTXSID8024440,Allylamine,107-11-9,NCC=C,Aliphatic Amines,,,107119
+DTXSID0020076,Amitrole,61-82-5,NC1=NNC=N1,Anilines,,,61825
+DTXSID2020921,2-Naphthylamine,91-59-8,NC1=CC2=C(C=CC=C2)C=C1,Anilines,,,91598
+DTXSID7020920,1-Naphthylamine,134-32-7,NC1=CC=CC2=C1C=CC=C2,,,,134327
+DTXSID8020090,Aniline,62-53-3,NC1=CC=CC=C1,Anilines,,,62533
+DTXSID6020068,2-Aminoanthraquinone,117-79-3,NC1=CC=C2C(=O)C3=C(C=CC=C3)C(=O)C2=C1,Anilines,,,117793
+DTXSID9021344,"4,4'-Thiodianiline",139-65-1,NC1=CC=C(SC2=CC=C(N)C=C2)C=C1,Anilines,,,139651
+DTXSID0021094,"4,4'-Oxydianiline",101-80-4,NC1=CC=C(OC2=CC=C(N)C=C2)C=C1,Anilines,,,101804
+DTXSID9021138,"1,4-Benzenediamine",106-50-3,NC1=CC=C(N)C=C1,Anilines,,,106503
+DTXSID9020295,4-Chloroaniline,106-47-8,NC1=CC=C(Cl)C=C1,Anilines,,,106478
+DTXSID6022422,"4,4'-Diaminobiphenyl methane",101-77-9,NC1=CC=C(CC2=CC=C(N)C=C2)C=C1,Anilines,,,101779
+DTXSID5020071,4-Biphenylamine,92-67-1,NC1=CC=C(C=C1)C1=CC=CC=C1,Anilines,,,92671
+DTXSID2020137,Benzidine,92-87-5,NC1=CC=C(C=C1)C1=CC=C(N)C=C1,Anilines,,,92875
+DTXSID8020961,4-Nitroaniline,100-01-6,NC1=CC=C(C=C1)[N+]([O-])=O,Anilines,,,100016
+DTXSID4021137,"1,3-Benzenediamine",108-45-2,NC1=CC(N)=CC=C1,Anilines,,,108452
+DTXSID4039235,"1-Amino-2,4-dibromoanthraquinone",81-49-2,NC1=C2C(=O)C3=C(C=CC=C3)C(=O)C2=C(Br)C=C1Br,Anilines,,,81492
+DTXSID3025881,"1,2-Phenylenediamine",95-54-5,NC1=C(N)C=CC=C1,Anilines,,,95545
+DTXSID5020865,"4,4'-Methylenebis(2-chloroaniline)",101-14-4,NC1=C(Cl)C=C(CC2=CC(Cl)=C(N)C=C2)C=C1,Anilines,,,101144
+DTXSID2020426,Dicloran,99-30-9,NC1=C(Cl)C=C(C=C1Cl)[N+]([O-])=O,Anilines,,,99309
+DTXSID6020432,"3,3'-Dichlorobenzidine",91-94-1,NC1=C(Cl)C=C(C=C1)C1=CC(Cl)=C(N)C=C1,Anilines,,,91941
+DTXSID1021160,Picloram,1918-02-1,NC1=C(Cl)C(Cl)=NC(C(O)=O)=C1Cl,Anilines,,,1918021
+DTXSID2020262,Chloramben,133-90-4,NC1=C(Cl)C(=CC(Cl)=C1)C(O)=O,Anilines,,,133904
+DTXSID9021348,Thiourea,62-56-6,NC(N)=S,,,,62566
+DTXSID2034968,"2,4-Dithiobiuret",541-53-7,NC(=S)NC(N)=S,Imides,,,541537
+DTXSID0021709,Benzamide,55-21-0,NC(=O)C1=CC=CC=C1,,,,55210
+DTXSID5020027,Acrylamide,79-06-1,NC(=O)C=C,Acrylamides,,,79061
+DTXSID0021337,Thiabendazole,148-79-8,N1C2=C(C=CC=C2)N=C1C1=CSC=N1,,,,148798
+DTXSID6021907,Propanedinitrile,109-77-3,N#CCC#N,"Nitriles, allylic/vinyl",,,109773
+DTXSID7020710,"1,2-Diphenylhydrazine",122-66-7,N(NC1=CC=CC=C1)C1=CC=CC=C1,Hydrazines and Related Compounds,,,122667
+DTXSID4021975,Diphenylamine,122-39-4,N(C1=CC=CC=C1)C1=CC=CC=C1,,,,122394
+DTXSID0023872,Ammonia,7664-41-7,N,,,,7664417
+DTXSID9034945,Sulfuryl fluoride,2699-79-8,FS(F)(=O)=O,,,,2699798
+DTXSID3024106,Fluorine,7782-41-4,FF,,,,7782414
+DTXSID2020634,5-Fluorouracil,51-21-8,FC1=CNC(=O)NC1=O,Imides,,,51218
+DTXSID1024049,Diflubenzuron,35367-38-5,FC1=CC=CC(F)=C1C(=O)NC(=O)NC1=CC=C(Cl)C=C1,Imides,,,35367385
+DTXSID3021435,Vinyl fluoride,75-02-5,FC=C,,,,75025
+DTXSID6020301,Chlorodifluoromethane,75-45-6,FC(F)Cl,,,,75456
+DTXSID1042023,"1-chloro-1,1,2,2-tetrafluoroethane",354-25-6,FC(F)C(F)(F)Cl,,,,354256
+DTXSID1042029,"1,1-dichloro-1,2,2,3,3-pentafluoropropane",13474-88-9,FC(F)C(F)(F)C(F)(Cl)Cl,,,,13474889
+DTXSID6042022,"1,1-dichloro-1,2,2-trifluoroethane",812-04-4,FC(F)C(F)(Cl)Cl,,,,812044
+DTXSID6042026,"1,2-dichloro-1,1,2,3,3-pentafluoropropane",422-44-6,FC(F)C(F)(Cl)C(F)(F)Cl,,,,422446
+DTXSID6042024,"2,2-dichloro-1,1,1,3,3-pentafluoropropane",128903-21-9,FC(F)C(Cl)(Cl)C(F)(F)F,,,,128903219
+DTXSID6021325,Tetrafluoroethylene,116-14-3,FC(F)=C(F)F,,,,116143
+DTXSID4052500,Chlorotrifluoromethane,75-72-9,FC(F)(F)Cl,,,,75729
+DTXSID5020289,"2-Chloro-1,1,1-trifluoroethane",75-88-7,FC(F)(F)CCl,Neutral organics,,,75887
+DTXSID5042033,"3-chloro-1,1,1-trifluoropropane",460-35-5,FC(F)(F)CCCl,,,,460355
+DTXSID3026435,Chloropentafluoroethane,76-15-3,FC(F)(F)C(F)(F)Cl,,,,76153
+DTXSID1042027,"3,3-Dichloro-1,1,1,2,2-pentafluoropropane",422-56-0,FC(F)(F)C(F)(F)C(Cl)Cl,,,,422560
+DTXSID7020712,"2,2-Dichloro-1,1,1-trifluoroethane",306-83-2,FC(F)(F)C(Cl)Cl,,,,306832
+DTXSID0042030,"1,2-dichloro-1,1,3,3,3-pentafluoropropane",431-86-7,FC(F)(F)C(Cl)C(F)(F)Cl,,,,431867
+DTXSID5026415,Bromotrifluoromethane,75-63-8,FC(F)(F)Br,,,,75638
+DTXSID6020436,Dichlorodifluoromethane,75-71-8,FC(F)(Cl)Cl,,,,75718
+DTXSID5031393,"1,2-Dichloro-1,1-difluoroethane",1649-08-7,FC(F)(Cl)CCl,,,,1649087
+DTXSID8026434,"1,2-Dichloro-1,1,2,2-tetrafluoroethane",76-14-2,FC(F)(Cl)C(F)(F)Cl,,,,76142
+DTXSID6021377,"1,1,2-Trichloro-1,2,2-trifluoroethane",76-13-1,FC(F)(Cl)C(F)(Cl)Cl,,,,76131
+DTXSID0027147,"Methane, bromochlorodifluoro-",353-59-3,FC(F)(Cl)Br,,,,353593
+DTXSID0041226,"1,2-Dibromo-1,1,2,2-tetrafluoroethane",124-73-2,FC(F)(Br)C(F)(F)Br,,,,124732
+DTXSID7052498,Dichlorofluoromethane,75-43-4,FC(Cl)Cl,,,,75434
+DTXSID7029245,"2-Chloro-1,1,1,2-tetrafluoroethane",2837-89-0,FC(Cl)C(F)(F)F,,,,2837890
+DTXSID1042021,"1,2-Dichloro-1,1,2-trifluoroethane",354-23-4,FC(Cl)C(F)(F)Cl,,,,354234
+DTXSID6042028,"1,3-Dichloro-1,1,2,2,3-pentafluoropropane",507-55-1,FC(Cl)C(F)(F)C(F)(F)Cl,,,,507551
+DTXSID1042025,"2,3-dichloro-1,1,1,2,3-pentafluoropropane",422-48-0,FC(Cl)C(F)(Cl)C(F)(F)F,,,,422480
+DTXSID6042020,"1,1,1,2-tetrachloro-2-fluoroethane",354-11-0,FC(Cl)C(Cl)(Cl)Cl,,,,354110
+DTXSID5021384,Trichlorofluoromethane,75-69-4,FC(Cl)(Cl)Cl,,,,75694
+DTXSID6059863,HCFC-121,354-14-3,FC(Cl)(Cl)C(Cl)Cl,,,,354143
+DTXSID0042032,"1,1-dichloro-1,2,3,3,3-pentafluoropropane",111512-56-2,FC(C(F)(F)F)C(F)(Cl)Cl,,,,111512562
+DTXSID5042031,"Propane, 1,3-dichloro-1,1,2,3,3-pentafluoro-",136013-79-1,FC(C(F)(F)Cl)C(F)(F)Cl,,,,136013791
+DTXSID7041677,Boron trifluoride,7637-07-2,FB(F)F,,,,7637072
+DTXSID1049641,Hydrogen fluoride,7664-39-3,F,,,,7664393
+DTXSID6024204,Metribuzin,21087-64-9,CSC1=NN=C(C(=O)N1N)C(C)(C)C,Hydrazines and Related Compounds,,,21087649
+DTXSID4024272,Prometryn,7287-19-6,CSC1=NC(NC(C)C)=NC(NC(C)C)=N1,Substituted Triazines,,,7287196
+DTXSID7024112,Fomesafen,72178-02-0,CS(=O)(=O)NC(=O)C1=CC(OC2=CC=C(C=C2Cl)C(F)(F)F)=CC=C1[N+]([O-])=O,,,,72178020
+DTXSID5024055,Dimethyl sulfate,77-78-1,COS(=O)(=O)OC,Esters,,,77781
+DTXSID0027486,Dimethyl chlorothiophosphate,2524-03-0,COP(Cl)(=S)OC,Phosphinate Esters,,,2524030
+DTXSID6032352,Chlorpyrifos-methyl,5598-13-0,COP(=S)(OC)OC1=NC(Cl)=C(Cl)C=C1Cl,Phosphinate Esters,,,5598130
+DTXSID1032484,Temephos,3383-96-8,COP(=S)(OC)OC1=CC=C(SC2=CC=C(OP(=S)(OC)OC)C=C2)C=C1,Phosphinate Esters,,,3383968
+DTXSID7041966,Famphur,52-85-7,COP(=S)(OC)OC1=CC=C(C=C1)S(=O)(=O)N(C)C,Phosphinate Esters,,,52857
+DTXSID1020855,Methyl parathion,298-00-0,COP(=S)(OC)OC1=CC=C(C=C1)[N+]([O-])=O,Phosphinate Esters,,,298000
+DTXSID8020620,Fenthion,55-38-9,COP(=S)(OC)OC1=CC(C)=C(SC)C=C1,Phosphinate Esters,,,55389
+DTXSID5020449,Dichlorvos,62-73-7,COP(=O)(OC)OC=C(Cl)Cl,Phosphinate Esters,,,62737
+DTXSID1024209,Naled,300-76-5,COP(=O)(OC)OC(Br)C(Cl)(Cl)Br,Phosphinate Esters,,,300765
+DTXSID1021320,Tetrachlorovinphos,961-11-5,COP(=O)(OC)OC(=CCl)C1=C(Cl)C=C(Cl)C(Cl)=C1,Phosphinate Esters,,,961115
+DTXSID0021389,Trichlorfon,52-68-6,COP(=O)(OC)C(O)C(Cl)(Cl)Cl,Phosphinate Esters,,,52686
+DTXSID8023846,Acephate,30560-19-1,COP(=O)(NC(C)=O)SC,Phosphinate Esters,,,30560191
+DTXSID2024163,Linuron,330-55-2,CON(C)C(=O)NC1=CC=C(Cl)C(Cl)=C1,,,,330552
+DTXSID5024182,2-Methoxyethanol,109-86-4,COCCO,Ethylene Glycol Ethers,,,109864
+DTXSID6020307,Chloromethyl methyl ether,107-30-2,COCCl,Neutral organics,,,107302
+DTXSID2023987,Creosote,8001-58-9,COc1ccccc1O,Phenols,,,8001589
+DTXSID7023980,Chlorsulfuron,64902-72-3,COC1=NC(C)=NC(NC(=O)NS(=O)(=O)C2=C(Cl)C=CC=C2)=N1,Substituted Triazines,,,64902723
+DTXSID2024662,Brucine,357-57-3,COC1=CC2=C(C=C1OC)[C@@]13CCN4CC5=CCO[C@H]6CC(=O)N2[C@H]1[C@H]6[C@H]5C[C@@H]34,,,,357573
+DTXSID5023877,2-Anisidine,90-04-0,COC1=CC=CC=C1N,Anilines,,,90040
+DTXSID5041358,"2,4-Diaminoanisole",615-05-4,COC1=CC=C(N)C=C1N,Anilines,,,615054
+DTXSID7024532,4-Methoxyaniline,104-94-9,COC1=CC=C(N)C=C1,Anilines,,,104949
+DTXSID5025607,Methyleugenol,93-15-2,COC1=CC=C(CC=C)C=C1OC,,,,93152
+DTXSID9020827,Methoxychlor,72-43-5,COC1=CC=C(C=C1)C(C1=CC=C(OC)C=C1)C(Cl)(Cl)Cl,"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,,72435
+DTXSID1020350,2-Methoxy-5-methylaniline,120-71-8,COC1=CC=C(C)C=C1N,Anilines,,,120718
+DTXSID3025091,"3,3'-Dimethoxybenzidine",119-90-4,COC1=CC(=CC=C1N)C1=CC(OC)=C(N)C=C1,Anilines,,,119904
+DTXSID0020943,2-Methoxy-5-nitroaniline,99-59-2,COC1=C(N)C=C(C=C1)[N+]([O-])=O,Anilines,,,99592
+DTXSID4024018,Dicamba,1918-00-9,COC1=C(Cl)C=CC(Cl)=C1C(O)=O,,,,1918009
+DTXSID3020962,1-Methoxy-2-nitrobenzene,91-23-6,COC1=C(C=CC=C1)[N+]([O-])=O,TRI,,,91236
+DTXSID0024185,Methyl chlorocarbonate,79-22-1,COC(Cl)=O,Acid Chlorides,,,79221
+DTXSID3020833,Methyl tert-butyl ether,1634-04-4,COC(C)(C)C,Neutral organics,,,1634044
+DTXSID1024338,Thiophanate-methyl,23564-05-8,COC(=O)NC(=S)NC1=C(NC(=S)NC(=O)OC)C=CC=C1,Imides,,,23564058
+DTXSID8024101,Tribenuron-methyl,101200-48-0,COC(=O)C1=CC=CC=C1S(=O)(=O)NC(=O)N(C)C1=NC(OC)=NC(C)=N1,Esters,Substituted Triazines,,101200480
+DTXSID3022455,Dimethyl phthalate,131-11-3,COC(=O)C1=C(C=CC=C1)C(=O)OC,Esters,,,131113
+DTXSID2032683,Mevinphos,7786-34-7,COC(=O)C=C(C)OP(=O)(OC)OC,Esters,Phosphinate Esters,,7786347
+DTXSID0024183,Methyl acrylate,96-33-3,COC(=O)C=C,Acrylates/Methacrylates,,,96333
+DTXSID0032605,"Methyl (RS)-2-[4-(2,4-dichlorophenoxy)phenoxy]propionate",51338-27-3,COC(=O)C(C)OC1=CC=C(OC2=CC=C(Cl)C=C2Cl)C=C1,Esters,,,51338273
+DTXSID2020844,Methyl methacrylate,80-62-6,COC(=O)C(C)=C,Acrylates/Methacrylates,,,80626
+DTXSID2021731,Methanol,67-56-1,CO,Neutral organics,,,67561
+DTXSID4020874,Methylhydrazine,60-34-4,CNN,Hydrazines and Related Compounds,,,60344
+DTXSID8024234,Norflurazon,27314-13-2,CNC1=C(Cl)C(=O)N(N=C1)C1=CC=CC(=C1)C(F)(F)F,Hydrazines and Related Compounds,Aliphatic Amines,,27314132
+DTXSID0039223,Aldicarb,116-06-3,CNC(=O)ON=CC(C)(C)SC,,,,116063
+DTXSID9032327,Bendiocarb,22781-23-3,CNC(=O)OC1=CC=CC2=C1OC(C)(C)O2,Esters,,,22781233
+DTXSID9020249,Carbofuran,1563-66-2,CNC(=O)OC1=CC=CC2=C1OC(C)(C)C2,Esters,,,1563662
+DTXSID7021948,Propoxur,114-26-1,CNC(=O)OC1=CC=CC=C1OC(C)C,Esters,,,114261
+DTXSID3032626,Methiocarb,2032-65-7,CNC(=O)OC1=CC(C)=C(SC)C(C)=C1,Esters,,,2032657
+DTXSID9020247,Carbaryl,63-25-2,CNC(=O)OC1=C2C=CC=CC2=CC=C1,Esters,,,63252
+DTXSID9041318,"2,3,5-Trimethylphenyl methylcarbamate",2655-15-4,CNC(=O)OC1=C(C)C(C)=CC(C)=C1,Esters,,,2655154
+DTXSID3024316,Tebuthiuron,34014-18-1,CNC(=O)N(C)C1=NN=C(S1)C(C)(C)C,,,,34014181
+DTXSID7020479,Dimethoate,60-51-5,CNC(=O)CSP(=S)(OC)OC,Phosphinate Esters,,,60515
+DTXSID9034369,Dicamba-dimethylammonium,2300-66-5,CNC.COC1=C(C(O)=O)C(Cl)=CC=C1Cl,,,,2300665
+DTXSID5024057,Dimethylamine,124-40-3,CNC,Aliphatic Amines,,,124403
+DTXSID7024902,Dazomet,533-74-4,CN1CSC(=S)N(C)C1,Aliphatic Amines,Dithiocarbamates,,533744
+DTXSID2058417,Dazomet sodium salt,53404-60-7,CN1CN(C)C(=S)SC1[Na],Aliphatic Amines,,,53404607
+DTXSID6020856,N-Methyl-2-pyrrolidone,872-50-4,CN1CCCC1=O,,,,872504
+DTXSID1040293,Methazole,20354-26-1,CN1C(=O)ON(C1=O)C1=CC=C(Cl)C(Cl)=C1,Imides,,,20354261
+DTXSID2027204,Methyl isothiocyanate,556-61-6,CN=C=S,,,,556616
+DTXSID1023786,Methyl isocyanate,624-83-9,CN=C=O,,,,624839
+DTXSID4021006,N-Nitroso-N-methylurea,684-93-5,CN(N=O)C(N)=O,Aliphatic Amines,,,684935
+DTXSID3042211,N-Nitrosomethylvinylamine,4549-40-0,CN(CN=O)C=C,Aliphatic Amines,,,4549400
+DTXSID2020975,Nitrogen mustard,51-75-2,CN(CCCl)CCCl,Aliphatic Amines,,,51752
+DTXSID6020694,Hexamethylphosphoramide,680-31-9,CN(C)P(=O)(N(C)C)N(C)C,,,,680319
+DTXSID7021029,N-Nitrosodimethylamine,62-75-9,CN(C)N=O,Aliphatic Amines,,,62759
+DTXSID1020516,"1,1-Dimethylhydrazine",57-14-7,CN(C)N,Hydrazines and Related Compounds,,,57147
+DTXSID4024145,Hexazinone,51235-04-2,CN(C)C1=NC(=O)N(C2CCCCC2)C(=O)N1C,Imides,,,51235042
+DTXSID2020507,"N,N-Dimethylaniline",121-69-7,CN(C)C1=CC=CC=C1,,,,121697
+DTXSID5020869,"4,4'-Methylenebis(N,N-dimethylaniline)",101-61-1,CN(C)C1=CC=C(CC2=CC=C(C=C2)N(C)C)C=C1,,,,101611
+DTXSID5020491,4-(Dimethylamino)azobenzene,60-11-7,CN(C)C1=CC=C(C=C1)N=NC1=CC=CC=C1,,,,60117
+DTXSID2020894,Michler's ketone,90-94-8,CN(C)C1=CC=C(C=C1)C(=O)C1=CC=C(C=C1)N(C)C,,,,90948
+DTXSID7043821,Auramine,492-80-8,CN(C)C1=CC=C(C=C1)C(=N)C1=CC=C(C=C1)N(C)C,,,,492808
+DTXSID6020515,"N,N-Dimethylformamide",68-12-2,CN(C)C=O,,,,68122
+DTXSID1020512,Dimethylcarbamoyl chloride,79-44-7,CN(C)C(Cl)=O,Acid Chlorides,,,79447
+DTXSID5021332,Thiram,137-26-8,CN(C)C(=S)SSC(=S)N(C)C,Dithiocarbamates,,,137268
+DTXSID8020628,Fluometuron,2164-17-2,CN(C)C(=O)NC1=CC=CC(=C1)C(F)(F)F,,,,2164172
+DTXSID0020311,Monuron,150-68-5,CN(C)C(=O)NC1=CC=C(Cl)C=C1,,,,150685
+DTXSID0020446,Diuron,330-54-1,CN(C)C(=O)NC1=CC(Cl)=C(Cl)C=C1,,,,330541
+DTXSID8024072,Diphenamid,957-51-7,CN(C)C(=O)C(C1=CC=CC=C1)C1=CC=CC=C1,,,,957517
+DTXSID6025854,Perchloromethylmercaptan,594-42-3,ClSC(Cl)(Cl)Cl,,,,594423
+DTXSID8020173,bis(Chloromethyl) ether,542-88-1,ClCOCCl,Neutral organics,,,542881
+DTXSID8020092,2-Methoxyaniline hydrochloride,134-29-2,ClCOC1=C(N)C=CC=C1,Anilines,,,134292
+DTXSID1020273,Chlorine,7782-50-5,ClCl,,,,7782505
+DTXSID0037100,Bis-(2-chloroethyl)sulfide,505-60-2,ClCCSCCCl,,,,505602
+DTXSID4023917,Bis(2-chloroethoxy)methane,111-91-1,ClCCOCOCCCl,Neutral organics,,,111911
+DTXSID9020168,Bis(2-chloroethyl) ether,111-44-4,ClCCOCCCl,Neutral organics,,,111444
+DTXSID0020868,Dichloromethane,75-09-2,ClCCl,,,,75092
+DTXSID6020438,"1,2-Dichloroethane",107-06-2,ClCCCl,Neutral organics,,,107062
+DTXSID4030336,3-Chloropropionitrile,542-76-7,ClCCC#N,,,,542767
+DTXSID1020566,Epichlorohydrin,106-89-8,ClCC1CO1,Epoxides,,,106898
+DTXSID0020153,Benzyl chloride,100-44-7,ClCC1=CC=CC=C1,,,,100447
+DTXSID6041345,"2,4-D Chlorocrotyl ester",2971-38-2,ClCC=CCOC(=O)COC1=C(Cl)C=C(Cl)C=C1,Esters,,,2971382
+DTXSID1022057,"1,3-Dichloropropene",542-75-6,ClCC=CCl,,,,542756
+DTXSID9027310,"1,4-Dichloro-2-butene",764-41-0,ClCC=CCCl,,,,764410
+DTXSID4039231,Allyl chloride,107-05-1,ClCC=C,,,,107051
+DTXSID5021380,"1,1,2-Trichloroethane",79-00-5,ClCC(Cl)Cl,Neutral organics,,,79005
+DTXSID9021390,"1,2,3-Trichloropropane",96-18-4,ClCC(Cl)CCl,Neutral organics,,,96184
+DTXSID6025012,"2,3-Dichloro-1-propene",78-88-6,ClCC(Cl)=C,,,,78886
+DTXSID2021317,"1,1,1,2-Tetrachloroethane",630-20-6,ClCC(Cl)(Cl)Cl,,,,630206
+DTXSID3020413,"1,2-Dibromo-3-chloropropane",96-12-8,ClCC(Br)CBr,,,,96128
+DTXSID9020293,2-Chloroacetophenone,532-27-4,ClCC(=O)C1=CC=CC=C1,,,,532274
+DTXSID7020267,Chlordane,57-74-9,ClC1CC2C(C1Cl)C1(Cl)C(Cl)=C(Cl)C2(Cl)C1(Cl)Cl,"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,,57749
+DTXSID3020679,Heptachlor,76-44-8,ClC1C=CC2C1C1(Cl)C(Cl)=C(Cl)C2(Cl)C1(Cl)Cl,"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,,76448
+DTXSID9020089,Anilazine,101-05-3,ClC1=CC=CC=C1NC1=NC(Cl)=NC(Cl)=N1,Substituted Triazines,,,101053
+DTXSID4020298,Chlorobenzene,108-90-7,ClC1=CC=CC=C1,Neutral organics,,,108907
+DTXSID0024216,Nitrapyrin,1929-82-4,ClC1=CC=CC(=N1)C(Cl)(Cl)Cl,,,,1929824
+DTXSID1020431,"1,4-Dichlorobenzene",106-46-7,ClC1=CC=C(Cl)C=C1,Neutral organics,,,106467
+DTXSID7040732,4-Chlorophenyl isocyanate,104-12-1,ClC1=CC=C(C=C1)N=C=O,,,,104121
+DTXSID6022056,"1,3-Dichlorobenzene",541-73-1,ClC1=CC(Cl)=CC=C1,Neutral organics,,,541731
+DTXSID0021965,"1,2,4-Trichlorobenzene",120-82-1,ClC1=CC(Cl)=C(Cl)C=C1,Neutral organics,,,120821
+DTXSID7024247,Pentachlorobenzene,608-93-5,ClC1=CC(Cl)=C(Cl)C(Cl)=C1Cl,"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,,608935
+DTXSID8024151,Imazalil,35554-44-0,ClC1=CC(Cl)=C(C=C1)C(CN1C=CN=C1)OCC=C,,,,35554440
+DTXSID6025800,"1,2,3,4,5,6,7,8-Octachloronaphthalene",2234-13-1,ClC1=C(Cl)C2=C(Cl)C(Cl)=C(Cl)C(Cl)=C2C(Cl)=C1Cl,,,,2234131
+DTXSID6020430,"1,2-Dichlorobenzene",95-50-1,ClC1=C(Cl)C=CC=C1,Neutral organics,,,95501
+DTXSID2020682,Hexachlorobenzene,118-74-1,ClC1=C(Cl)C(Cl)=C(Cl)C(Cl)=C1Cl,"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,,118741
+DTXSID2020688,Hexachlorocyclopentadiene,77-47-4,ClC1=C(Cl)C(Cl)(Cl)C(Cl)=C1Cl,,,,77474
+DTXSID0020319,Chlorothalonil,1897-45-6,ClC1=C(Cl)C(C#N)=C(Cl)C(C#N)=C1Cl,,,,1897456
+DTXSID7042065,Isodrin,465-73-6,ClC1=C(Cl)[C@]2(Cl)[C@@H]3[C@@H]4C[C@H](C=C4)[C@@H]3[C@@]1(Cl)C2(Cl)Cl,"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,,465736
+DTXSID8020040,Aldrin,309-00-2,ClC1=C(Cl)[C@]2(Cl)[C@@H]3[C@@H]4C[C@@H](C=C4)[C@@H]3[C@@]1(Cl)C2(Cl)Cl,"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,,309002
+DTXSID8024991,"1,2-Dichloroethylene",540-59-0,ClC=CCl,,,,540590
+DTXSID0021383,Trichloroethylene,79-01-6,ClC=C(Cl)Cl,,,,79016
+DTXSID8021434,Vinyl chloride,75-01-4,ClC=C,,,,75014
+DTXSID1020306,Chloroform,67-66-3,ClC(Cl)Cl,,,,67663
+DTXSID6025014,Benzal chloride,98-87-3,ClC(Cl)C1=CC=CC=C1,,,,98873
+DTXSID7021318,"1,1,2,2-Tetrachloroethane",79-34-5,ClC(Cl)C(Cl)Cl,,,,79345
+DTXSID7021104,Pentachloroethane,76-01-7,ClC(Cl)C(Cl)(Cl)Cl,,,,76017
+DTXSID1020198,Bromodichloromethane,75-27-4,ClC(Cl)Br,,,,75274
+DTXSID0024260,Phosgene,75-44-5,ClC(Cl)=O,Acid Chlorides,,,75445
+DTXSID2021319,Tetrachloroethylene,127-18-4,ClC(Cl)=C(Cl)Cl,,,,127184
+DTXSID2021074,Octachlorostyrene,29082-74-4,ClC(Cl)=C(Cl)C1=C(Cl)C(Cl)=C(Cl)C(Cl)=C1Cl,"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,,29082744
+DTXSID7020683,"Hexachloro-1,3-butadiene",87-68-3,ClC(Cl)=C(Cl)C(Cl)=C(Cl)Cl,,,,87683
+DTXSID8021438,"1,1-Dichloroethylene",75-35-4,ClC(Cl)=C,,,,75354
+DTXSID9020243,Captan,133-06-2,ClC(Cl)(Cl)SN1C(=O)C2CC=CCC2C1=O,Imides,,,133062
+DTXSID0021385,Folpet,133-07-3,ClC(Cl)(Cl)SN1C(=O)C2=C(C=CC=C2)C1=O,Imides,,,133073
+DTXSID8020250,Carbon tetrachloride,56-23-5,ClC(Cl)(Cl)Cl,Neutral organics,,,56235
+DTXSID1020148,Benzotrichloride,98-07-7,ClC(Cl)(Cl)C1=CC=CC=C1,,,,98077
+DTXSID5032654,Triforine,26644-46-2,ClC(Cl)(Cl)C(NC=O)N1CCN(CC1)C(NC=O)C(Cl)(Cl)Cl,Aliphatic Amines,,,26644462
+DTXSID7020689,Hexachloroethane,67-72-1,ClC(Cl)(Cl)C(Cl)(Cl)Cl,,,,67721
+DTXSID9026631,Benzoyl chloride,98-88-4,ClC(=O)C1=CC=CC=C1,Acid Chlorides,,,98884
+DTXSID9034070,Trichloroacetyl chloride,76-02-8,ClC(=O)C(Cl)(Cl)Cl,Acid Chlorides,,,76028
+DTXSID5020316,Chloroprene,126-99-8,ClC(=C)C=C,,,,126998
+DTXSID2041676,Boron trichloride,10294-34-5,ClB(Cl)Cl,,,,10294345
+DTXSID8042476,Titanium tetrachloride,7550-45-0,Cl[Ti](Cl)(Cl)Cl,,,,7550450
+DTXSID2040733,Triphenyltin chloride,639-58-7,Cl[Sn](C1=CC=CC=C1)(C1=CC=CC=C1)C1=CC=CC=C1,Organotins,,,639587
+DTXSID2020684,"alpha-1,2,3,4,5,6-Hexachlorocyclohexane",319-84-6,Cl[C@H]1[C@H](Cl)[C@@H](Cl)[C@H](Cl)[C@H](Cl)[C@H]1Cl,,,,319846
+DTXSID2020686,Lindane,58-89-9,Cl[C@H]1[C@H](Cl)[C@@H](Cl)[C@@H](Cl)[C@H](Cl)[C@H]1Cl,,,,58899
+DTXSID5036848,"3,3'-Dimethoxybenzidine hydrochloride",111984-09-9,Cl.COC1=CC(=CC=C1N)C1=CC(OC)=C(N)C=C1,Anilines,,,111984099
+DTXSID6021321,Tetracycline hydrochloride,64-75-5,Cl.CN(C)[C@H]1[C@@H]2C[C@H]3C(=C(O)[C@]2(O)C(=O)C(C(N)=O)=C1O)C(=O)C1=C(C=CC=C1O)[C@@]3(C)O,Phenols,Aliphatic Amines,,64755
+DTXSID8021141,"1,4-Benzenediamine dihydrochloride",624-18-0,Cl.Cl.NC1=CC=C(N)C=C1,Anilines,,,624180
+DTXSID1020433,"3,3'-Dichlorobenzidine dihydrochloride",612-83-9,Cl.Cl.NC1=CC=C(C=C1Cl)C1=CC(Cl)=C(N)C=C1,Anilines,,,612839
+DTXSID3021140,"1,2-Phenylenediamine dihydrochloride",615-28-1,Cl.Cl.NC1=C(N)C=CC=C1,Anilines,,,615281
+DTXSID1020485,"3,3'-Dimethoxybenzidine dihydrochloride",20325-40-0,Cl.Cl.COC1=CC(=CC=C1N)C1=CC=C(N)C(OC)=C1,Anilines,,,20325400
+DTXSID6020511,"3,3'-Dimethylbenzidine dihydrochloride",612-82-8,Cl.Cl.CC1=C(N)C=CC(=C1)C1=CC(C)=C(N)C=C1,Anilines,,,612828
+DTXSID7021364,2-Methylaniline hydrochloride,636-21-5,Cl.CC1=CC=CC=C1N,Anilines,,,636215
+DTXSID2020711,Hydrochloric acid,7647-01-0,Cl,,,,7647010
+DTXSID0024187,Methyl iodide,74-88-4,CI,Neutral organics,,,74884
+DTXSID6024206,Molinate,2212-67-1,CCSC(=O)N1CCCCCC1,,,,2212671
+DTXSID6032356,Cycloate,1134-23-2,CCSC(=O)N(CC)C1CCCCC1,,,,1134232
+DTXSID8025541,Oxydemeton-methyl,301-12-2,CCS(=O)CCSP(=O)(OC)OC,Phosphinate Esters,,,301122
+DTXSID1024045,Diethyl sulfate,64-67-5,CCOS(=O)(=O)OCC,Esters,,,64675
+DTXSID9020407,Diazinon,333-41-5,CCOP(=S)(OCC)OC1=NC(=NC(C)=C1)C(C)C,Phosphinate Esters,,,333415
+DTXSID7021100,Parathion,56-38-2,CCOP(=S)(OCC)OC1=CC=C(C=C1)[N+]([O-])=O,Phosphinate Esters,,,56382
+DTXSID8032417,Isofenphos,25311-71-1,CCOP(=S)(NC(C)C)OC1=CC=CC=C1C(=O)OC(C)C,Esters,Phosphinate Esters,,25311711
+DTXSID7024087,2-Ethoxyethanol,110-80-5,CCOCCO,Ethylene Glycol Ethers,,,110805
+DTXSID7024241,Oxyfluorfen,42874-03-3,CCOC1=CC(OC2=CC=C(C=C2Cl)C(F)(F)F)=CC=C1[N+]([O-])=O,,,,42874033
+DTXSID9021427,Urethane,51-79-6,CCOC(N)=O,Esters,,,51796
+DTXSID1027186,Ethyl chloroformate,541-41-3,CCOC(Cl)=O,Acid Chlorides,,,541413
+DTXSID7032393,Fenoxycarb,72490-01-8,CCOC(=O)NCCOC1=CC=C(OC2=CC=CC=C2)C=C1,Esters,,,72490018
+DTXSID0034518,Desmedipham,13684-56-5,CCOC(=O)NC1=CC(OC(=O)NC2=CC=CC=C2)=CC=C1,Esters,,,13684565
+DTXSID3034531,Thiophanate,23564-06-9,CCOC(=O)NC(=S)NC1=C(NC(=S)NC(=O)OCC)C=CC=C1,Imides,,,23564069
+DTXSID9032539,Diethatyl-ethyl,38727-55-8,CCOC(=O)CN(C(=O)CCl)C1=C(CC)C=CC=C1CC,Esters,,,38727558
+DTXSID4020791,Malathion,121-75-5,CCOC(=O)CC(SP(=S)(OC)OC)C(=O)OCC,Phosphinate Esters,,,121755
+DTXSID0023955,Chlorimuron-ethyl,90982-32-4,CCOC(=O)C1=CC=CC=C1S(=O)(=O)NC(=O)NC1=NC(OC)=CC(Cl)=N1,Esters,,,90982324
+DTXSID4020583,Ethyl acrylate,140-88-5,CCOC(=O)C=C,Acrylates/Methacrylates,,,140885
+DTXSID9020299,Chlorobenzilate,510-15-6,CCOC(=O)C(O)(C1=CC=C(Cl)C=C1)C1=CC=C(Cl)C=C1,Esters,,,510156
+DTXSID2032392,Fenoxaprop-ethyl,66441-23-4,CCOC(=O)C(C)OC1=CC=C(OC2=NC3=C(O2)C=C(Cl)C=C3)C=C1,Esters,,,66441234
+DTXSID9023889,Quizalofop-ethyl,76578-14-8,CCOC(=O)C(C)OC1=CC=C(OC2=CN=C3C=C(Cl)C=CC3=N2)C=C1,Esters,,,76578148
+DTXSID7024160,Lactofen,77501-63-4,CCOC(=O)C(C)OC(=O)C1=C(C=CC(OC2=C(Cl)C=C(C=C2)C(F)(F)F)=C1)[N+]([O-])=O,Esters,,,77501634
+DTXSID7032470,Propetamphos,31218-83-4,CCNP(=S)(OC)OC(=CC(=O)OC(C)C)C,Esters,,,31218834
+DTXSID1023869,Ametryn,834-12-8,CCNC1=NC(SC)=NC(NC(C)C)=N1,Substituted Triazines,,,834128
+DTXSID4021268,Simazine,122-34-9,CCNC1=NC(NCC)=NC(Cl)=N1,Substituted Triazines,,,122349
+DTXSID9020112,Atrazine,1912-24-9,CCNC1=NC(NC(C)C)=NC(Cl)=N1,Substituted Triazines,,,1912249
+DTXSID1023990,Cyanazine,21725-46-2,CCNC1=NC(NC(C)(C)C#N)=NC(Cl)=N1,Substituted Triazines,,,21725462
+DTXSID8020593,1-Ethyl-1-nitrosourea,759-73-9,CCN(N=O)C(N)=O,Aliphatic Amines,,,759739
+DTXSID2021028,N-Nitrosodiethylamine,55-18-5,CCN(CC)N=O,Aliphatic Amines,,,55185
+DTXSID0034302,Triclopyr triethylamine salt,57213-69-1,CCN(CC)CC.OC(=O)COC1=NC(Cl)=C(Cl)C=C1Cl,Aliphatic Amines,,,57213691
+DTXSID3024366,Triethylamine,121-44-8,CCN(CC)CC,Aliphatic Amines,,,121448
+DTXSID0024266,Pirimiphos-methyl,29232-93-7,CCN(CC)C1=NC(OP(=S)(OC)OC)=CC(C)=N1,Phosphinate Esters,,,29232937
+DTXSID6024337,Thiobencarb,28249-77-6,CCN(CC)C(=O)SCC1=CC=C(Cl)C=C1,,,,28249776
+DTXSID0021541,Chloromethane,74-87-3,CCl,Neutral organics,,,74873
+DTXSID8032675,Sulprofos,35400-43-2,CCCSP(=S)(OCC)OC1=CC=C(SC)C=C1,Phosphinate Esters,,,35400432
+DTXSID4032611,Ethoprop,13194-48-4,CCCSP(=O)(OCC)SCCC,Phosphinate Esters,,,13194484
+DTXSID3032464,Profenofos,41198-08-7,CCCSP(=O)(OCC)OC1=C(Cl)C=C(Br)C=C1,Phosphinate Esters,,,41198087
+DTXSID8032544,"Dipropyl 2,5-pyridinedicarboxylate",136-45-8,CCCOC(=O)C1=CC=C(N=C1)C(=O)OCCC,Esters,,,136458
+DTXSID6021032,N-Nitrosodipropylamine,621-64-7,CCCN(CCC)N=O,Aliphatic Amines,,,621647
+DTXSID8024238,Oryzalin,19044-88-3,CCCN(CCC)C1=C(C=C(C=C1[N+]([O-])=O)S(N)(=O)=O)[N+]([O-])=O,Polynitroaromatics,,,19044883
+DTXSID4021395,Trifluralin,1582-09-8,CCCN(CCC)C1=C(C=C(C=C1[N+]([O-])=O)C(F)(F)F)[N+]([O-])=O,Polynitroaromatics,"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,1582098
+DTXSID1024091,EPTC,759-94-4,CCCN(CCC)C(=O)SCC,,,,759944
+DTXSID1020302,Chloroethane,75-00-3,CCCl,,,,75003
+DTXSID6024173,Merphos,150-50-5,CCCCSP(SCCCC)SCCCC,,,,150505
+DTXSID1024174,Tribufos,78-48-8,CCCCSP(=O)(SCCCC)SCCCC,Phosphinate Esters,,,78488
+DTXSID1021166,Piperonyl butoxide,51-03-6,CCCCOCCOCCOCC1=CC2=C(OCO2)C=C1CCC,,,,51036
+DTXSID1032309,"2,4-D-Butotyl",1929-73-3,CCCCOCCOC(=O)COC1=C(Cl)C=C(Cl)C=C1,Esters,,,1929733
+DTXSID5020443,"2,4-D Butyl ester",94-80-4,CCCCOC(=O)COC1=C(Cl)C=C(Cl)C=C1,Esters,,,94804
+DTXSID2021781,Dibutyl phthalate,84-74-2,CCCCOC(=O)C1=CC=CC=C1C(=O)OCCCC,Esters,,,84742
+DTXSID6024676,Butyl acrylate,141-32-2,CCCCOC(=O)C=C,Acrylates/Methacrylates,,,141322
+DTXSID3034612,Fluazifop-butyl,69806-50-4,CCCCOC(=O)C(C)OC1=CC=C(OC2=CC=C(C=N2)C(F)(F)F)C=C1,Esters,,,69806504
+DTXSID1021740,1-Butanol,71-36-3,CCCCO,Neutral organics,,,71363
+DTXSID0028038,3-Iodo-2-propynyl-N-butylcarbamate,55406-53-6,CCCCNC(=O)OCC#CI,Esters,,,55406536
+DTXSID5023900,Benomyl,17804-35-2,CCCCNC(=O)N1C(NC(=O)OC)=NC2=C1C=CC=C2,Esters,,,17804352
+DTXSID2021026,N-Nitrosodibutylamine,924-16-3,CCCCN(CCCC)N=O,Aliphatic Amines,,,924163
+DTXSID3023899,Benfluralin,1861-40-1,CCCCN(CC)C1=C(C=C(C=C1[N+]([O-])=O)C(F)(F)F)[N+]([O-])=O,Polynitroaromatics,,,1861401
+DTXSID8021199,Pebulate,1114-71-2,CCCCN(CC)C(=O)SCCC,,,,1114712
+DTXSID7023932,Bromoxynil octanoate,1689-99-2,CCCCCCCC(=O)OC1=C(Br)C=C(C=C1Br)C#N,Esters,,,1689992
+DTXSID3040352,Dinocap,39300-45-3,CCCCCCC(C)C1=CC(=CC(=C1OC(=O)C=CC)[N+](=O)[O-])[N+](=O)[O-],Esters,Polynitroaromatics,,39300453
+DTXSID0021917,n-Hexane,110-54-3,CCCCCC,,,,110543
+DTXSID8024315,Myclobutanil,88671-89-0,CCCCC(CN1C=NC=N1)(C#N)C1=CC=C(Cl)C=C1,,,,88671890
+DTXSID4034235,"2,4-D 2-EHE",1928-43-4,CCCCC(CC)COC(=O)COC1=C(Cl)C=C(Cl)C=C1,Esters,,,1928434
+DTXSID5020607,Di(2-ethylhexyl) phthalate,117-81-7,CCCCC(CC)COC(=O)C1=C(C=CC=C1)C(=O)OCC(CC)CCCC,Esters,,,117817
+DTXSID8024280,Propiconazole,60207-90-1,CCCC1COC(CN2C=NC=N2)(O1)C1=C(Cl)C=C(Cl)C=C1,,,,60207901
+DTXSID7020475,Dihydrosafrole,94-58-6,CCCC1=CC2=C(OCO2)C=C1,,,,94586
+DTXSID8021513,Butyraldehyde,123-72-8,CCCC=O,Aldehydes,,,123728
+DTXSID1032480,Tributyltin fluoride,1983-10-4,CCCC[Sn](F)(CCCC)CCCC,Organotins,,,1983104
+DTXSID9035204,Tributyltin methacrylate,2155-70-6,CCCC[Sn](CCCC)(CCCC)OC(=O)C(C)=C,Organotins,,,2155706
+DTXSID9020166,Bis(tributyltin)oxide,56-35-9,CCCC[Sn](CCCC)(CCCC)O[Sn](CCCC)(CCCC)CCCC,Organotins,,,56359
+DTXSID9024304,Sethoxydim,74051-80-2,CCCC(=NOCC)C1=C(O)CC(CC(C)SCC)CC1=O,Aliphatic Amines,,,74051802
+DTXSID6021874,1-Bromopropane,106-94-5,CCCBr,Neutral organics,,,106945
+DTXSID6020569,"1,2-Epoxybutane",106-88-7,CCC1CO1,Epoxides,,,106887
+DTXSID3020596,Ethylbenzene,100-41-4,CCC1=CC=CC=C1,Neutral organics,,,100414
+DTXSID1022265,Alachlor,15972-60-8,CCC1=CC=CC(CC)=C1N(COC)C(=O)CCl,,,,15972608
+DTXSID2021658,Propanal,123-38-6,CCC=O,Aldehydes,,,123386
+DTXSID2034679,"2,4-D 2-ethyl-4-methylpentyl ester",53404-37-8,CCC(COC(=O)COC1=C(Cl)C=C(Cl)C=C1)CC(C)C,Esters,,,53404378
+DTXSID7024245,Pendimethalin,40487-42-1,CCC(CC)NC1=C(C(C)=C(C)C=C1[N+]([O-])=O)[N+]([O-])=O,Polynitroaromatics,"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,40487421
+DTXSID9021762,2-Butanol,78-92-2,CCC(C)O,Neutral organics,,,78922
+DTXSID4022020,Bromacil,314-40-9,CCC(C)N1C(=O)NC(C)=C(Br)C1=O,Imides,,,314409
+DTXSID3020207,Dinoseb,88-85-7,CCC(C)C1=CC(=CC(=C1O)[N+]([O-])=O)[N+]([O-])=O,Phenols,Polynitroaromatics,,88857
+DTXSID8022111,Propanil,709-98-8,CCC(=O)NC1=CC=C(Cl)C(Cl)=C1,,,,709988
+DTXSID9023419,Paraldehyde,123-63-7,CC1OC(C)OC(C)O1,Neutral organics,,,123637
+DTXSID5021207,"1,2-Propylene oxide",75-56-9,CC1CO1,Epoxides,,,75569
+DTXSID8024286,Propyleneimine,75-55-8,CC1CN1,,,,75558
+DTXSID9021899,2-Methylpyridine,109-06-8,CC1=NC=CC=C1,,,,109068
+DTXSID2032342,Chinomethionate,2439-01-02,CC1=CC2=NC3=C(SC(=O)S3)N=C2C=C1,Esters,,,2439012
+DTXSID4025791,2-Nitrotoluene,88-72-2,CC1=CC=CC=C1[N+]([O-])=O,,,,88722
+DTXSID7021360,Toluene,108-88-3,CC1=CC=CC=C1,Neutral organics,,,108883
+DTXSID8026307,"2,6-Dimethylaniline",87-62-7,CC1=CC=CC(C)=C1N,Anilines,,,87627
+DTXSID7020057,1-Amino-2-methylanthraquinone,82-28-0,CC1=CC=C2C(=O)C3=C(C=CC=C3)C(=O)C2=C1N,Anilines,,,82280
+DTXSID7021869,p-Cresol,106-44-5,CC1=CC=C(O)C=C1,Phenols,,,106445
+DTXSID5040706,C.I. Solvent Orange 7,3118-97-6,CC1=CC=C(N=NC2=C(O)C=CC3=CC=CC=C23)C(C)=C1,Phenols,,,3118976
+DTXSID7026156,"Toluene-2,4-diisocyanate",584-84-9,CC1=CC=C(C=C1N=C=O)N=C=O,Diisocyanates,,,584849
+DTXSID2021868,p-Xylene,106-42-3,CC1=CC=C(C)C=C1,Neutral organics,,,106423
+DTXSID6024200,m-Cresol,108-39-4,CC1=CC(O)=CC=C1,Phenols,,,108394
+DTXSID6026298,m-Xylene,108-38-3,CC1=CC(C)=CC=C1,Neutral organics,,,108383
+DTXSID2021864,"2,4-Dimethylphenol",105-67-9,CC1=CC(C)=C(O)C=C1,Phenols,,,105679
+DTXSID6021402,"1,2,4-Trimethylbenzene",95-63-6,CC1=CC(C)=C(C)C=C1,Neutral organics,,,95636
+DTXSID5024059,"3,3'-Dimethylbenzidine",119-93-7,CC1=CC(=CC=C1N)C1=CC=C(N)C(C)=C1,Anilines,,,119937
+DTXSID5023871,Amitraz,33089-61-1,CC1=CC(=C(C=C1)N=CN(C)C=NC2=C(C=C(C=C2)C)C)C,,,,33089611
+DTXSID0023951,Carboxin,5234-68-4,CC1=C(SCCO1)C(=O)NC1=CC=CC=C1,,,,5234684
+DTXSID4024195,MCPA,94-74-6,CC1=C(OCC(O)=O)C=CC(Cl)=C1,,,,94746
+DTXSID8021808,o-Cresol,95-48-7,CC1=C(O)C=CC=C1,Phenols,,,95487
+DTXSID1022053,"2-Methyl-4,6-dinitrophenol",534-52-1,CC1=C(O)C(=CC(=C1)[N+]([O-])=O)[N+]([O-])=O,Phenols,Polynitroaromatics,,534521
+DTXSID1026164,2-Methylaniline,95-53-4,CC1=C(N)C=CC=C1,Anilines,,,95534
+DTXSID1041508,4-Chloro-2-methylaniline,95-69-2,CC1=C(N)C=CC(Cl)=C1,Anilines,,,95692
+DTXSID1020069,2-Amino-5-azotoluene,97-56-3,CC1=C(N)C=CC(=C1)N=NC1=C(C)C=CC=C1,Anilines,,,97563
+DTXSID4020402,"2,4-Diaminotoluene",95-80-7,CC1=C(N)C=C(N)C=C1,Anilines,,,95807
+DTXSID4020959,2-Methyl-5-nitroaniline,99-55-8,CC1=C(N)C=C(C=C1)[N+]([O-])=O,Anilines,,,99558
+DTXSID8024317,Terbacil,5902-51-2,CC1=C(Cl)C(=O)N(C(=O)N1)C(C)(C)C,Imides,,,5902512
+DTXSID2026157,"Toluene-2,6-diisocyanate",91-08-7,CC1=C(C=CC=C1N=C=O)N=C=O,Diisocyanates,,,91087
+DTXSID9020160,Bifenthrin,82657-04-3,CC1=C(C=CC=C1COC(=O)[C@@H]1[C@H](\C=C(/Cl)C(F)(F)F)C1(C)C)C1=CC=CC=C1,,,,82657043
+DTXSID5020528,"2,6-Dinitrotoluene",606-20-2,CC1=C(C=CC=C1[N+]([O-])=O)[N+]([O-])=O,Polynitroaromatics,,,606202
+DTXSID9027869,Toluenediamine,25376-45-8,CC1=C(C=C(C=C1)N)N,Anilines,,,25376458
+DTXSID5027859,Dinitrotoluene,25321-14-6,CC1=C(C=C(C=C1)[N+](=O)[O-])[N+](=O)[O-],Polynitroaromatics,,,25321146
+DTXSID0020529,"2,4-Dinitrotoluene",121-14-2,CC1=C(C=C(C=C1)[N+]([O-])=O)[N+]([O-])=O,Polynitroaromatics,,,121142
+DTXSID0024052,Dimethipin,55290-64-7,CC1=C(C)S(=O)(=O)CCS1(=O)=O,Vinyl Sulfones,,,55290647
+DTXSID3021807,o-Xylene,95-47-6,CC1=C(C)C=CC=C1,Neutral organics,,,95476
+DTXSID4022361,Vinclozolin,50471-44-8,CC1(OC(=O)N(C1=O)C1=CC(Cl)=CC(Cl)=C1)C=C,Imides,,,50471448
+DTXSID6023868,Hydramethylnon,67485-29-4,CC1(CNC(=NC1)NN=C(C=CC2=CC=C(C=C2)C(F)(F)F)C=CC3=CC=C(C=C3)C(F)(F)F)C,,,,67485294
+DTXSID8022292,Permethrin,52645-53-1,CC1(C)C(C=C(Cl)Cl)C1C(=O)OCC1=CC(OC2=CC=CC=C2)=CC=C1,Esters,,,52645531
+DTXSID5035957,Cyfluthrin,68359-37-5,CC1(C)C(C=C(Cl)Cl)C1C(=O)OC(C#N)C1=CC=C(F)C(OC2=CC=CC=C2)=C1,Esters,,,68359375
+DTXSID0024002,Fenpropathrin,39515-41-8,CC1(C)C(C(=O)OC(C#N)C2=CC=CC(OC3=CC=CC=C3)=C2)C1(C)C,Esters,,,39515418
+DTXSID6023997,alpha-Cyhalothrin,68085-85-8,CC1(C(C1C(=O)OC(C#N)C2=CC(=CC=C2)OC3=CC=CC=C3)C=C(C(F)(F)F)Cl)C,Esters,,,68085858
+DTXSID5039224,Acetaldehyde,75-07-0,CC=O,Aldehydes,,,75070
+DTXSID2020767,Isosafrole,120-58-1,CC=CC1=CC2=C(OCO2)C=C1,,,,120581
+DTXSID8024864,Crotonaldehyde,4170-30-3,CC=CC=O,Aldehydes,,,4170303
+DTXSID5021205,1-Propene,115-07-1,CC=C,,,,115071
+DTXSID7020009,Acetonitrile,75-05-8,CC#N,,,,75058
+DTXSID0020440,Dichlorprop,120-36-5,CC(OC1=C(Cl)C=C(Cl)C=C1)C(O)=O,,,,120365
+DTXSID9024194,Mecoprop,93-65-2,CC(OC1=C(C)C=C(Cl)C=C1)C(O)=O,,,,93652
+DTXSID3020548,Dodine,2439-10-3,CC(O)=O.CCCCCCCCCCCCNC(N)=N,Aliphatic Amines,,,2439103
+DTXSID9021340,Thioacetamide,62-55-5,CC(N)=S,,,,62555
+DTXSID7020005,Acetamide,60-35-5,CC(N)=O,,,,60355
+DTXSID9023960,"1-Chloro-1,1-difluoroethane",75-68-3,CC(F)(F)Cl,,,,75683
+DTXSID2020422,"1,1-Dichloro-1-fluoroethane",1717-00-6,CC(F)(Cl)Cl,,,,1717006
+DTXSID1020437,"1,1-Dichloroethane",75-34-3,CC(Cl)Cl,,,,75343
+DTXSID0020448,"1,2-Dichloropropane",78-87-5,CC(Cl)CCl,Neutral organics,,,78875
+DTXSID0021381,"1,1,1-Trichloroethane",71-55-6,CC(Cl)(Cl)Cl,,,,71556
+DTXSID4020167,bis(2-Chloro-1-methylethyl) ether,108-60-1,CC(CCl)OC(C)CCl,Neutral organics,,,108601
+DTXSID3024239,Oxadiazon,19666-30-9,CC(C)OC1=CC(N2N=C(OC2=O)C(C)(C)C)=C(Cl)C=C1Cl,Hydrazines and Related Compounds,,,19666309
+DTXSID5020445,"2,4-D isopropyl ester",94-11-1,CC(C)OC(=O)COC1=C(Cl)C=C(Cl)C=C1,Esters,,,94111
+DTXSID7020762,Isopropanol,67-63-0,CC(C)O,,,,67630
+DTXSID2020391,Diallate,2303-16-4,CC(C)N(C(C)C)C(=O)SCC(Cl)=CCl,,,,2303164
+DTXSID5024344,Tri-allate,2303-17-5,CC(C)N(C(C)C)C(=O)SCC(Cl)=C(Cl)Cl,,,,2303175
+DTXSID4024274,Propachlor,1918-16-7,CC(C)N(C(=O)CCl)C1=CC=CC=C1,,,,1918167
+DTXSID5021889,4-Methyl-2-pentanone,108-10-1,CC(C)CC(C)=O,Neutral organics,,,108101
+DTXSID1021827,Cumene,98-82-8,CC(C)C1=CC=CC=C1,,,,98828
+DTXSID9021635,2-Methylpropanal,78-84-2,CC(C)C=O,Aldehydes,,,78842
+DTXSID7024110,Fluvalinate,69409-94-5,CC(C)C(NC1=C(Cl)C=C(C=C1)C(F)(F)F)C(=O)OC(C#N)C1=CC=CC(OC2=CC=CC=C2)=C1,Esters,,,69409945
+DTXSID3020621,Fenvalerate,51630-58-1,CC(C)C(C(=O)OC(C#N)C1=CC=CC(OC2=CC=CC=C2)=C1)C1=CC=C(Cl)C=C1,Esters,,,51630581
+DTXSID6032649,Tetramethrin,7696-12-0,CC(C)=CC1C(C(=O)OCN2C(=O)C3=C(CCCC3)C2=O)C1(C)C,Esters,Imides,,7696120
+DTXSID7022253,Resmethrin,10453-86-8,CC(C)=CC1C(C(=O)OCC2=COC(CC3=CC=CC=C3)=C2)C1(C)C,Esters,,,10453868
+DTXSID7032688,Phenothrin,26002-80-2,CC(C)=CC1C(C(=O)OCC2=CC=CC(OC3=CC=CC=C3)=C2)C1(C)C,Esters,,,26002802
+DTXSID2039336,S-Bioallethrin,28434-00-6,CC(C)=C[C@@H]1[C@@H](C(=O)O[C@H]2CC(=O)C(CC=C)=C2C)C1(C)C,Esters,,,28434006
+DTXSID6020981,2-Nitropropane,79-46-9,CC(C)[N+]([O-])=O,,,,79469
+DTXSID3024869,Cumene hydroperoxide,80-15-9,CC(C)(OO)C1=CC=CC=C1,Peroxides,,,80159
+DTXSID7025427,2-Hydroxy-2-methylpropanenitrile,75-86-5,CC(C)(O)C#N,Neutral organics,,,75865
+DTXSID2020420,Propyzamide,23950-58-5,CC(C)(NC(=O)C1=CC(Cl)=CC(Cl)=C1)C#C,,,,23950585
+DTXSID7020182,Bisphenol A,80-05-7,CC(C)(C1=CC=C(O)C=C1)C1=CC=C(O)C=C1,Phenols,,,80057
+DTXSID1026081,"3,3',5,5'-Tetrabromobisphenol A",79-94-7,CC(C)(C1=CC(Br)=C(O)C(Br)=C1)C1=CC(Br)=C(O)C(Br)=C1,Phenols,"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,79947
+DTXSID7032391,Fenbutatin oxide,13356-08-6,CC(C)(C[Sn](CC(C)(C)C1=CC=CC=C1)(CC(C)(C)C1=CC=CC=C1)O[Sn](CC(C)(C)C1=CC=CC=C1)(CC(C)(C)C1=CC=CC=C1)CC(C)(C)C1=CC=CC=C1)C1=CC=CC=C1,,,,13356086
+DTXSID8020204,tert-Butyl alcohol,75-65-0,CC(C)(C)O,Neutral organics,,,75650
+DTXSID4024276,Propargite,2312-35-8,CC(C)(C)C1=CC=C(OC2CCCCC2OS(=O)OCC#C)C=C1,,,,2312358
+DTXSID3023897,Triadimefon,43121-43-3,CC(C)(C)C(=O)C(OC1=CC=C(Cl)C=C1)N1C=NC=N1,,,,43121433
+DTXSID1025853,Peracetic acid,79-21-0,CC(=O)OO,Peroxides,,,79210
+DTXSID3021431,Vinyl acetate,108-05-4,CC(=O)OC=C,Esters,Vinyl Esters,,108054
+DTXSID0039227,2-Acetylaminofluorene,53-96-3,CC(=O)NC1=CC=C2C(CC3=C2C=CC=C3)=C1,,,,53963
+DTXSID6021450,C.I. Disperse Yellow 3,2832-40-8,CC(=O)NC1=CC=C(C=C1)\N=N\C1=C(O)C=CC(C)=C1,Cationic Dyes,,,2832408
+DTXSID6021828,Acetophenone,98-86-2,CC(=O)C1=CC=CC=C1,,,,98862
+DTXSID0032578,Thiodicarb,59669-26-0,CC(=NOC(=O)N(C)SN(C)C(=O)ON=C(C)SC)SC,,,,59669260
+DTXSID1020279,3-Chloro-2-methylpropene,563-47-3,CC(=C)CCl,,,,563473
+DTXSID2020761,Isoprene,78-79-5,CC(=C)C=C,,,,78795
+DTXSID1024176,Methacrylonitrile,126-98-7,CC(=C)C#N,"Nitriles, allylic/vinyl",,,126987
+DTXSID8020832,Methyl bromide,74-83-9,CBr,Neutral organics,,,74839
+DTXSID0041307,"2,2'-Bioxirane",1464-53-5,C1OC1C1CO1,Epoxides,,,1464535
+DTXSID2021286,Styrene oxide,96-09-3,C1OC1C1=CC=CC=C1,Epoxides,,,96093
+DTXSID4020533,"1,4-Dioxane",123-91-1,C1COCCO1,,,,123911
+DTXSID0020600,Ethylene oxide,75-21-8,C1CO1,Epoxides,,,75218
+DTXSID8020599,Ethyleneimine,151-56-4,C1CN1,,,,151564
+DTXSID4021923,Cyclohexane,110-82-7,C1CCCCC1,,,,110827
+DTXSID5025023,Dicyclopentadiene,77-73-6,C1C=CC2C3CC(C=C3)C12,,,,77736
+DTXSID0023878,Anthracene,120-12-7,C1=CC2=CC3=C(C=CC=C3)C=C2C=C1,,,,120127
+DTXSID8020913,Naphthalene,91-20-3,C1=CC2=CC=CC=C2C=C1,,,,91203
+DTXSID5023908,"Benzo(g,h,i)perylene",191-24-2,C1=CC2=C3C(=C1)C1=C4C(C=CC5=C4C3=C(C=C2)C=C5)=CC=C1,"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,,191242
+DTXSID1021798,Quinoline,91-22-5,C1=CC2=C(C=C1)N=CC=C2,,,,91225
+DTXSID6024254,Phenanthrene,85-01-8,C1=CC2=C(C=C1)C1=C(C=CC=C1)C=C2,,,,85018
+DTXSID9021924,Pyridine,110-86-1,C1=CC=NC=C1,,,,110861
+DTXSID3039242,Benzene,71-43-2,C1=CC=CC=C1,Neutral organics,,,71432
+DTXSID6024460,4-Aminoazobenzene,60-09-3,C1=CC=C(C=C1)N=NC2=CC=C(C=C2)N,Cationic Dyes,,,60093
+DTXSID7020184,C.I. Direct Black 38,1937-37-7,C1=CC=C(C=C1)N=NC2=C(C3=C(C(=C(C=C3C=C2S(=O)(=O)O)S(=O)(=O)O)N=NC4=CC=C(C=C4)C5=CC=C(C=C5)N=NC6=C(C=C(C=C6)N)N)N)O,Anilines,Phenols,Polyanionic Polymers (& Monomers),1937377
+DTXSID4020161,Biphenyl,92-52-4,C1=CC=C(C=C1)C1=CC=CC=C1,Neutral organics,,,92524
+DTXSID7020637,Formaldehyde,50-00-0,C=O,Aldehydes,,,50000
+DTXSID0021254,Safrole,94-59-7,C=CCC1=CC=C2OCOC2=C1,,,,94597
+DTXSID2021284,Styrene,100-42-5,C=CC1=CC=CC=C1,,,,100425
+DTXSID5020023,Acrolein,107-02-8,C=CC=O,Aldehydes,,,107028
+DTXSID3020203,"1,3-Butadiene",106-99-0,C=CC=C,,,,106990
+DTXSID5020029,Acrylonitrile,107-13-1,C=CC#N,"Nitriles, allylic/vinyl",,,107131
+DTXSID7021368,Toxaphene,8001-35-2,C=C1C(C2(C(C(C1(C2(Cl)Cl)Cl)Cl)Cl)Cl)(CCl)CCl,"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,,8001352
+DTXSID1026378,Ethylene,74-85-1,C=C,,,,74851
+DTXSID0024008,Diazomethane,334-88-3,C=[N+]=[N-],,,,334883
+DTXSID9024148,Hydrogen cyanide,74-90-8,C#N,,,,74908
+DTXSID3024364,Cresol,1319-77-3,"C*.OC1=CC=CC=C1 |c:4,6,t:2,lp:2:2,m:1:6.7.8|",Phenols,,,1319773
+DTXSID2020977,Nitromethane,75-52-5,C[N+]([O-])=O,,,,75525
+DTXSID2020470,Diglycidyl resorcinol ether,101-90-6,C(OC1=CC(OCC2CO2)=CC=C1)C1CO1,Epoxides,,,101906
+DTXSID9034737,Metiram,9006-42-2,C(CNC(=S)[S-])NC(=S)[S-].[Zn+2],Dithiocarbamates,,,9006422
+DTXSID2042480,"trans-1,3-Dichloropropene",10061-02-6,C(C=CCl)Cl,,,,10061026
+DTXSID6020434,"(2E)-1,4-Dichlorobut-2-ene",110-57-6,C(C=CCCl)Cl,,,,110576
+DTXSID6032308,"2,4-D 2-butoxymethylethyl ester",1320-18-9,C(=O)(COc1c(cc(cc1)Cl)Cl)OCC(C)OCCCC,Esters,,,1320189
+DTXSID3020415,"1,2-Dibromoethane",106-93-4,BrCCBr,,,,106934
+DTXSID5021413,"Tris(2,3-dibromopropyl) phosphate",126-72-7,BrCC(Br)COP(=O)(OCC(Br)CBr)OCC(Br)CBr,Phosphinate Esters,,,126727
+DTXSID3024944,"1,2-Dibromo-2,4-dicyanobutane",35691-65-7,BrCC(Br)(CCC#N)C#N,,,,35691657
+DTXSID4021557,Dibromomethane,74-95-3,BrCBr,,,,74953
+DTXSID9020376,"1,1'-Oxybis[2,3,4,5,6-pentabromobenzene]",1163-19-5,BrC1=C(Br)C(Br)=C(OC2=C(Br)C(Br)=C(Br)C(Br)=C2Br)C(Br)=C1Br,,,,1163195
+DTXSID8021432,Vinyl bromide,593-60-2,BrC=C,,,,593602
+DTXSID1021374,Bromoform,75-25-2,BrC(Br)Br,,,,75252
+DTXSID1035238,Bromine,7726-95-6,BrBr,,,,7726956
+DTXSID5021465,Zineb,12122-67-7,[Zn++].[S-]C(=S)NCCNC([S-])=S,Dithiocarbamates,Soluble complexes of Zinc,,12122677
+DTXSID7035012,Zinc,7440-66-6,[Zn],,,,7440666
+DTXSID2040282,Vanadium,7440-62-2,[V],,,,7440622
+DTXSID2036035,Thallium,7440-28-0,[Tl],,,,7440280
+DTXSID9021261,Selenium,7782-49-2,[Se],,,,7782492
+DTXSID5023879,Antimony,7440-36-0,[Sb],,,,7440360
+DTXSID2024161,Lead,7439-92-1,[Pb],"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,,7439921
+DTXSID1024382,Phosphorus,7723-14-0,[P],,,,7723140
+DTXSID5023958,Chlorine dioxide,10049-04-4,[O][Cl]=O,,,,10049044
+DTXSID0021098,Ozone,10028-15-6,[O-][O+]=O,,,,10028156
+DTXSID1021407,Trinitroglycerin,55-63-0,[O-][N+](=O)OCC(CO[N+]([O-])=O)O[N+]([O-])=O,,,,55630
+DTXSID3020964,Nitrobenzene,98-95-3,[O-][N+](=O)C1=CC=CC=C1,,,,98953
+DTXSID7020970,Nitrofen,1836-75-5,[O-][N+](=O)C1=CC=C(OC2=C(Cl)C=C(Cl)C=C2)C=C1,,,,1836755
+DTXSID9041522,4-Nitrobiphenyl,92-93-3,[O-][N+](=O)C1=CC=C(C=C1)C1=CC=CC=C1,,,,92933
+DTXSID0021836,"1,4-Dinitrobenzene",100-25-4,[O-][N+](=O)C1=CC=C(C=C1)[N+]([O-])=O,Polynitroaromatics,,,100254
+DTXSID9024065,"1,3-Dinitrobenzene",99-65-0,[O-][N+](=O)C1=CC(=CC=C1)[N+]([O-])=O,Polynitroaromatics,,,99650
+DTXSID2021105,Pentachloronitrobenzene,82-68-8,[O-][N+](=O)C1=C(Cl)C(Cl)=C(Cl)C(Cl)=C1Cl,,,,82688
+DTXSID4024066,"1,2-Dinitrobenzene",528-29-0,[O-][N+](=O)C1=C(C=CC=C1)[N+]([O-])=O,Polynitroaromatics,,,528290
+DTXSID0020315,Chloropicrin,76-06-2,[O-][N+](=O)C(Cl)(Cl)Cl,,,,76062
+DTXSID5021334,Tetranitromethane,509-14-8,[O-][N+](=O)C([N+]([O-])=O)([N+]([O-])=O)[N+]([O-])=O,,,,509148
+DTXSID2020925,Nickel,7440-02-0,[Ni],Nickel Compounds,,,7440020
+DTXSID1020352,Cupferron,135-20-6,[NH4+].[O-]N(N=O)C1=CC=CC=C1,,,,135206
+DTXSID8027450,Sodium dicamba,1982-69-0,[Na+].COC1=C(C([O-])=O)C(Cl)=CC=C1Cl,,,,1982690
+DTXSID2029167,Metam-sodium,137-42-8,[Na+].CNC([S-])=S,Dithiocarbamates,,,137428
+DTXSID6027050,Sodium dimethyldithiocarbamate,128-04-1,[Na+].CN(C)C([S-])=S,Dithiocarbamates,,,128041
+DTXSID3020671,FD&C Green No. 1,4680-78-8,[Na+].CCN(CC1=CC(=CC=C1)S([O-])(=O)=O)C1=CC=C(C=C1)C(C1=CC=CC=C1)=C1C=CC(C=C1)=[N+](CC)CC1=CC(=CC=C1)S([O-])(=O)=O,Acid Dyes and Amphoteric Dyes,,,4680788
+DTXSID9021712,Pentobarbital sodium,57-33-0,[Na+].CCCC(C)C1(CC)C(=O)NC([O-])=NC1=O,,,,57330
+DTXSID2034700,MCPA-sodium,3653-48-3,[Na+].CC1=C(OCC([O-])=O)C=CC(Cl)=C1,,,,3653483
+DTXSID0020941,Sodium nitrite,7632-00-0,[Na+].[O-]N=O,Aliphatic Amines,,,7632000
+DTXSID4040264,Sodium pentachlorophenate,131-52-2,[Na+].[O-]C1=C(Cl)C(Cl)=C(Cl)C(Cl)=C1Cl,,,,131522
+DTXSID2021153,Sodium 2-phenylphenate,132-27-4,[Na+].[O-]C1=C(C=CC=C1)C1=CC=CC=C1,,,,132274
+DTXSID4027496,"2,4-D sodium salt",2702-72-9,[Na+].[O-]C(=O)COC1=C(Cl)C=C(Cl)C=C1,,,,2702729
+DTXSID8024311,Sodium fluoroacetate,62-74-8,[Na+].[O-]C(=O)CF,,,,62748
+DTXSID7023853,Acifluorfen-sodium,62476-59-9,[Na+].[O-]C(=O)C1=C(C=CC(OC2=CC=C(C=C2Cl)C(F)(F)F)=C1)[N+]([O-])=O,,,,62476599
+DTXSID8021224,C.I. Acid Red 114,6459-94-5,[Na+].[Na+].CC1=CC=C(C=C1)S(=O)(=O)OC1=CC=C(C=C1)N=NC1=C(C)C=C(C=C1)C1=CC=C(N=NC2=C(O)C=CC3=CC(=CC(=C23)S([O-])(=O)=O)S([O-])(=O)=O)C(C)=C1,Acid Dyes and Amphoteric Dyes,,,6459945
+DTXSID8021228,Ponceau MX,3761-53-3,[Na+].[Na+].CC1=CC(=C(C=C1)N=NC2=C3C=CC(=CC3=CC(=C2O)S(=O)(=O)[O-])S(=O)(=O)[O-])C,Acid Dyes and Amphoteric Dyes,,,3761533
+DTXSID5020603,Nabam-sodium,142-59-6,[Na+].[Na+].[S-]C(=S)NCCNC([S-])=S,Dithiocarbamates,,,142596
+DTXSID6034423,Disodium cyanodithioimidocarbonate,138-93-2,[Na+].[Na+].[S-]C([S-])=NC#N,,,,138932
+DTXSID2020187,C.I. Direct Blue 218,28407-37-6,[Na+].[Na+].[Na+].[Na+].NC1=CC(=CC2=CC(=C3\N=N/C4=CC=C(C=C4O[Cu]OC3=C12)C1=CC2=C(C=C1)\N=N/C1=C(C=C3C=C(C=C(N)C3=C1O[Cu]O2)S([O-])(=O)=O)S([O-])(=O)=O)S([O-])(=O)=O)S([O-])(=O)=O,Acid Dyes and Amphoteric Dyes,,,28407376
+DTXSID2020185,C.I. Direct Blue 6,2602-46-2,[Na+].[Na+].[Na+].[Na+].NC1=CC(=CC2=CC(=C(\N=N\C3=CC=C(C=C3)C3=CC=C(C=C3)\N=N/C3=C(C=C4C=C(C=C(N)C4=C3O)S([O-])(=O)=O)S([O-])(=O)=O)C(O)=C12)S([O-])(=O)=O)S([O-])(=O)=O,Acid Dyes and Amphoteric Dyes,,,2602462
+DTXSID4026268,C.I. Direct Blue 14,72-57-1,[Na+].[Na+].[Na+].[Na+].CC1=CC(=CC=C1N=NC1=C(C=C2C=C(C=C(N)C2=C1O)S([O-])(=O)=O)S([O-])(=O)=O)C1=CC(C)=C(C=C1)N=NC1=C(C=C2C=C(C=C(N)C2=C1O)S([O-])(=O)=O)S([O-])(=O)=O,Acid Dyes and Amphoteric Dyes,,,72571
+DTXSID3020201,C.I. Direct Brown 95,16071-86-6,[Na+].[Na+].[Cu++].OC1=CC=C(\N=N\C2=C([O-])C=CC(=C2)S([O-])(=O)=O)C([O-])=C1N=NC1=CC=C(C=C1)C1=CC=C(C=C1)N=NC1=CC(C([O-])=O)=C(O)C=C1,Acid Dyes and Amphoteric Dyes,,,16071866
+DTXSID8020121,Sodium azide,26628-22-8,[Na+].[N-]=[N+]=[N-],Azides,,,26628228
+DTXSID9020794,Maneb,12427-38-2,[Mn++].[S-]C(=S)NCCNC([S-])=S,Dithiocarbamates,,,12427382
+DTXSID2024169,Manganese,7439-96-5,[Mn],,,,7439965
+DTXSID9034284,"Bromacil, lithium salt",53404-19-6,[Li+].CCC(C)N1C(=O)[N-]C(C)=C(Br)C1=O,Imides,,,53404196
+DTXSID1023784,Lithium carbonate,554-13-2,[Li+].[Li+].[O-]C([O-])=O,,,,554132
+DTXSID1034424,Potassium N-methyldithiocarbamate,137-41-7,[K+].CNC([S-])=S,Dithiocarbamates,,,137417
+DTXSID7034834,Potassium dimethyldithiocarbamate,128-03-0,[K+].CN(C)C([S-])=S,Dithiocarbamates,,,128030
+DTXSID6020195,Potassium bromate,7758-01-2,[K+].[O-][Br](=O)=O,,,,7758012
+DTXSID0034568,Endothal-dipotassium,2164-07-0,[K+].[K+].[O-]C(=O)C1C2CCC(O2)C1C([O-])=O,,,,2164070
+DTXSID1024172,Mercury,7439-97-6,[Hg],"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,,7439976
+DTXSID8020624,Ferbam,14484-64-1,[Fe+3].CN(C)C([S-])=S.CN(C)C([S-])=S.CN(C)C([S-])=S,Dithiocarbamates,,,14484641
+DTXSID3027746,Pentacarbonyl iron,13463-40-6,[Fe].[C-]#[O+].[C-]#[O+].[C-]#[O+].[C-]#[O+].[C-]#[O+],,,,13463406
+DTXSID2023985,Copper,7440-50-8,[Cu],,,,7440508
+DTXSID3031022,Chromium,7440-47-3,[Cr],,,,7440473
+DTXSID1031040,Cobalt,7440-48-4,[Co],,,,7440484
+DTXSID1025512,Malachite green,569-64-2,[Cl-].CN(C)C1=CC=C(C=C1)C(C1=CC=CC=C1)=C1C=CC(C=C1)=[N+](C)C,Triarylmethane Pigments/Dyes with Non-solubilizing Groups,,,569642
+DTXSID5024760,N-(3-Chloroallyl)hexaminium chloride,4080-31-3,[Cl-].ClC=CC[N+]12CN3CN(CN(C3)C1)C2,Aliphatic Amines,Substituted Triazines,,4080313
+DTXSID1021243,Rhodamine 6G,989-38-8,[Cl-].CCNC1=CC2=[O+]C3=C(C=C(C)C(NCC)=C3)C(=C2C=C1C)C1=C(C=CC=C1)C(=O)OCC,Cationic Dyes,,,989388
+DTXSID6042369,Rhodamine B,81-88-9,[Cl-].CCN(CC)C1=CC2=[O+]C3=C(C=CC(=C3)N(CC)CC)C(=C2C=C1)C1=C(C=CC=C1)C(O)=O,Cationic Dyes,,,81889
+DTXSID7024243,Paraquat dichloride,1910-42-5,[Cl-].[Cl-].C[N+]1=CC=C(C=C1)C1=CC=[N+](C)C=C1,,,,1910425
+DTXSID1023940,Cadmium,7440-43-9,[Cd],,,,7440439
+DTXSID6020353,Calcium cyanamide,156-62-7,[Ca++].[N--]C#N,,,,156627
+DTXSID4023913,Beryllium,7440-41-7,[Be],,,,7440417
+DTXSID8023894,Barium,7440-39-3,[Ba],,,,7440393
+DTXSID4023886,Arsenic,7440-38-2,[As],,,,7440382
+DTXSID1023867,Aluminum phosphide,20859-73-8,[Al+3].[P-3],Aluminum Compounds,,,20859738
+DTXSID3040273,Aluminum,7429-90-5,[Al],,,,7429905
+DTXSID4024305,Silver,7440-22-4,[Ag],,,,7440224
+DTXSID5024267,Polychlorinated biphenyls,1336-36-3,"[*]C1=C([*])C([*])=C(C([*])=C1[*])C1=C([*])C([*])=C([*])C([*])=C1[*] |$_R1;;;_R1;;_R1;;;_R1;;_R1;;;_R1;;_R1;;_R1;;_R1;;_R1$,c:1,5,8,12,20,t:16,RG:_R1={Cl* |$;_AP1$,lp:0:3|},LOG={_R1:;H;>0}|","Persistent, Bioaccumulative, and Toxic PBT Chemicals	",,,1336363
+DTXSID0024341,Toluene diisocyanate,26471-62-5,,Diisocyanates,,,26471625
+DTXSID2021446,Xylenes,1330-20-7,,Neutral organics,,,1330207
+DTXSID0041854,Dichlorobenzene,25321-22-6,,Neutral organics,,,25321226
+DTXSID4023888,Asbestos,1332-21-4,,,,,1332214
+DTXSID8051465,Chlorotetrafluoroethane,63938-10-3,,,,,63938103
+DTXSID60872604,Hexachloronaphthalene,1335-87-1,,,,,1335871
+DTXSID8023892,Abamectin,71751-41-2,,,,,71751412
+,Mixture,MIXTURE,,,,,MIXTURE
+,Antimony compounds,N010,,,,,N010
+,Arsenic compounds,N020,,,,,N020
+,Barium compounds,N040,,,,,N040
+,Beryllium compounds,N050,,,,,N050
+,Cadmium compounds,N078,,,,,N078
+,Chlorophenols,N084,,Phenols,,,N084
+,Chromium compounds,N090,,,,,N090
+,Cobalt compounds,N096,,Cobalt,,,N096
+,Copper compounds,N100,,,,,N100
+,Cyanide compounds,N106,,,,,N106
+,Diisocyanates,N120,,Diisocyanates,,,N120
+,Dioxin and dioxin-like compounds,N150,,"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,,N150
+,"Ethylenebisdithiocarbamic acid, salts and esters",N171,,,,,N171
+,Certain glycol ethers,N230,,Ethylene Glycol Ethers,,,N230
+,Hexabromocyclododecane,N270,,"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,,N270
+,Lead compounds,N420,,"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,,N420
+,Manganese compounds,N450,,,,,N450
+,Mercury compounds,N458,,"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,,N458
+,Nickel compounds,N495,,Nickel Compounds,,,N495
+,Nicotine and salts,N503,,,,,N503
+,Nitrate compounds,N511,,,,,N511
+,Nonylphenol,N530,,Phenols,,,N530
+,Polybrominated biphenyls,N575,,,,,N575
+,Polychlorinated alkanes,N583,,,,,N583
+,Polycyclic aromatic compounds,N590,,"Persistent, Bioaccumulative, and Toxic PBT Chemicals",,,N590
+,Selenium compounds,N725,,,,,N725
+,Silver compounds,N740,,,,,N740
+,Strychnine and salts,N746,,,,,N746
+,Thallium compounds,N760,,,,,N760
+,Vanadium compounds,N770,,,,,N770
+,Warfarin and salts,N874,,,,,N874
+,Zinc compounds,N982,,,,,N982
+,Trade Secret Chemical,TRD SECRT,,,,,TRD SECRT

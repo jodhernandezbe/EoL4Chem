@@ -1,0 +1,8 @@
+EPA Handler ID
+Reporting Cycle Year
+Total Quantity Shipped Off-site (in tons)
+EPA ID Number of Facility to Which Waste was Shipped
+Waste Code Group
+Waste Source Code
+Management Method Code
+Quantity Received (in tons)

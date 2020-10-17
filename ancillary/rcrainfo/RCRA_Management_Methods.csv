@@ -1,0 +1,35 @@
+Management Method Code,Management Method,Management Method - Category,Type of value
+H010,"Metals recovery including retorting, smelting, chemical, etc.",RECLAMATION AND RECOVERY,Nationally-defined
+H020,Solvents recovery,RECLAMATION AND RECOVERY,Nationally-defined
+H039,"Other recovery or reclamation for reuse including acid regeneration, organics recovery, etc.",RECLAMATION AND RECOVERY,Nationally-defined
+H050,Energy recovery at this site; used as fuel (includes on-site fuel blending before energy recovery),RECLAMATION AND RECOVERY,Nationally-defined
+H061,Fuel blending prior to energy recovery at another site (waste generated on-site or received from off-site),RECLAMATION AND RECOVERY,Nationally-defined
+H040,Incineration; thermal destruction other than use as a fuel,DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Nationally-defined
+H070,Chemical treatment (reduction / destruction / oxidation /precipitation),DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Nationally-defined
+H081,Biological treatment,DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Nationally-defined
+H100,Physical treatment only (adsorption / absorption / separation /stripping / dewatering),DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Nationally-defined
+H110,Stabilization prior to land disposal at another site (encapsulation / stabilization / fixation),DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Nationally-defined
+H120,"Combination of chemical, biological and/or physical treatment",DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Nationally-defined
+H121,Neutralization only,DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Nationally-defined
+H122,Evaporation,DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Nationally-defined
+H129,Other treatment that does not include on-site disposal,DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Nationally-defined
+H130,Surface impoundment that will be closed as a landfill (with prior treatment and/or stabilization meeting LDR treatment standard),DISPOSAL,Nationally-defined
+H131,Land treatment or application (with any prior treatment and/or stabilization),DISPOSAL,Nationally-defined
+H132,Landfill (with prior treatment and/or stabilization),DISPOSAL,Nationally-defined
+H134,Deepwell or underground injection (with or without treatment),DISPOSAL,Nationally-defined
+H135,Discharge to sewer/POTW or NPDES (storage or transported prior to discharge to POTW or by NPDES),DISPOSAL,Nationally-defined
+H141,"Storage and Transfer -The site receiving this waste stored/bulked and transferred the waste with no reclamation, recovery, destruction, treatment, or disposal at that site",TRANSFER OFF-SITE,Nationally-defined
+H071,Chemical reduction with or without precipitation,DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Legacy
+H073,Cyanide destruction with or without precipitation,DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Legacy
+H075,Chemical oxidation,DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Legacy
+H076,Wet air oxidation,DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Legacy
+H077,Other chemical precipitation with or without pre-treatment,DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Legacy
+H082,Adsorption,DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Legacy
+H083,Air or steam stripping,DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Legacy
+H101,Sludge treatment and/or dewatering,DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Legacy
+H103,Absorption,DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Legacy
+H111,Stabilization or chemical fixation prior to disposal at another site,DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Legacy
+H112,Macro-encapsulation prior to disposal at another site,DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Legacy
+H123,Settling or clarification,DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Legacy
+H124,Phase separation,DESTRUCTION OR TREATMENT PRIOR TO DISPOSAL AT ANOTHER SITE,Legacy
+H139,Other Disposal,DISPOSAL,Legacy
