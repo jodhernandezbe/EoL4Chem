@@ -1,8 +1,6 @@
 # EoL4Chem
 
-EoL4Chem are Python scripts written to track chemical waste flows across different locations in the United States of America, using publicly-available databases. EoL4Chem uses the U.S. Environmental Protection Agency's [Chemical Data Reporting (CDR)](https://www.epa.gov/chemical-data-reporting) to gather information about potential post-recycling scenarios for recycled chemicals (e.g., fuel or fuel agent). EoL4Chem integrates [PAU4Chem](https://github.com/jodhernandezbe/PAU4Chem) repository which transforms data for performing chemical flow analysis for pollution abatement units (PAUs) or on-site end-of-life (EoL) operations (e.g., distillation). In addition, EoL4Chem incorporates the physical properties (e.g., boiling point) from [another repository](https://github.com/jodhernandezbe/Properties_Scraper) that retrieves the properties using web scraping and automatization. These properties support the chemical flow analysis performance.
-
-<sup>[1](#myfootnote1)</sup>
+EoL4Chem are Python scripts written to track chemical waste flows and identify recycling, energy recovery, treatment & disposal facilities (RETDFs) located across the United States of America, using publicly-available databases. EoL4Chem uses the U.S. Environmental Protection Agency's [Chemical Data Reporting (CDR)](https://www.epa.gov/chemical-data-reporting) to gather information about potential post-recycling scenarios for recycled chemicals (e.g., fuel or fuel agent). EoL4Chem integrates [PAU4Chem](https://github.com/jodhernandezbe/PAU4Chem) repository which transforms data for performing chemical flow analysis for pollution abatement units (PAUs) or on-site end-of-life (EoL) operations (e.g., distillation). In addition, EoL4Chem incorporates the physical properties (e.g., boiling point) from [another repository](https://github.com/jodhernandezbe/Properties_Scraper) that retrieves the properties using web scraping and automatization. These properties support the chemical flow analysis performance.
 
 <p align="center">
   <img src=https://github.com/jodhernandezbe/EoL4Chem/blob/main/EoL4Chem.svg width="100%">
@@ -43,6 +41,3 @@ This research was supported in by an appointment for Jose D. Hernandez-Betancur 
 Program at the Center for Environmental Solutions and Emergency Response, Office of Research and Development,
 U.S. Environmental Protection Agency, administered by the Oak Ridge Institute for Science and Education through an Interagency Agreement No. DW-89-92433001 between the U.S. Department of Energy and the U.S. Environmental Protection Agency.
 
------------------------------------------------------------------------------------------------------------------------------
-
-<a name="myfootnote1">1</a>: Recycling, energy recovery, treatment & disposal facility (RETDF). Pollution abatement unit (PAU).
