@@ -2,6 +2,12 @@
 
 EoL4Chem is a code written in Python to track chemicals across different location in the United States of America, using publicly-available databases.
 
+<sup>[1](#myfootnote1)</sup>
+
+<p align="center">
+  <img src=https://github.com/jodhernandezbe/EoL4Chem/blob/main/EoL4Chem.svg width="80%">
+</p>
+
 # Requirements:
 
 1. [chardet](https://anaconda.org/anaconda/chardet)
