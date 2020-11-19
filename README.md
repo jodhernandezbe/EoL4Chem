@@ -87,5 +87,4 @@ U.S. Environmental Protection Agency, administered by the Oak Ridge Institute fo
 
 -----------------------------------------------------------------------------------------------------------------------------
 
-<a name="myfootnote1">1</a>: - Recycling, energy recovery, treatment & disposal facility (RETDF).
-                             - Pollution abatement unit (PAU).
+<a name="myfootnote1">1</a>: Recycling, energy recovery, treatment & disposal facility (RETDF). Pollution abatement unit (PAU).
