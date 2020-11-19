@@ -10,6 +10,8 @@ EoL4Chem is a code written in Python to track chemicals across different locatio
 
 # Requirements:
 
+This code was written using Python 3.x, Anaconda 3, and operating system Ubuntu 18.04. The following Python libraries are required for running the code:
+
 1. [chardet](https://anaconda.org/anaconda/chardet)
 2. [pandas](https://anaconda.org/anaconda/pandas)
 3. [numpy](https://anaconda.org/conda-forge/numpy)
@@ -70,18 +72,6 @@ EoL4Chem is a code written in Python to track chemicals across different locatio
 | WASTE MANAGEMENT UNDER EPA WMH | Alphanumeric | TOTAL RELEASE FROM RETDF | Float |
 | RECEIVER FRS ID	| Integer | RELIABILITY OF TOTAL RELEASE FROM RETDF | Integer |
 
-# Pathways uncertainty
-
-## Possibilities based on scenarios
-
-<p align="center">
-  <img src=https://github.com/jodhernandezbe/EoL4Chem/blob/main/Fuzziness_pathways.png width="80%">
-</p>
-
-## Fuzzy Analytical Hierarchy Process (FAHP) 
-<p align="center">
-  <img src=https://github.com/jodhernandezbe/EoL4Chem/blob/main/FAHP_pathways.png width="80%">
-</p>
 
 # Disclaimer
 
