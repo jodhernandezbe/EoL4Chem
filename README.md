@@ -1,6 +1,6 @@
 # EoL4Chem
 
-EoL4Chem are Python scripts written to track chemical waste flows across different locations in the United States of America, using publicly-available databases.EoL4Chem integrates [PAU4Chem](https://github.com/jodhernandezbe/PAU4Chem) repository which transforms data for performing chemical flow analysis for pollution abatement units or on-site end-of-life activities.
+EoL4Chem are Python scripts written to track chemical waste flows across different locations in the United States of America, using publicly-available databases. EoL4Chem uses [Chemical Data Reporting](https://www.epa.gov/chemical-data-reporting) to gather information about potential post-recycling scenarios for recycled chemicals (e.g., fuel or fuel agent). EoL4Chem integrates [PAU4Chem](https://github.com/jodhernandezbe/PAU4Chem) repository which transforms data for performing chemical flow analysis for pollution abatement units or on-site end-of-life operations (e.g., distillation). In addition, 
 
 <sup>[1](#myfootnote1)</sup>
 
