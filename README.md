@@ -5,7 +5,7 @@ EoL4Chem is a code written in Python to track chemicals across different locatio
 <sup>[1](#myfootnote1)</sup>
 
 <p align="center">
-  <img src=https://github.com/jodhernandezbe/EoL4Chem/blob/main/EoL4Chem.svg width="80%">
+  <img src=https://github.com/jodhernandezbe/EoL4Chem/blob/main/EoL4Chem.svg width="100%">
 </p>
 
 # Requirements:
