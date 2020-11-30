@@ -6,7 +6,7 @@ EoL4Chem are Python scripts written to track chemical waste flows and identify r
   <img src=https://github.com/jodhernandezbe/EoL4Chem/blob/main/EoL4Chem.svg width="100%">
 </p>
 
-# Requirements:
+## Requirements:
 
 This code was written using Python 3.x, Anaconda 3, and operating system Ubuntu 18.04. The following Python libraries are required for running the code:
 
@@ -29,13 +29,19 @@ This code was written using Python 3.x, Anaconda 3, and operating system Ubuntu 
 17. [matplotlib](https://anaconda.org/conda-forge/matplotlib)
 18. [seaborn](https://anaconda.org/anaconda/seaborn)
 
-# Disclaimer
+## How to use
+
+### Web scraping module
+
+### Data engineering module
+
+## Disclaimer
 
 The views expressed in this article are those of the authors and do not necessarily represent the views or policies of
 the U.S. Environmental Protection Agency. Any mention of trade names, products, or services does not imply an endorsement by the U.S.
 Government or the U.S. Environmental Protection Agency. The U.S. Environmental Protection Agency does not endorse any commercial products, service, or enterprises.
 
-# Acknowledgement
+## Acknowledgement
 
 This research was supported in by an appointment for Jose D. Hernandez-Betancur to the Research Participation
 Program at the Center for Environmental Solutions and Emergency Response, Office of Research and Development,
