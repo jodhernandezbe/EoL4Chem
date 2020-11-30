@@ -6,7 +6,7 @@ EoL4Chem are Python scripts written to track chemical waste flows and identify r
   <img src=https://github.com/jodhernandezbe/EoL4Chem/blob/main/EoL4Chem.svg width="100%">
 </p>
 
-## Requirements:
+## 1. Requirements:
 
 This code was written using Python 3.x, Anaconda 3, and operating system Ubuntu 18.04. The following Python libraries are required for running the code:
 
@@ -29,13 +29,13 @@ This code was written using Python 3.x, Anaconda 3, and operating system Ubuntu 
 17. [matplotlib](https://anaconda.org/conda-forge/matplotlib)
 18. [seaborn](https://anaconda.org/anaconda/seaborn)
 
-## How to use
+## 2. How to use
 
-### Web scraping module
+### 2.1. Web scraping module
 
 EoL4Chem is a modular framework that uses web scraping to extract the information from the web and organize it before data engineering. To run the web scraping module, navigate to the folder [extract](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract). This folder contains five subfolders [frs](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/frs), [gps](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/gps), [properties](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/properties), [rcrainfo](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/rcrainfo), and [tri](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/tri). The [gps](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/gps) folder has the scripts for using [Nominatim](https://nominatim.org/)'s API and [OSRM](http://project-osrm.org/.)'s, which are called by the data engineering process. [properties](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/properties) is used as explained in this GitHub [repository](https://github.com/jodhernandezbe/Properties_Scraper).
 
-#### frs folder
+#### 2.1.1. frs folder
 
 This folder contains the information from the EPA's [Facility Registry Service (FRS)](https://www.epa.gov/frs). To retrieve the FRS information, navigate to the folder [frs](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/frs). Then, you execute the following command either on Windows CMD or Unix terminal:
 
@@ -43,7 +43,7 @@ This folder contains the information from the EPA's [Facility Registry Service (
 python frs_scraper.py
 ```
 
-#### rcrainfo folder
+#### 2.1.2. rcrainfo folder
 
 This folder contains the information from the EPA's [Resource Conservation and Recovery Act Information (RCRAInfo)](https://www.epa.gov/enviro/rcrainfo-overview). To retrieve the RCRAInfo information, navigate to the folder [rcrainfo](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/rcrainfo). Execute the following command either on Windows CMD or Unix terminal:
 
@@ -72,7 +72,7 @@ Execute each step starting with A and finishing with B. Use flag -Y for choosing
 python rcrainfo_scraper.py A -Y 2001 2003
 ```
 
-#### tri folder
+#### 2.1.3. tri folder
 
 This folder contains the information from the EPA's [Toxics Release Inventory (TRI)](https://www.epa.gov/toxics-release-inventory-tri-program). To retrieve the TRI information, navigate to the folder [tri](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/tri). Execute the following command either on Windows CMD or Unix terminal:
 
@@ -81,15 +81,13 @@ python tri_web_scraper.py -Y TRI_Year -F TRI_File
 ```
 
 The flag -Y represents the TRI reporting year that you would like to get, while -F is the file from the TRI for retrieving the information (e.g., File 1a). Check [TRI Basic Plus Data Files Guides
-](https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-plus-data-files-guides) for knowing more about the TRI files. EoL4Chem requires the files 1a, 1b, 1b, 2a, 2b, 3a, 3b, and 3c to run the data engineering.
-
-The above command can work for retrieving many years and files at the same time, for example:
+](https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-plus-data-files-guides) for knowing more about the TRI files. EoL4Chem requires the files 1a, 1b, 1b, 2a, 2b, 3a, 3b, and 3c to run the data engineering. The above command can work for retrieving many years and files at the same time, for example:
 
 ```
 python tri_web_scraper.py -Y 2001 2002 2003 -F 1a 1b 2b
 ```
 
-### Data engineering module
+### 2.2. Data engineering module
 
 ## Disclaimer
 
