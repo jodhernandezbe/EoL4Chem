@@ -6,6 +6,7 @@ import os
 import pandas as pd
 pd.options.mode.chained_assignment = None
 import argparse
+import time
 import numpy as np
 import bisect
 import sys
@@ -43,47 +44,91 @@ class Network:
                                    'OPTION',
                                    'TYPE_PROCESS_USE',
                                    'FUNCTION_CATEGORY',
-                                   'PCT_PROD_VOLUME',
-                                   'PRODUCT_CATEGORY'],
+                                   'PRODUCT_CATEGORY',
+                                   'PCT_PROD_VOLUME'],
                           dtype={'STRIPPED_CHEMICAL_ID_NUMBER': 'str'})
         CDR = CDR.loc[CDR['STRIPPED_CHEMICAL_ID_NUMBER'] == self.chem]
         CDR = CDR.where(pd.notnull(CDR), None)
         CDR = CDR.where(CDR != 'Not known or reasonably ascertainable', None)
+        CDR = CDR.where(CDR != 'Not Known or Reasonably Ascertainable', None)
         CDR.drop(columns=['STRIPPED_CHEMICAL_ID_NUMBER'],
                  inplace=True)
         CDR = CDR.loc[CDR['OPTION'] != 'Manufacturing']
+        groups = CDR.groupby('REGISTRY_ID',
+                             as_index=False)
+        for _, group in groups:
+            FRS_ID = group['REGISTRY_ID'].unique()[0]
+            NAICS_CODE = group['NAICS_CODE'].unique()[0]
+            if not NAICS_CODE:
+                CDR_aux = CDR.drop_duplicates(keep='first', subset=['REGISTRY_ID'])
+                NAICS_selected = np.random.choice(CDR_aux['NAICS_CODE'].dropna().values)
+                CDR.loc[CDR['REGISTRY_ID'] == FRS_ID, 'NAICS_CODE'] = NAICS_selected
         Industrial = CDR.loc[CDR['OPTION'] == 'Industrial']
+        # Removing industrial function category with hight purity
+        Industrial = Industrial.loc[Industrial['FUNCTION_CATEGORY'].str.capitalize() != 'Laboratory chemicals']
         Commercial_consumer = CDR.loc[CDR['OPTION'] != 'Industrial']
         del CDR
         # Filling null values in industrial
         Industrial.drop(columns=['PRODUCT_CATEGORY'],
                         inplace=True)
-        for col in ['NAICS_CODE', 'NAICS', 'PCT_PROD_VOLUME',
-                    'TYPE_PROCESS_USE', 'FUNCTION_CATEGORY']:
-            Industrial[col] = Industrial[col]\
-                .apply(lambda x: np.random.choice(Industrial[col].dropna().values) if pd.isnull(x) else x)
+        relation = {'NAICS': 'NAICS_CODE',
+                    'FUNCTION_CATEGORY': 'NAICS',
+                    'TYPE_PROCESS_USE': 'FUNCTION_CATEGORY',
+                    'PCT_PROD_VOLUME': 'FUNCTION_CATEGORY'}
+        for col in ['NAICS', 'FUNCTION_CATEGORY', 'TYPE_PROCESS_USE', 'PCT_PROD_VOLUME']:
+            if col in ['TYPE_PROCESS_USE', 'FUNCTION_CATEGORY']:
+                Industrial[col] = Industrial[col].str.capitalize()
+            for idx, row in Industrial.iterrows():
+                if pd.isnull(row[col]):
+                    try:
+                        Industrial.loc[idx, col] =\
+                            np.random.choice(Industrial.loc[Industrial[relation[col]]
+                                                            == row[relation[col]], col]\
+                               .dropna().values)
+                    except ValueError:
+                        Industrial.loc[idx, col] = np.random.choice(Industrial[col].dropna().values)
+                else:
+                    Industrial.loc[idx, col] = row[col]
         Industrial['NAICS_CODE'] =\
             Industrial['NAICS_CODE'].astype('int')\
             .astype('str')
         Industrial['NAICS'] =\
             Industrial['NAICS'].astype('int')\
             .astype('str')
-        Industrial['PCT_PROD_VOLUME'] =\
-            Industrial['PCT_PROD_VOLUME'].astype('float')
+        Industrial['PCT_PROD_VOLUME'] = Industrial['PCT_PROD_VOLUME'].astype('float')
+        grouping = list(set(Industrial.columns.tolist()) - set(['PCT_PROD_VOLUME']))
+        Industrial = Industrial.groupby(grouping,
+                                        as_index=False).sum()
         # Filling null values in commercial and consumer
         Commercial_consumer.drop(columns=['TYPE_PROCESS_USE',
                                           'FUNCTION_CATEGORY',
                                           'NAICS'],
                                  inplace=True)
-        for col in ['NAICS_CODE', 'OPTION', 'PCT_PROD_VOLUME',
-                    'PRODUCT_CATEGORY']:
-            Commercial_consumer[col] = Commercial_consumer[col]\
-                .apply(lambda x: np.random.choice(Commercial_consumer[col].dropna().values) if pd.isnull(x) else x)
+        Commercial_consumer = Commercial_consumer.loc[pd.notnull(Commercial_consumer['OPTION'])]
+        Commercial_consumer['OPTION'] = Commercial_consumer['OPTION'].str.capitalize()
+        Commercial_consumer['PRODUCT_CATEGORY'] = Commercial_consumer['PRODUCT_CATEGORY'].str.capitalize()
+        relation = {'PRODUCT_CATEGORY': 'OPTION',
+                    'PCT_PROD_VOLUME': 'PRODUCT_CATEGORY'}
+        for col in ['PRODUCT_CATEGORY', 'PCT_PROD_VOLUME']:
+            for idx, row in Commercial_consumer.iterrows():
+                if pd.isnull(row[col]):
+                    try:
+                        Commercial_consumer.loc[idx, col] =\
+                            np.random.choice(Commercial_consumer.loc[Commercial_consumer[relation[col]]
+                                                            == row[relation[col]], col]\
+                               .dropna().values)
+                    except ValueError:
+                        Commercial_consumer.loc[idx, col] =\
+                            np.random.choice(Commercial_consumer[col].dropna().values)
+                else:
+                    Commercial_consumer.loc[idx, col] = row[col]
         Commercial_consumer['NAICS_CODE'] =\
             Commercial_consumer['NAICS_CODE'].astype('int')\
             .astype('str')
-        Commercial_consumer['PCT_PROD_VOLUME'] =\
-            Commercial_consumer['PCT_PROD_VOLUME'].astype('float')
+        Commercial_consumer['PCT_PROD_VOLUME'] = Commercial_consumer['PCT_PROD_VOLUME'].astype('float')
+        grouping = list(set(Commercial_consumer.columns.tolist()) - set(['PCT_PROD_VOLUME']))
+        Commercial_consumer = Commercial_consumer.groupby(grouping,
+                                                          as_index=False).sum()
 
         return Industrial, Commercial_consumer
 
@@ -104,54 +149,104 @@ class Network:
     def _possible_pathway_for_recycled_flows(self, Industrial,
                                              Commercial_consumer,
                                              NAICS_code,
-                                             FRS_ID):
+                                             FRS_ID,
+                                             RETDF_selected,
+                                             RETDF_reporting_year):
         '''
         Method to determine the possible pathway for a recycled chemical:
         consumer, commercial, and industrial use
         '''
 
-        Input = {'Industry': Industrial,
-                 'Commercial_consumer': Commercial_consumer}
-        df = pd.DataFrame()
-        for key, value in Input.items():
-            # Facility
-            df_f = value[value['REGISTRY_ID'] == FRS_ID]
-            How = 'Facility'
-            if df_f.empty:
-                df_f = value
-                df_f['VAL'] = df_f['NAICS_CODE']\
-                    .apply(lambda x: self._comparing_naics(x, str(NAICS_code)))
-                max = df_f['VAL'].max()
-                # Industry
-                if max >= 2:
-                    df_f = df_f.loc[df_f['VAL'] == max]
-                    df_f.drop(columns=['VAL'], inplace=True)
-                    How = 'Industry'
-                else:
-                    # General
-                    df_f = value
-                    How = 'General'
-            df_f = df_f[['OPTION', 'PCT_PROD_VOLUME']]
-            df_f['HOW'] = How
-            df = pd.concat([df, df_f], ignore_index=True,
-                           sort=True, axis=0)
+        cou_path = f'{self._dir_path}/../waste_tracking/csv/on_site_tracking/Conditions_of_use_by_facility_and_chemical_{RETDF_reporting_year}.csv'
+        df_cou = pd.read_csv(cou_path, low_memory=False,
+                             usecols=['TRIFID', 'CAS NUMBER',
+                                      'SALE OR DISTRIBUTION OF THE CHEMICAL',
+                                      'USED AS A REACTANT',
+                                      'ADDED AS A FORMULATION COMPONENT',
+                                      'USED AS AN ARTICLE COMPONENT',
+                                      'REPACKAGING',
+                                      'USED AS A CHEMICAL PROCESSING AID',
+                                      'USED AS A MANUFACTURING AID',
+                                      'ANCILLARY OR OTHER USE'])
+        df_cou['CAS NUMBER'] = df_cou['CAS NUMBER'].str.lstrip('0')
+        df_cou = df_cou.loc[(df_cou['CAS NUMBER'] == self.chem) &
+                            (df_cou['TRIFID'] == RETDF_selected)]
+        df_cou.drop(columns=['TRIFID', 'CAS NUMBER'],
+                    inplace=True)
+        sale_distribution = df_cou['SALE OR DISTRIBUTION OF THE CHEMICAL'].values[0]
+        distribution_list = ['SALE OR DISTRIBUTION OF THE CHEMICAL',
+                             'ADDED AS A FORMULATION COMPONENT',
+                             'USED AS AN ARTICLE COMPONENT',
+                             'REPACKAGING']
+        on_site_use = ['USED AS A REACTANT',
+                       'USED AS A CHEMICAL PROCESSING AID',
+                       'USED AS A MANUFACTURING AID',
+                       'ANCILLARY OR OTHER USE']
 
-        if (df['HOW'] == 'Facility').any():
-            df = df.loc[df['HOW'] == 'Facility']
-        elif (df['HOW'] == 'Industry').any():
-            df = df.loc[df['HOW'] == 'Industry']
+        if sale_distribution == 'Yes':
+            cou_yes = [key for key, val in df_cou.to_dict('record')[0].items() if val == 'Yes']
+            cou_selected = cou_yes[np.random.randint(0,len(cou_yes))]
+            if cou_selected in distribution_list:
+                Input = {'Industry': Industrial,
+                         'Commercial_consumer': Commercial_consumer}
+                df = pd.DataFrame()
+                for key, value in Input.items():
+                    # Facility
+                    df_f = value[value['REGISTRY_ID'] == FRS_ID]
+                    How = 'Facility'
+                    if df_f.empty:
+                        df_f = value
+                        df_f['VAL'] = df_f['NAICS_CODE']\
+                            .apply(lambda x: self._comparing_naics(x, str(NAICS_code)))
+                        max = df_f['VAL'].max()
+                        # Industry
+                        if max >= 2:
+                            df_f = df_f.loc[df_f['VAL'] == max]
+                            df_f.drop(columns=['VAL'], inplace=True)
+                            How = 'Industry'
+                        else:
+                            # General
+                            df_f = value
+                            How = 'General'
+                    df_f = df_f[['OPTION', 'PCT_PROD_VOLUME']]
+                    df_f['HOW'] = How
+                    df = pd.concat([df, df_f], ignore_index=True,
+                                   sort=True, axis=0)
 
-        df['ACCUMULATED'] = df['PCT_PROD_VOLUME'].transform(pd.Series.cumsum)
-        df.sort_values(by=['ACCUMULATED'], inplace=True)
-        df.reset_index(inplace=True, drop=True)
+                if (df['HOW'] == 'Facility').any():
+                    df = df.loc[df['HOW'] == 'Facility']
+                elif (df['HOW'] == 'Industry').any():
+                    df = df.loc[df['HOW'] == 'Industry']
 
-        max_accumulated = df['ACCUMULATED'].max()
-        rnd_pathway = np.random.uniform(0, max_accumulated)
-        idx = bisect.bisect_left(df['ACCUMULATED'].tolist(), rnd_pathway)
-        Option = df['OPTION'].iloc[idx]
-        How = df['HOW'].iloc[idx]
+                df['ACCUMULATED'] = df['PCT_PROD_VOLUME'].transform(pd.Series.cumsum)
+                df.sort_values(by=['ACCUMULATED'], inplace=True)
+                df.reset_index(inplace=True, drop=True)
 
-        return Option, How
+                max_accumulated = df['ACCUMULATED'].max()
+                rnd_pathway = np.random.uniform(0, max_accumulated)
+                idx = bisect.bisect_left(df['ACCUMULATED'].tolist(), rnd_pathway)
+                Option = df['OPTION'].iloc[idx]
+                How = df['HOW'].iloc[idx]
+                Sale = 'Yes'
+                What_processing = None
+            else:
+                Option = 'Industrial'
+                How = None
+                Sale = 'No'
+                What_processing = cou_selected
+        else:
+            cou_yes = [key for key, val in df_cou.to_dict('record')[0].items() if val == 'Yes']
+            cou_yes = [col for col in cou_yes if col not in distribution_list]
+            try:
+                cou_selected = cou_yes[np.random.randint(0,len(cou_yes))]
+            except ValueError:
+                cou_selected = 'ANCILLARY OR OTHER USE'
+            What_processing = cou_selected
+            Option = 'Industrial'
+            How = None
+            Sale = 'No'
+
+        return Option, How, Sale, What_processing
 
     def _searching_6_digit_naics(self, IS):
         '''
@@ -184,21 +279,85 @@ class Network:
         IS = int(susb['NAICS CODE'].iloc[idx])
         return IS
 
-    def _checking_industrial_use_and_sector(self, Industrial,
-                                            NAICS_code,
-                                            FRS_ID, How):
+    def _checking_industrial_use_no_sale(self, Industrial,
+                                         NAICS_code,
+                                         What_processing):
+        '''
+        Method for checking industrial use when the RETDF does not
+        sell the recycled chemical
+        '''
+
+        cdr_tri = f'{self._dir_path}/../../ancillary/others/CDR_TRI_parallel_TPU.csv'
+        cdr_tri = pd.read_csv(cdr_tri)
+        cdr_pross = cdr_tri.loc[cdr_tri['TRI'] == What_processing, 'CDR'].values[0]
+
+        Industrial_pross = Industrial.loc[Industrial['TYPE_PROCESS_USE'] == cdr_pross]
+        if Industrial_pross.empty: # only in case
+            Industrial_pross = Industrial
+        Industrial_pross['VAL'] = Industrial_pross['NAICS']\
+                                 .apply(lambda x: self._comparing_naics(x, str(NAICS_code)))
+        max = Industrial_pross['VAL'].max()
+        if max >= 2:
+            Industrial_pross = Industrial_pross.loc[Industrial_pross['VAL'] == max]
+        Industrial_pross.drop(columns=['OPTION', 'REGISTRY_ID',
+                                       'NAICS_CODE', 'NAICS',
+                                       'VAL'],
+                              inplace=True)
+
+        Industrial_pross = Industrial_pross.groupby(['TYPE_PROCESS_USE',
+                                                     'FUNCTION_CATEGORY'],
+                                                    as_index=False).sum()
+
+        Industrial_pross['ACCUMULATED'] = Industrial_pross['PCT_PROD_VOLUME']\
+            .transform(pd.Series.cumsum)
+        Industrial_pross.sort_values(by=['ACCUMULATED'], inplace=True)
+        Industrial_pross.reset_index(inplace=True, drop=True)
+
+        max_accumulated = Industrial_pross['ACCUMULATED'].max()
+        rnd_pathway = np.random.uniform(0, max_accumulated)
+        idx = bisect.bisect_left(Industrial_pross['ACCUMULATED'].tolist(),
+                                 rnd_pathway)
+
+        # Industry Sector
+        IS = NAICS_code
+        # Industrial Processing or Use Operations
+        TPU = Industrial_pross['TYPE_PROCESS_USE'].iloc[idx].capitalize().strip()
+        # Industrial Function Category
+        IFC = Industrial_pross['FUNCTION_CATEGORY'].iloc[idx].capitalize().strip()
+
+        Result = {'Industry sector': [int(IS)],
+                  'Industrial processing or use operation': [TPU],
+                  'Industry function category': [IFC]}
+
+        return Result
+
+    def _checking_industrial_use_and_sector_sale(self, Industrial,
+                                                 NAICS_code,
+                                                 FRS_ID, How):
         '''
         Method for checking industry sector and industrial use
+        for sale cases
         '''
 
         if How == 'Industry':
             Industrial['VAL'] = Industrial['NAICS_CODE']\
                 .apply(lambda x: self._comparing_naics(x, str(NAICS_code)))
             max = Industrial['VAL'].max()
-            Industrial = Industrial.loc[Industrial['VAL'] == max]
+            if max >= 2:
+                Industrial = Industrial.loc[Industrial['VAL'] == max]
             Industrial.drop(columns=['VAL'], inplace=True)
         elif How == 'Facility':
             Industrial = Industrial[Industrial['REGISTRY_ID'] == FRS_ID]
+
+        Industrial.drop(columns=['NAICS_CODE',
+                                 'REGISTRY_ID',
+                                 'OPTION'],
+                        inplace=True)
+
+        Industrial = Industrial.groupby(['TYPE_PROCESS_USE',
+                                         'FUNCTION_CATEGORY',
+                                         'NAICS'],
+                                        as_index=False).sum()
 
         Industrial['ACCUMULATED'] = Industrial['PCT_PROD_VOLUME']\
             .transform(pd.Series.cumsum)
@@ -743,13 +902,39 @@ class Network:
         df_markov_network = pd.DataFrame()
         df_flow_MN = pd.DataFrame()
         n_loop = 0
+        n_sale = 0
+        n_no_sale = 0
+        n_non_industrial = 0
+        n_industrial = 0
+        n_recycling = 0
+        n_total = 0
+        m_total = 0
+        m_total_2 = 0
+        m_transfer_for_recycling = 0
+        m_transfer_for_recycling_2 = 0
+        m_recycled_for_sale = 0
+        m_recycled_for_sale_2 = 0
+        m_recycled_for_no_sale = 0
+        m_recycled_for_no_sale_2 = 0
+        m_recycled_for_industrial = 0
+        m_recycled_for_industrial_2 = 0
+        m_recycled_for_no_industrial = 0
+        m_recycled_for_no_industrial_2 = 0
         for i in range(self.n_cycles):
             print('Cycle {}'.format(i + 1))
             groups = EoL_dataset.groupby(grouping_columns,
                                          as_index=False)
             df_output = pd.DataFrame()
+            m_total_cycle = 0
+            m_transfer_for_recycling_cycle = 0
+            m_recycled_for_sale_cycle = 0
+            m_recycled_for_no_sale_cycle = 0
+            m_recycled_for_industrial_cycle = 0
+            m_recycled_for_no_industrial_cycle = 0
             for _, group in groups:
+                n_total = n_total + 1
                 Flow_transferred = group['QUANTITY TRANSFER OFF-SITE'].unique()[0]
+                m_total_cycle = m_total_cycle + Flow_transferred
                 WMH = group['WASTE MANAGEMENT UNDER EPA WMH'].unique()[0].strip()
                 WM_TRI = group['WASTE MANAGEMENT UNDER TRI'].unique()[0].strip()
                 GiS = group['GENERATOR TRI PRIMARY NAICS TITLE'].unique()[0].strip()
@@ -798,23 +983,43 @@ class Network:
                 # Analyzing recycling flows
                 if WMH == 'Recycling':
 
-                    # calling CDR
+                    # Calling CDR
                     Industrial, Commercial_consumer = self._callin_cdr()
 
                     # Selecting between industrial and non-industrial activities
-                    Option, How =\
-                        self._possible_pathway_for_recycled_flows(Industrial,
-                                                                  Commercial_consumer,
+                    Option, How , Sale, What_processing =\
+                        self._possible_pathway_for_recycled_flows(Industrial.copy(),
+                                                                  Commercial_consumer.copy(),
                                                                   NAICS_code,
-                                                                  FRS_ID)
+                                                                  FRS_ID,
+                                                                  RETDF_selected,
+                                                                  RETDF_reporting_year)
+
+                    n_recycling = n_recycling + 1
+                    m_transfer_for_recycling_cycle = m_transfer_for_recycling_cycle + Flow_transferred
+                    if Sale == 'Yes':
+                        n_sale = n_sale + 1
+                        m_recycled_for_sale_cycle = m_recycled_for_sale_cycle + Flow_transferred
+                    else:
+                        n_no_sale =  n_no_sale + 1
+                        m_recycled_for_no_sale_cycle = m_recycled_for_no_sale_cycle + Flow_transferred
 
                     if Option == 'Industrial':
 
+                        m_recycled_for_industrial_cycle = m_recycled_for_industrial_cycle + Flow_transferred
+                        n_industrial = n_industrial + 1
+
                         # Analyzing industrial activities
-                        Result =\
-                            self._checking_industrial_use_and_sector(Industrial,
-                                                                     NAICS_code,
-                                                                     FRS_ID, How)
+                        if Sale == 'Yes':
+                            Result =\
+                                self._checking_industrial_use_and_sector_sale(Industrial.copy(),
+                                                                              NAICS_code,
+                                                                              FRS_ID, How)
+                        else:
+                            Result =\
+                                self._checking_industrial_use_no_sale(Industrial.copy(),
+                                                                      NAICS_code,
+                                                                      What_processing)
                         del Industrial
 
                         Result = pd.DataFrame(Result)
@@ -848,9 +1053,12 @@ class Network:
 
                     else:
 
+                        m_recycled_for_no_industrial_cycle = m_recycled_for_no_industrial_cycle + Flow_transferred
+                        n_non_industrial = n_non_industrial + 1
+
                         # Analyzing non-industrial activities
                         Result =\
-                        self._checking_commercial_and_consumer_product(Commercial_consumer,
+                        self._checking_commercial_and_consumer_product(Commercial_consumer.copy(),
                                                                        NAICS_code,
                                                                        FRS_ID,
                                                                        How)
@@ -862,30 +1070,33 @@ class Network:
                     Output.update(Result)
                     del Result
 
-                    Evidence =\
-                        self._checking_possible_chemicals(On_recycling,
-                                                          RETDF_selected,
-                                                          RETDF_reporting_year,
-                                                          NAICS_code)
-                    df_ratio = pd.DataFrame(Evidence)
-                    df_ratio['Option'] = Option
-                    df_ratio['Category'] = Category
-                    df_ratio = df_ratio.loc[df_ratio['Evidence'] != 'No']
-                    if not df_ratio.empty:
-                        df_ratio.drop(columns=['Evidence'], inplace=True)
-                        df_ratio_loop = pd.concat([df_ratio_loop, df_ratio],
-                                                  ignore_index=True,
-                                                  sort=True, axis=0)
-                        del df_ratio
-                        df_ratio_loop =\
-                            df_ratio_loop.groupby(['Category',
-                                                   'Chemical',
-                                                   'Option'],
-                                                  as_index=False)\
-                            .apply(lambda x:
-                                   self._selecting_highest_degree(x,
-                                                                  n_loop))
-                        n_loop = n_loop + 1
+                    # Analyzing other chemicals that may flow with the
+                    # chemical of interest
+                    if Sale == 'Yes':
+                        Evidence =\
+                            self._checking_possible_chemicals(On_recycling,
+                                                              RETDF_selected,
+                                                              RETDF_reporting_year,
+                                                              NAICS_code)
+                        df_ratio = pd.DataFrame(Evidence)
+                        df_ratio['Option'] = Option
+                        df_ratio['Category'] = Category
+                        df_ratio = df_ratio.loc[df_ratio['Evidence'] != 'No']
+                        if not df_ratio.empty:
+                            df_ratio.drop(columns=['Evidence'], inplace=True)
+                            df_ratio_loop = pd.concat([df_ratio_loop, df_ratio],
+                                                      ignore_index=True,
+                                                      sort=True, axis=0)
+                            del df_ratio
+                            df_ratio_loop =\
+                                df_ratio_loop.groupby(['Category',
+                                                       'Chemical',
+                                                       'Option'],
+                                                      as_index=False)\
+                                .apply(lambda x:
+                                       self._selecting_highest_degree(x,
+                                                                      n_loop))
+                            n_loop = n_loop + 1
 
                 df_output = pd.concat([df_output,
                                        pd.DataFrame(Output)],
@@ -893,6 +1104,18 @@ class Network:
                                       sort=True, axis=0)
 
             # Loop total
+            m_total = m_total + m_total_cycle
+            m_total_2 = m_total_2 + m_total_cycle**2
+            m_transfer_for_recycling = m_transfer_for_recycling + m_transfer_for_recycling_cycle
+            m_transfer_for_recycling_2 = m_transfer_for_recycling_2 + m_transfer_for_recycling_cycle**2
+            m_recycled_for_sale = m_recycled_for_sale + m_recycled_for_sale_cycle
+            m_recycled_for_sale_2 = m_recycled_for_sale_2 + m_recycled_for_sale_cycle**2
+            m_recycled_for_no_sale = m_recycled_for_no_sale + m_recycled_for_no_sale_cycle
+            m_recycled_for_no_sale_2 = m_recycled_for_no_sale_2 + m_recycled_for_no_sale_cycle**2
+            m_recycled_for_industrial = m_recycled_for_industrial + m_recycled_for_industrial_cycle
+            m_recycled_for_industrial_2 = m_recycled_for_industrial_2 + m_recycled_for_industrial_cycle**2
+            m_recycled_for_no_industrial = m_recycled_for_no_industrial + m_recycled_for_no_industrial_cycle
+            m_recycled_for_no_industrial_2 = m_recycled_for_no_industrial_2 + m_recycled_for_no_industrial_cycle**2
             # Filling null values in the flows
             num_cols = df_output._get_numeric_data().columns
             cat_cols = [col for col in df_output.columns
@@ -909,8 +1132,9 @@ class Network:
             # Dataframe for Markov Network joint probability
             Network_nodes = list(set(Network_nodes)
                                  .intersection(set(list(df_output.columns))))
-            df_markov_network_loop = df_output[Network_nodes]
-            df_markov_network_loop['Times'] = 1
+            df_markov_network_loop = df_output[Network_nodes + ['Flow transferred']]
+            df_markov_network_loop.rename(columns={'Flow transferred': 'Times'},
+                                          inplace=True)
             df_markov_network = pd.concat([df_markov_network,
                                            df_markov_network_loop],
                                           ignore_index=True,
@@ -949,6 +1173,73 @@ class Network:
         # Stacked bar plot
         stacked_barplot(df_markov_network.copy(),
                         self._dir_path)
+        # Printing some results
+        ## Total transfer
+        m_total_average = m_total/self.n_cycles
+        m_total_std = (m_total_2/self.n_cycles - m_total_average**2)**0.5
+        try:
+            m_total_cv = m_total_std/m_total_average
+        except ZeroDivisionError:
+            m_total_cv = 0
+        ## Recycling transfer
+        m_transfer_for_recycling_avg = m_transfer_for_recycling/self.n_cycles
+        m_transfer_for_recycling_std = (m_transfer_for_recycling_2/self.n_cycles - m_transfer_for_recycling_avg**2)**0.5
+        try:
+            m_transfer_for_recycling_cv = m_transfer_for_recycling_std/m_transfer_for_recycling_avg
+        except ZeroDivisionError:
+            m_transfer_for_recycling_cv = 0
+        ## Sale
+        m_recycled_for_sale_avg = m_recycled_for_sale/self.n_cycles
+        m_recycled_for_sale_std = (m_recycled_for_sale_2/self.n_cycles - m_recycled_for_sale_avg**2)**0.5
+        try:
+            m_recycled_for_sale_cv = m_recycled_for_sale_std/m_recycled_for_sale_avg
+        except ZeroDivisionError:
+            m_recycled_for_sale_cv = 0
+        ## No sale
+        m_recycled_for_no_sale_avg = m_recycled_for_no_sale/self.n_cycles
+        m_recycled_for_no_sale_std = (m_recycled_for_no_sale_2/self.n_cycles - m_recycled_for_no_sale_avg**2)**0.5
+        try:
+            m_recycled_for_no_sale_cv = m_recycled_for_no_sale_std/m_recycled_for_no_sale_avg
+        except ZeroDivisionError:
+            m_recycled_for_no_sale_cv = 0
+        ## For industrial
+        m_recycled_for_industrial_avg = m_recycled_for_industrial/self.n_cycles
+        m_recycled_for_industrial_std = (m_recycled_for_industrial_2/self.n_cycles - m_recycled_for_industrial_avg**2)**0.5
+        try:
+            m_recycled_for_industrial_cv = m_recycled_for_industrial_std/m_recycled_for_industrial_avg
+        except ZeroDivisionError:
+            m_recycled_for_industrial_cv = 0
+        ## For no industrial
+        m_recycled_for_no_industrial_avg = m_recycled_for_no_industrial/self.n_cycles
+        m_recycled_for_no_industrial_std = (m_recycled_for_no_industrial_2/self.n_cycles - m_recycled_for_no_industrial_avg**2)**0.5
+        try:
+            m_recycled_for_no_industrial_cv = m_recycled_for_no_industrial_std/m_recycled_for_no_industrial_avg
+        except ZeroDivisionError:
+            m_recycled_for_no_industrial_cv = 0
+
+        print('*'*45)
+        print(f'Average total mass is {round(m_total_average)} kg/yr')
+        print(f'CV for total mass is {round(m_total_cv, 2)}')
+        print('*'*45)
+        print(f'% of times that recycling ocurred {round(n_recycling*100/n_total, 2)}')
+        print(f'Average recycling mass transfer is {round(m_transfer_for_recycling_avg)} kg/yr')
+        print(f'CV for recycling mass transfer is {round(m_transfer_for_recycling_cv, 2)}')
+        print('*'*45)
+        print(f'% of times that the recycled flow was sold by the RETDF: {round(n_sale/n_recycling*100, 2)}')
+        print(f'Average recycling mass sold by RETDF is {round(m_recycled_for_sale_avg)} kg/yr')
+        print(f'CV for recycling mass sold by RETDF is {round(m_recycled_for_sale_cv, 2)}')
+        print('*'*45)
+        print(f'% of times that the recycled flow was not sold by the RETDF: {round(n_no_sale/n_recycling*100, 2)}')
+        print(f'Average recycling mass not sold by RETDF is {round(m_recycled_for_no_sale_avg)} kg/yr')
+        print(f'CV for recycling mass not sold by RETDF is {round(m_recycled_for_no_sale_cv, 2)}')
+        print('*'*4)
+        print(f'% of times that the recycled flow was used for industrial: {round(n_industrial/n_recycling*100, 2)}')
+        print(f'Average recycling mass for industrial is {round(m_recycled_for_industrial_avg)} kg/yr')
+        print(f'CV for recycling mass for industrial  is {round(m_recycled_for_no_sale_cv, 2)}')
+        print('*'*4)
+        print(f'% of times that the recycled flow was used for no industrial: {round(n_non_industrial/n_recycling*100, 2)}')
+        print(f'Average recycling mass for no industrial is {round(m_recycled_for_no_industrial_avg)} kg/yr')
+        print(f'CV for recycling mass for no industrial  is {round(m_recycled_for_no_industrial_cv, 2)}')
 
 
 if __name__ == '__main__':
@@ -972,5 +1263,8 @@ if __name__ == '__main__':
     n_cycles = args.N_cycles
     chem = args.CAS
 
+    start_time = time.time()
     Network = Network(n_cycles, chem)
     Network.loop()
+    print('*'*45)
+    print('Execution time: %s sec' % (time.time() - start_time))

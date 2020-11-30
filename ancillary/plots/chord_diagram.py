@@ -5,6 +5,7 @@
 import holoviews as hv
 from holoviews import opts, dim
 import pandas as pd
+import numpy as np
 
 hv.extension("matplotlib")
 hv.output(fig='pdf', size=250)
@@ -38,13 +39,13 @@ def chord_diagram(df_flow_MN, n_cycles, dir_path):
         df_links_aux[cols[2]] = df_links_aux[cols[2]]/n_cycles
         df_links_aux['flow'] = Flow
         df_links_aux.rename(columns=Link, inplace=True)
+        if Flow == 'waste':
+            # 1 metric ton/yr
+            df_links_aux = df_links_aux[df_links_aux['value'] >= 1000]
         df_links = pd.concat([df_links, df_links_aux],
                              ignore_index=True,
                              sort=True, axis=0)
-
-    # 1 metric ton/yr
     df_links = df_links.loc[df_links['source'] != df_links['target']]
-    df_links = df_links[df_links['value'] >= 1000]
     Nodes = set(df_links['source'].unique().tolist()
                 + df_links['target'].unique().tolist())
     Nodes = {node: i for i, node in enumerate(Nodes)}

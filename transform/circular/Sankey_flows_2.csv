@@ -1,0 +1,8 @@
+Source,Target,Value,CV
+All other basic organic chemical manufacturing 1,Hazardous waste treatment and disposal 1,5512.149774240001,3.958114029012638
+Hazardous waste treatment and disposal 1,Solvents/organics recovery,5512.149774240001,3.958114029012638
+Solvents/organics recovery,Intermediates,5489.780456193384,3.9581229667342877
+Solvents/organics recovery,Fugitive air release,0.03156219006475171,4.450716128346257
+Solvents/organics recovery,Wastewater,22.33775585655025,4.464103224471026
+Intermediates,Processing as a reactant,5489.780456193384,3.9581229667342877
+Processing as a reactant,Petroleum refineries 1,5489.780456193384,3.9581229667342877

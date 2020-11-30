@@ -233,31 +233,56 @@ class On_Tracker:
                       sep=',', index=False)
 
     def conditions_of_use(self):
-        df_TRI = pd.DataFrame()
-        Files = [file for file in os.listdir(
-                 self._dir_path + '/../../extract/tri/csv') if 'US_1b' in file]
-        for File in Files:
-            Path_csv = self._dir_path + f'/../../extract/tri/csv/{File}'
-            TRI_aux =\
-                pd.read_csv(Path_csv, header=0, sep=',',
-                            low_memory=False,
-                            usecols=['REPORTING YEAR', 'TRIFID',
-                                     'CAS NUMBER', 'PRODUCE THE CHEMICAL',
-                                     'IMPORT THE CHEMICAL', 'REPACKAGING'
-                                     'ON-SITE USE OF THE CHEMICAL',
-                                     'SALE OR DISTRIBUTION OF THE CHEMICAL',
-                                     'AS A BYPRODUCT', 'USED AS A REACTANT',
-                                     'AS A MANUFACTURED IMPURITY',
-                                     'ADDED AS A FORMULATION COMPONENT',
-                                     'USED AS AN ARTICLE COMPONENT',
-                                     'AS A PROCESS IMPURITY', 'RECYCLING',
-                                     'USED AS A CHEMICAL PROCESSING AID',
-                                     'USED AS A MANUFACTURING AID',
-                                     'ANCILLARY OR OTHER USE'])
-            df_TRI = pd.concat([TRI_aux, df_TRI], ignore_index=True, axis=0)
-        df_TRI.drop_duplicates(keep='first', inplace=True, subset=['TRIFID'])
-        df_TRI.to_csv(self._dir_path + '/csv/on_site_tracking/Conditions_of_use_by_facility_and_chemical.csv',
+        Path_csv = f'{self._dir_path}/../../extract/tri/csv/US_1b_{self.year}.csv'
+        df_TRI =\
+            pd.read_csv(Path_csv, header=0, sep=',',
+                        low_memory=False,
+                        usecols=['TRIFID',
+                                 'CAS NUMBER', 'PRODUCE THE CHEMICAL',
+                                 'IMPORT THE CHEMICAL', 'REPACKAGING',
+                                 'ON-SITE USE OF THE CHEMICAL',
+                                 'SALE OR DISTRIBUTION OF THE CHEMICAL',
+                                 'AS A BYPRODUCT', 'USED AS A REACTANT',
+                                 'AS A MANUFACTURED IMPURITY',
+                                 'ADDED AS A FORMULATION COMPONENT',
+                                 'USED AS AN ARTICLE COMPONENT',
+                                 'AS A PROCESS IMPURITY', 'RECYCLING',
+                                 'USED AS A CHEMICAL PROCESSING AID',
+                                 'USED AS A MANUFACTURING AID',
+                                 'ANCILLARY OR OTHER USE'])
+        df_TRI['REPORTING YEAR'] = self.year
+        func = self._fuctions_rows_grouping(df_TRI, self.year)
+        df_TRI = df_TRI.groupby(['TRIFID', 'CAS NUMBER'],
+                                as_index=False).agg(func)
+        df_TRI.to_csv(f'{self._dir_path}/csv/on_site_tracking/Conditions_of_use_by_facility_and_chemical_{self.year}.csv',
                       sep=',', index=False)
+
+    def _searching(sefl, df):
+        if any(df.str.capitalize() == 'Yes'):
+            return 'Yes'
+        else:
+            return 'No'
+
+    def _fuctions_rows_grouping(self, x, year):
+        f = {'REPORTING YEAR': lambda x: x.drop_duplicates(keep = 'first'),
+            'PRODUCE THE CHEMICAL': lambda x: self._searching(x),
+            'IMPORT THE CHEMICAL': lambda x: self._searching(x),
+            'SALE OR DISTRIBUTION OF THE CHEMICAL': lambda x: self._searching(x),
+            'ON-SITE USE OF THE CHEMICAL': lambda x: self._searching(x),
+            'AS A BYPRODUCT': lambda x: self._searching(x),
+            'AS A MANUFACTURED IMPURITY': lambda x: self._searching(x),
+            'AS A PROCESS IMPURITY': lambda x: self._searching(x),
+            'USED AS A REACTANT': lambda x: self._searching(x),
+            'ADDED AS A FORMULATION COMPONENT': lambda x: self._searching(x),
+            'USED AS AN ARTICLE COMPONENT': lambda x: self._searching(x),
+            'REPACKAGING': lambda x: self._searching(x),
+            'AS A PROCESS IMPURITY': lambda x: self._searching(x),
+            'USED AS A CHEMICAL PROCESSING AID': lambda x: self._searching(x),
+            'USED AS A MANUFACTURING AID': lambda x: self._searching(x),
+            'ANCILLARY OR OTHER USE': lambda x: self._searching(x)}
+        if int(year) >= 2018:
+            f.update({'RECYCLING': lambda x: self._searching(x)})
+        return f
 
 
 if __name__ == '__main__':
@@ -290,5 +315,6 @@ if __name__ == '__main__':
         T = On_Tracker()
         T.facility_information()
     if args.Option == 'C':
-        T = On_Tracker()
-        T.conditions_of_use()
+        for TRIyear in TRIyears:
+            T = On_Tracker(TRIyear)
+            T.conditions_of_use()

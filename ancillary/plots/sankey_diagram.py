@@ -68,11 +68,10 @@ def sankey_diagram(df_flow_MN, df_markov_network,
                                            f'{col}^2': f'CV_-_{col.lower()}'},
                                   inplace=True)
 
-
         colors_links = {'Generator_Industry_Sector': '#fbb4ae',
                         'RETDF_Industry_Sector': '#b3cde3',
                         'Waste_management_under_TRI': '#abdea0',
-                        'Industry_sector': '#decbe4',
+                        'Industry_function_category': '#decbe4',
                         'Industrial_processing_or_use_operation': '#fed9a6'}
         Wastes = {'W': 'Wastewater', 'L': 'Liquid waste',
                   'S': 'Solid waste', 'A': 'Gaseous'}
@@ -82,8 +81,8 @@ def sankey_diagram(df_flow_MN, df_markov_network,
                                                                                              'CV_-_flow_transferred']},
                                     'Waste_management_under_TRI': {'Carrier_phase': ['Mean_carrier_flow',
                                                                                      'CV_-_carrier_flow'],
-                                                                   'Industry_sector': ['Mean_recycled_flow',
-                                                                                       'CV_-_recycled_flow'],
+                                                                   'Industry_function_category': ['Mean_recycled_flow',
+                                                                                                  'CV_-_recycled_flow'],
                                                                    'Product_category': ['Mean_recycled_flow',
                                                                                         'CV_-_recycled_flow'],
                                                                    'Effluent_phase': ['Mean_effluent_flow',
@@ -96,10 +95,10 @@ def sankey_diagram(df_flow_MN, df_markov_network,
                                                                                            'CV_-_waste/release_flow'],
                                                                    'Mean_on-site_soil_release': ['Mean_on-site_soil_release',
                                                                                                  'CV_-_on-site_soil_release']},
-                                    'Industry_sector': {'Industrial_processing_or_use_operation': ['Mean_recycled_flow',
-                                                                                                   'CV_-_recycled_flow']},
-                                    'Industrial_processing_or_use_operation': {'Industry_function_category': ['Mean_recycled_flow',
-                                                                                                              'CV_-_recycled_flow']}}
+                                    'Industry_function_category': {'Industrial_processing_or_use_operation': ['Mean_recycled_flow',
+                                                                                                              'CV_-_recycled_flow']},
+                                    'Industrial_processing_or_use_operation': {'Industry_sector': ['Mean_recycled_flow',
+                                                                                                   'CV_-_recycled_flow']}}
 
         Sources = list()
         Targets = list()
@@ -107,6 +106,19 @@ def sankey_diagram(df_flow_MN, df_markov_network,
         CVs = list()
         Labels = list()
         Colors_source_dict = dict()
+
+        df_flow_result = pd.DataFrame({key: [val] for key, val in
+                                      df_flow_result.to_dict('records')[0].items() if val != 'N/N'})
+        sectors = [col for col in df_flow_result.columns if 'industry_sector' in col.lower()]
+        sector_val = dict()
+        for sector in sectors:
+            val_sec = df_flow_result[sector].values[0]
+            if val_sec in sector_val.keys():
+                sector_val[val_sec] = sector_val[val_sec] + 1
+                df_flow_result[sector] = f'{val_sec} {sector_val[val_sec]}'
+            else:
+                sector_val[val_sec] = 1
+                df_flow_result[sector] = f'{val_sec} 1'
 
         # Labels
         for key_1, val_1 in Dictionary_source_target.items():

@@ -16,10 +16,6 @@ def stacked_barplot(df_markov_network, dir_path):
     df_markov_network = df_markov_network.loc[df_markov_network['Type of waste management'] == 'Recycling']
     df_markov_network = df_markov_network[['RETDF Industry Sector',
                                            'Option', 'Times']]
-    ##############################################################
-    df_markov_network['RETDF Industry Sector'] = df_markov_network['RETDF Industry Sector'].str.capitalize()
-    df_markov_network['Option'] = df_markov_network['Option'].str.capitalize()
-    ##############################################################
     df_markov_network = df_markov_network.groupby(['RETDF Industry Sector',
                                                    'Option'],
                                                   as_index=False).sum()
@@ -27,8 +23,8 @@ def stacked_barplot(df_markov_network, dir_path):
                                                            as_index=False)\
                                                            ['Times'].transform('sum')
     df_markov_network['percentage'] = df_markov_network['Times']*100/df_markov_network['Total']
-    df_markov_network['percentage'] = df_markov_network['percentage'].round(0)
-    df_markov_network['percentage'] = df_markov_network['percentage'].astype('int')
+    df_markov_network['percentage'] = df_markov_network['percentage'].round(4)
+    df_markov_network['percentage'] = df_markov_network['percentage'].astype('float')
     df_markov_network.drop(columns=['Times', 'Total'], inplace=True)
     df_markov_network.rename(columns={'Option': 'Activity'},
                              inplace=True)
@@ -37,6 +33,7 @@ def stacked_barplot(df_markov_network, dir_path):
                                        values='percentage',
                                        index='RETDF Industry Sector',
                                        columns='Activity')
+    df_markov_network.to_csv(f'{dir_path}/stacked_barplot.csv')
     ax = df_markov_network.plot(kind='bar', stacked=True,
                                 legend=False)
     ax.legend(loc='center left', bbox_to_anchor=(0.45, 0.9), ncol=1)

@@ -25,7 +25,7 @@ class FRS_Scrapper:
     def extracting_zip(self):
         self._visit()
         with zipfile.ZipFile(io.BytesIO(self._r_file.content)) as z:
-            z.extractall(self._dir_path + '/CSV')
+            z.extractall(self._dir_path + '/csv')
 
 if __name__ == '__main__':
 
