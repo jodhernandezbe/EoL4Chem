@@ -66,13 +66,28 @@ optional arguments:
                         2017
 ```
  
-Execute each step starting with A and finish with B. Use flag -Y for choosing the odd years from 2001 to 2017 (the most recent RCRA biennial report).The flag -Y can work for retrieving many years at the same time, for example:
+Execute each step starting with A and finishing with B. Use flag -Y for choosing the odd years from 2001 to 2017 (the most recent RCRA biennial report).The flag -Y can work for retrieving many years at the same time, for example:
 
 ```
 python rcrainfo_scraper.py A -Y 2001 2003
 ```
 
 #### tri folder
+
+This folder contains the information from the EPA's [Toxics Release Inventory (TRI)](https://www.epa.gov/toxics-release-inventory-tri-program). To retrieve the TRI information, navigate to the folder [tri](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/tri). Execute the following command either on Windows CMD or Unix terminal:
+
+```
+python tri_web_scraper.py -Y TRI_Year -F TRI_File
+```
+
+The flag -Y represents the TRI reporting year that you would like to get, while -F is the file from the TRI for retrieving the information (e.g., File 1a). Check [TRI Basic Plus Data Files Guides
+](https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-plus-data-files-guides) for knowing more about the TRI files. EoL4Chem requires the files 1a, 1b, 1b, 2a, 2b, 3a, 3b, and 3c to run the data engineering.
+
+The above command can work for retrieving many years and files at the same time, for example:
+
+```
+python tri_web_scraper.py -Y 2001 2002 2003 -F 1a 1b 2b
+```
 
 ### Data engineering module
 
