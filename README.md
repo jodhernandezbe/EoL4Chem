@@ -91,6 +91,18 @@ python tri_web_scraper.py -Y 2001 2002 2003 -F 1a 1b 2b
 
 To run the data engineering module, navigate to the folder [transform](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform). This folder contains six subfolders [cdr](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/cdr), [circular](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/circular), [pau4chem](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/pau4chem), [source_reduction](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/source_reduction), [tri](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/tri), and [waste_tracking](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/waste_tracking).
 
+#### 2.2.1. waste_tracking folder
+
+#### 2.2.2 tri folder
+
+#### 2.2.3. cdr folder
+
+#### 2.2.4. pau4chem folder
+
+#### 2.2.5. source_reduction folder
+
+#### 2.2.6. circular folder
+
 ## Disclaimer
 
 The views expressed in this article are those of the authors and do not necessarily represent the views or policies of
