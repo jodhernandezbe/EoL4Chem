@@ -31,77 +31,9 @@ This code was written using Python 3.x, Anaconda 3, and operating system Ubuntu 
 
 ## 2. How to use
 
-### 2.1. Web scraping module
+In order to get 
 
-EoL4Chem is a modular framework that uses web scraping to extract the information from the web and organize it before data engineering. To run the web scraping module, navigate to the folder [extract](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract). This folder contains five subfolders [frs](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/frs), [gps](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/gps), [properties](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/properties), [rcrainfo](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/rcrainfo), and [tri](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/tri). The [gps](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/gps) folder has the scripts for using [Nominatim](https://nominatim.org/)'s API and [OSRM](http://project-osrm.org/.)'s, which are called by the data engineering process. [properties](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/properties) is used as explained in this GitHub [repository](https://github.com/jodhernandezbe/Properties_Scraper).
 
-#### 2.1.1. frs folder
-
-This folder contains the information from the EPA's [Facility Registry Service (FRS)](https://www.epa.gov/frs). To retrieve the FRS information, navigate to the folder [frs](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/frs). Then, you execute the following command either on Windows CMD or Unix terminal:
-
-```
-python frs_scraper.py
-```
-
-#### 2.1.2. rcrainfo folder
-
-This folder contains the information from the EPA's [Resource Conservation and Recovery Act Information (RCRAInfo)](https://www.epa.gov/enviro/rcrainfo-overview). To retrieve the RCRAInfo information, navigate to the folder [rcrainfo](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/rcrainfo). Execute the following command either on Windows CMD or Unix terminal:
-
-```
-python rcrainfo_scraper.py --help
-```
-You could see the following menu:
-
-```
-usage: rcrainfo_scraper.py [-h] [-Y YEAR [YEAR ...]] Option
-
-positional arguments:
-  Option                What do you want to do: [A] Extract information from RCRAInfo.
-                                                [B] Organize files for csv.
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -Y YEAR [YEAR ...], --Year YEAR [YEAR ...]
-                        What Bienniarl report do you want?. Currently up to
-                        2017
-```
- 
-Execute each step starting with A and finishing with B. Use flag -Y for choosing the odd years from 2001 to 2017 (the most recent RCRA biennial report).The flag -Y can work for retrieving many years at the same time, for example:
-
-```
-python rcrainfo_scraper.py A -Y 2001 2003
-```
-
-#### 2.1.3. tri folder
-
-This folder contains the information from the EPA's [Toxics Release Inventory (TRI)](https://www.epa.gov/toxics-release-inventory-tri-program). To retrieve the TRI information, navigate to the folder [tri](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/tri). Execute the following command either on Windows CMD or Unix terminal:
-
-```
-python tri_web_scraper.py -Y TRI_Year -F TRI_File
-```
-
-The flag -Y represents the TRI reporting year that you would like to get, while -F is the file from the TRI for retrieving the information (e.g., File 1a). Check [TRI Basic Plus Data Files Guides
-](https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-plus-data-files-guides) for knowing more about the TRI files. EoL4Chem requires the files 1a, 1b, 1b, 2a, 2b, 3a, 3b, and 3c to run the data engineering. The above command can work for retrieving many years and files at the same time, for example:
-
-```
-python tri_web_scraper.py -Y 2001 2002 2003 -F 1a 1b 2b
-```
-
-### 2.2. Data engineering module
-
-To run the data engineering module, navigate to the folder [transform](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform). This folder contains six subfolders [cdr](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/cdr), [circular](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/circular), [pau4chem](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/pau4chem), [source_reduction](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/source_reduction), [tri](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/tri), and [waste_tracking](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/waste_tracking).
-
-#### 2.2.1. waste_tracking folder
-
-#### 2.2.2 tri folder
-
-#### 2.2.3. cdr folder
-
-#### 2.2.4. pau4chem folder
-
-#### 2.2.5. source_reduction folder
-
-#### 2.2.6. circular folder
 
 ## Disclaimer
 
