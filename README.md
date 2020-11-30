@@ -35,6 +35,23 @@ or
 python circular.py
 ```
 
+## Outputs
+
+After running the Python script you obtain the following output files in the [circular](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/circular) folder:
+
+| File name | Description |
+| ------------- | ------------- |
+| Sankey_1.pdf | Sankey diagram in Figure 4A |
+| Sankey_flows_1.csv | Flows between nodes in Figure 4A |
+| Sankey_2.pdf | Sankey diagram in Figure 4B |
+| Sankey_flows_2.csv | Flows between nodes in Figure 4B |
+| stacked_barplot.pdf | Stacked bar plot or Figure 5 |
+| chord_waste.pdf | Chord diagram or Figure 6 |
+| chord_waste.csv | Labels for industry sectors in Figure 6 |
+| chord_recyled.pdf | Chord diagram or Figure 7 |
+| chord_recyled.csv | Labels for industry sectors in Figure 7 |
+| seaborn_heatmap_non_industrial.pdf | Plot for chemical cross-contamination or Figure 8 |
+
 ## Disclaimer
 
 The views expressed in this article are those of the authors and do not necessarily represent the views or policies of
