@@ -1,6 +1,6 @@
 # EoL4Chem
 
-EoL4Chem are Python scripts written to track chemical waste flows and identify recycling, energy recovery, treatment & disposal facilities (RETDFs) located across the United States of America, using publicly-available databases. EoL4Chem uses the U.S. Environmental Protection Agency's [Chemical Data Reporting (CDR)](https://www.epa.gov/chemical-data-reporting) to gather information about potential post-recycling scenarios for recycled chemicals (e.g., fuel or fuel agent). EoL4Chem integrates the [PAU4Chem](https://github.com/jodhernandezbe/PAU4Chem) repository, which transforms data for performing chemical flow analysis for pollution abatement units (PAUs) or on-site end-of-life (EoL) operations (e.g., distillation). Also, EoL4Chem incorporates the physical properties (e.g., boiling point) from [another repository](https://github.com/jodhernandezbe/Properties_Scraper) that retrieves the properties using web scraping and automatization. These properties support chemical flow analysis performance.
+EoL4Chem are Python scripts written to track chemical waste flows and identify recycling, energy recovery, treatment & disposal facilities (RETDFs) located across the United States of America, using publicly-available databases. EoL4Chem uses the U.S. Environmental Protection Agency (EPA)'s [Chemical Data Reporting (CDR)](https://www.epa.gov/chemical-data-reporting) to gather information about potential post-recycling scenarios for recycled chemicals (e.g., fuel or fuel agent). EoL4Chem integrates the [PAU4Chem](https://github.com/jodhernandezbe/PAU4Chem) repository, which transforms data for performing chemical flow analysis for pollution abatement units (PAUs) or on-site end-of-life (EoL) operations (e.g., distillation). Also, EoL4Chem incorporates the physical properties (e.g., boiling point) from [another repository](https://github.com/jodhernandezbe/Properties_Scraper) that retrieves the properties using web scraping and automatization. These properties support chemical flow analysis performance.
 
 <p align="center">
   <img src=https://github.com/jodhernandezbe/EoL4Chem/blob/main/EoL4Chem.svg width="100%">
@@ -33,10 +33,26 @@ This code was written using Python 3.x, Anaconda 3, and operating system Ubuntu 
 
 ### Web scraping module
 
-EoL4Chem is a modular framework that uses web scraping for extracing the information from the web and organizes it before the data engineering. In order to run the web scraping module, navigate to the folder [extract](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract). This folder contains 5 subfolders [frs](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/frs), [gps](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/gps), [properties](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/properties), [rcrainfo](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/rcrainfo), and [tri](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/tri). The [gps](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/gps) folder has the scripts for using [Nominatim](https://nominatim.org/)'s API and [OSRM](http://project-osrm.org/.)'s, which are called by the data engineering process.
+EoL4Chem is a modular framework that uses web scraping to extract the information from the web and organize it before data engineering. To run the web scraping module, navigate to the folder [extract](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract). This folder contains five subfolders [frs](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/frs), [gps](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/gps), [properties](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/properties), [rcrainfo](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/rcrainfo), and [tri](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/tri). The [gps](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/gps) folder has the scripts for using [Nominatim](https://nominatim.org/)'s API and [OSRM](http://project-osrm.org/.)'s, which are called by the data engineering process. [properties](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/properties) is used as explained in this GitHub [repository](https://github.com/jodhernandezbe/Properties_Scraper).
+
+#### frs folder
+
+This folder contains the information from the EPA's [Facility Registry Service (FRS)](https://www.epa.gov/frs). To retrieve the FRS information, navigate to the folder [frs](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/frs). Then, you execute the following command either on Windows CMD or Unix terminal:
+
+```
+python frs_scraper.py
+```
+
+### rcrainfo folder
+
+This folder contains the information from the EPA's [Resource Conservation and Recovery Act Information (RCRAInfo)](https://www.epa.gov/enviro/rcrainfo-overview). To retrieve the RCRAInfo information, navigate to the folder [rcrainfo](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/rcrainfo). Execute the following command either on Windows CMD or Unix terminal:
+
+```
+python rcrainfo_scraper.py --help
+```
 
 
-Then, you execute the following command either on Windows CMD or Unix terminal:
+### tri folder
 
 ### Data engineering module
 
