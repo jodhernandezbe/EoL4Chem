@@ -22,7 +22,7 @@ This code was written using Python 3.x, Anaconda 3, and operating system Ubuntu 
 
 ## 2. How to use
 
-In order to get 
+To run the Python script for the case, you need to navigate to the directory containing circular.py, i.e., [circular](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/circular) folder whose full path is *EoL4Chem/transform/circular*. Then, you execute the following command either on Windows CMD or Unix terminal:
 
 
 
