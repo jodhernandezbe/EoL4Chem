@@ -29,7 +29,7 @@ To run the Python script for the n-hexane case study, you need to navigate to th
 ```
 python circular.py -CAS 110543 -N_cycles 100
 ```
-or default running conditions
+or by default running conditions
 
 ```
 python circular.py
