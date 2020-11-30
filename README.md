@@ -43,16 +43,36 @@ This folder contains the information from the EPA's [Facility Registry Service (
 python frs_scraper.py
 ```
 
-### rcrainfo folder
+#### rcrainfo folder
 
 This folder contains the information from the EPA's [Resource Conservation and Recovery Act Information (RCRAInfo)](https://www.epa.gov/enviro/rcrainfo-overview). To retrieve the RCRAInfo information, navigate to the folder [rcrainfo](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract/rcrainfo). Execute the following command either on Windows CMD or Unix terminal:
 
 ```
 python rcrainfo_scraper.py --help
 ```
+You could see the following menu:
 
+```
+usage: rcrainfo_scraper.py [-h] [-Y YEAR [YEAR ...]] Option
 
-### tri folder
+positional arguments:
+  Option                What do you want to do: [A] Extract information from RCRAInfo.
+                                                [B] Organize files for csv.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -Y YEAR [YEAR ...], --Year YEAR [YEAR ...]
+                        What Bienniarl report do you want?. Currently up to
+                        2017
+```
+ 
+Execute each step starting with A and finish with B. Use flag -Y for choosing the odd years from 2001 to 2017 (the most recent RCRA biennial report).The flag -Y can work for retrieving many years at the same time, for example:
+
+```
+python rcrainfo_scraper.py A -Y 2001 2003
+```
+
+#### tri folder
 
 ### Data engineering module
 
