@@ -20,9 +20,9 @@ This code was written using Python 3.x, Anaconda 3, and operating system Ubuntu 
 8. [matplotlib](https://anaconda.org/conda-forge/matplotlib)
 9. [seaborn](https://anaconda.org/anaconda/seaborn)
 
-The case study needs the files obtained by data engineering which are in [transform](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform). The [extract](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract) folder contains all the files got by web straping and automatization, which together [ancillary](https://github.com/jodhernandezbe/EoL4Chem/tree/main/ancillary) folder files (e.g., fuzzy analytic hierarchy process (FAHP)) support the data engineering process.
+The case study needs the files obtained by data engineering, which are in [transform](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform). The [extract](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract) folder contains all the files got by web scraping and automatization, which together [ancillary](https://github.com/jodhernandezbe/EoL4Chem/tree/main/ancillary) folder files (e.g., fuzzy analytic hierarchy process (FAHP)) support the data engineering process.
 
-## 2. How to use
+## How to use
 
 To run the Python script for the n-hexane case study, you need to navigate to the directory containing circular.py, i.e., [circular](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/circular) folder whose full path is */EoL4Chem/transform/circular/*. Then, you execute the following command either on Windows CMD or Unix terminal:
 
