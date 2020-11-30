@@ -6,28 +6,19 @@ EoL4Chem are Python scripts written to track chemical waste flows and identify r
   <img src=https://github.com/jodhernandezbe/EoL4Chem/blob/main/EoL4Chem.svg width="100%">
 </p>
 
-## 1. Requirements:
+## Requirements:
 
 This code was written using Python 3.x, Anaconda 3, and operating system Ubuntu 18.04. The following Python libraries are required for running the code:
 
-1. [chardet](https://anaconda.org/anaconda/chardet)
-2. [pandas](https://anaconda.org/anaconda/pandas)
-3. [numpy](https://anaconda.org/conda-forge/numpy)
-4. [pyyaml](https://anaconda.org/anaconda/pyyaml/)
-5. [selenium](https://anaconda.org/conda-forge/selenium)
-6. [webdriver-manager](https://pypi.org/project/webdriver-manager/)
-7. [regex](https://anaconda.org/conda-forge/regex)
-8. [beautifulsoup](https://anaconda.org/anaconda/beautifulsoup4)
-9. [requests](https://anaconda.org/anaconda/requests)
-10. [argparse](https://anaconda.org/conda-forge/argparse)
-11. [fake-useragent](https://anaconda.org/auto/fake-useragent)
-12. [nltk](https://anaconda.org/anaconda/nltk)
-13. [plotly](https://anaconda.org/plotly/plotly)
-14. [plotly-orca](https://anaconda.org/plotly/plotly-orca)
-15. [psutil](https://pypi.org/project/psutil/)
-16. [holoviews](https://anaconda.org/conda-forge/holoviews)
-17. [matplotlib](https://anaconda.org/conda-forge/matplotlib)
-18. [seaborn](https://anaconda.org/anaconda/seaborn)
+1. [pandas](https://anaconda.org/anaconda/pandas)
+2. [numpy](https://anaconda.org/conda-forge/numpy)
+3. [argparse](https://anaconda.org/conda-forge/argparse)
+4. [plotly](https://anaconda.org/plotly/plotly)
+5. [plotly-orca](https://anaconda.org/plotly/plotly-orca)
+6. [psutil](https://pypi.org/project/psutil/)
+7. [holoviews](https://anaconda.org/conda-forge/holoviews)
+8. [matplotlib](https://anaconda.org/conda-forge/matplotlib)
+9. [seaborn](https://anaconda.org/anaconda/seaborn)
 
 ## 2. How to use
 
