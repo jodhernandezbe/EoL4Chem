@@ -22,9 +22,16 @@ This code was written using Python 3.x, Anaconda 3, and operating system Ubuntu 
 
 ## 2. How to use
 
-To run the Python script for the case, you need to navigate to the directory containing circular.py, i.e., [circular](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/circular) folder whose full path is *EoL4Chem/transform/circular*. Then, you execute the following command either on Windows CMD or Unix terminal:
+To run the Python script for the n-hexane case study, you need to navigate to the directory containing circular.py, i.e., [circular](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/circular) folder whose full path is */EoL4Chem/transform/circular/*. Then, you execute the following command either on Windows CMD or Unix terminal:
 
+```
+python circular.py -CAS 110543 -N_cycles 100
+```
+or default running conditions
 
+```
+python circular.py
+```
 
 ## Disclaimer
 
