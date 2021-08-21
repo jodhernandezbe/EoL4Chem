@@ -2,7 +2,6 @@
 /extract/frs/csv/*.CSV
 /extract/rcrainfo/csv/*.csv
 /extract/tri/csv/*.csv
-/transform/tri/2018/*.csv
 /transform/waste_tracking/csv/on_site_tracking/*.csv
 !transform/waste_tracking/csv/on_site_tracking/Conditions_of_use_by_facility_and_chemical_*.csv
 /transform/waste_tracking/csv/off_site_tracking/*.csv
