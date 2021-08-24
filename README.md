@@ -6,19 +6,62 @@ EoL4Chem are Python scripts written to track chemical waste flows and identify r
   <img src=https://github.com/jodhernandezbe/EoL4Chem/blob/main/EoL4Chem.svg width="100%">
 </p>
 
-## Requirements:
+## EoL4Chem folder structure (tree)
 
-This code was written using Python 3.x, Anaconda 3, and operating system Ubuntu 18.04. The following Python libraries are required for running the code:
+The following is the project structure for the EoL4Chem folder. Only the most important files/folders are shown
 
-1. [pandas](https://anaconda.org/anaconda/pandas)
-2. [numpy](https://anaconda.org/conda-forge/numpy)
-3. [argparse](https://anaconda.org/conda-forge/argparse)
-4. [plotly](https://anaconda.org/plotly/plotly)
-5. [plotly-orca](https://anaconda.org/plotly/plotly-orca)
-6. [psutil](https://pypi.org/project/psutil/)
-7. [holoviews](https://anaconda.org/conda-forge/holoviews)
-8. [matplotlib](https://anaconda.org/conda-forge/matplotlib)
-9. [seaborn](https://anaconda.org/anaconda/seaborn)
+```
+.
+├── ancillary
+│   ├── cdr
+│   ├── fahp
+│   ├── normalizing_naics
+│   ├── others
+│   ├── pau_flow_allocation
+│   ├── plots
+│   ├── rcrainfo
+│   ├── releases
+│   └── tri
+├── extract
+│   ├── frs
+│       └── frs_scraper.py
+│   ├── gps
+│   ├── properties
+│   │   ├── cameo
+│   │   ├── comptox
+│   │   ├── ifa
+│   │   ├── nist
+│   │   ├── osha
+│   │   └── main.py
+│   ├── rcrainfo
+│   │   └── rcrainfo_scraper.py
+│   └── tri
+│       └── tri_scraper.py
+└── transform
+    ├── cdr
+    │   └── cdr_transformer.py
+    ├── circular
+    │   └── circular.py
+    ├── pau4chem
+    │   └── building_pau_db.py
+    ├── source_reduction
+    │   └── building_source_reduction.py
+    ├── tri
+    │   └── tri_transformer.py
+    └── waste_tracking
+        ├── disposal_activities.py
+        ├── off_tracker_transformer.py
+        └── on_tracker_transformer.py
+```
+
+
+## Requirements
+
+This code was written using Python 3.x, Anaconda 3, and operating system Ubuntu 18.04. You can create a conda environment called EoL4Chem by running the following command after installing [Anaconda](https://www.anaconda.com/) in your computer:
+
+```
+conda env create -f environment.yml
+```
 
 The case study needs the files obtained by data engineering, which are in [transform](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform). The [extract](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract) folder contains all the files retrieved by web scraping and automatization, which together [ancillary](https://github.com/jodhernandezbe/EoL4Chem/tree/main/ancillary) folder files (e.g., fuzzy analytic hierarchy process (FAHP)) support the data engineering process.
 
