@@ -8,17 +8,11 @@ EoL4Chem are Python scripts written to track chemical waste flows and identify r
 
 ## Requirements:
 
-This code was written using Python 3.x, Anaconda 3, and operating system Ubuntu 18.04. The following Python libraries are required for running the code:
+This code was written using Python 3.x, Anaconda 3, and operating system Ubuntu 18.04. You can create a conda environment called EoL4Chem by running the following command after installing [Anaconda](https://www.anaconda.com/) in your computer:
 
-1. [pandas](https://anaconda.org/anaconda/pandas)
-2. [numpy](https://anaconda.org/conda-forge/numpy)
-3. [argparse](https://anaconda.org/conda-forge/argparse)
-4. [plotly](https://anaconda.org/plotly/plotly)
-5. [plotly-orca](https://anaconda.org/plotly/plotly-orca)
-6. [psutil](https://pypi.org/project/psutil/)
-7. [holoviews](https://anaconda.org/conda-forge/holoviews)
-8. [matplotlib](https://anaconda.org/conda-forge/matplotlib)
-9. [seaborn](https://anaconda.org/anaconda/seaborn)
+```
+conda env create -f environment.yml
+```
 
 The case study needs the files obtained by data engineering, which are in [transform](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform). The [extract](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract) folder contains all the files retrieved by web scraping and automatization, which together [ancillary](https://github.com/jodhernandezbe/EoL4Chem/tree/main/ancillary) folder files (e.g., fuzzy analytic hierarchy process (FAHP)) support the data engineering process.
 
