@@ -6,7 +6,56 @@ EoL4Chem are Python scripts written to track chemical waste flows and identify r
   <img src=https://github.com/jodhernandezbe/EoL4Chem/blob/main/EoL4Chem.svg width="100%">
 </p>
 
-## Requirements:
+## EoL4Chem folder structure (tree)
+
+The following is the project structure for the EoL4Chem folder. Only the most important files/folders are shown
+
+```
+.
+├── ancillary
+│   ├── cdr
+│   ├── fahp
+│   ├── normalizing_naics
+│   ├── others
+│   ├── pau_flow_allocation
+│   ├── plots
+│   ├── rcrainfo
+│   ├── releases
+│   └── tri
+├── extract
+│   ├── frs
+│       └── frs_scraper.py
+│   ├── gps
+│   ├── properties
+│   │   ├── cameo
+│   │   ├── comptox
+│   │   ├── ifa
+│   │   ├── nist
+│   │   ├── osha
+│   │   └── main.py
+│   ├── rcrainfo
+│   │   └── rcrainfo_scraper.py
+│   └── tri
+│       └── tri_scraper.py
+└── transform
+    ├── cdr
+    │   └── cdr_transformer.py
+    ├── circular
+    │   └── circular.py
+    ├── pau4chem
+    │   └── building_pau_db.py
+    ├── source_reduction
+    │   └── building_source_reduction.py
+    ├── tri
+    │   └── tri_transformer.py
+    └── waste_tracking
+        ├── disposal_activities.py
+        ├── off_tracker_transformer.py
+        └── on_tracker_transformer.py
+```
+
+
+## Requirements
 
 This code was written using Python 3.x, Anaconda 3, and operating system Ubuntu 18.04. You can create a conda environment called EoL4Chem by running the following command after installing [Anaconda](https://www.anaconda.com/) in your computer:
 
