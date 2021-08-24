@@ -97,7 +97,7 @@ If you are working as a Python programmer, you should avoid both ```ModuleNotFou
    </li>
 </ol>
 
-# How to use - circular life cycle analysis
+# How to use (circular life cycle analysis)
 
 To run the Python script for the n-hexane case study, you need to navigate to the directory containing circular.py, i.e., [circular](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/circular) folder whose full path is */EoL4Chem/transform/circular/*. Then, you execute the following command on Unix terminal:
 
