@@ -65,7 +65,7 @@ conda env create -f environment.yml
 
 The case study needs the files obtained by data engineering, which are in [transform](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform). The [extract](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract) folder contains all the files retrieved by web scraping and automatization, which together [ancillary](https://github.com/jodhernandezbe/EoL4Chem/tree/main/ancillary) folder files (e.g., fuzzy analytic hierarchy process (FAHP)) support the data engineering process.
 
-### Ovoiding ModuleNotFoundError and ImportError
+## Ovoiding ModuleNotFoundError and ImportError
 
 If you are working as a Python programmer, you should avoid both ```ModuleNotFoundError``` and ```ImportError```. Thus, follow the steps below to solve the above mentioned problems:
 
