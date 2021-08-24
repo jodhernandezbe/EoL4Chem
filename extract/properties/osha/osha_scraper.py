@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Importing libraries
 
-import os, sys
+import os
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -13,10 +13,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 import re
 import argparse
 import datetime
-import numpy as np
 
-sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/../..')
-from common import config
+from extract.common import config
 
 # Class that handles database
 class OSHA_scraper:

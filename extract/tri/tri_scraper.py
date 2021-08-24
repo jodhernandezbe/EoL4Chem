@@ -5,13 +5,12 @@
 from bs4 import BeautifulSoup
 import requests
 import zipfile, time
-import io, os, sys
+import io, os
 import chardet, codecs
 import pandas as pd
 import argparse
 
-sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/..')
-from common import config
+from extract.common import config
 
 
 class TRI_Scrapper:

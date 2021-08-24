@@ -9,7 +9,7 @@ web_sites:
     queries:
       Table_of_tables: "//table[@id='tables']"
   FRS:
-    url: https://www3.epa.gov/enviro/html/fii/downloads/state_files/national_combined.zip
+    url: https://ofmext.epa.gov/FLA/www3/state_files/national_combined.zip
   CAMEO:
     url: https://cameochemicals.noaa.gov/search/simple
     queries:
@@ -90,5 +90,3 @@ web_sites:
     url: https://nominatim.openstreetmap.org
   OSRM:
     url: http://router.project-osrm.org
-  CPDat:
-    url: ftp://newftp.epa.gov/COMPTOX/Sustainable_Chemistry_Data/Chemistry_Dashboard/CPDat/CPDat_bulk.zip

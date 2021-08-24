@@ -4,10 +4,9 @@
 # Importing libraries
 import requests
 import zipfile
-import sys, os, io
+import os, io
 
-sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/..')
-from common import config
+from extract.common import config
 
 class FRS_Scrapper:
 
@@ -23,9 +22,18 @@ class FRS_Scrapper:
 
 
     def extracting_zip(self):
+        list_to_extract = ['NATIONAL_ENVIRONMENTAL_INTEREST_FILE.CSV',
+                            'NATIONAL_FACILITY_FILE.CSV',
+                            'NATIONAL_ALTERNATIVE_NAME_FILE.CSV',
+                            'NATIONAL_SIC_FILE.CSV',
+                            'NATIONAL_NAICS_FILE.CSV']
+
         self._visit()
+        print('Here')
         with zipfile.ZipFile(io.BytesIO(self._r_file.content)) as z:
-            z.extractall(self._dir_path + '/csv')
+            for filename in list_to_extract:
+                print(filename)
+                z.extract(filename, self._dir_path + '/csv')
 
 if __name__ == '__main__':
 

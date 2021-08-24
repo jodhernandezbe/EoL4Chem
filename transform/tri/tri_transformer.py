@@ -8,7 +8,6 @@
 
 # Importing libraries
 import os
-import sys
 import chardet
 import codecs
 import argparse
@@ -19,8 +18,7 @@ import warnings
 import time
 import math
 from merging import fuctions_rows_grouping
-sys.path.append(os.path.dirname(
-                os.path.realpath(__file__)) + '/../..')
+
 from ancillary.normalizing_naics.normalizing import normalizing_naics
 from extract.gps.project_nominatim import NOMINATIM_API
 from extract.gps.project_osrm import OSRM_API

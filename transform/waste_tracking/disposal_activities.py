@@ -5,9 +5,7 @@
 import pandas as pd
 import argparse
 import os
-import sys
-sys.path.append(os.path.dirname(
-                os.path.realpath(__file__)) + '/../..')
+
 from ancillary.normalizing_naics.normalizing import normalizing_naics
 pd.options.mode.chained_assignment = None
 
@@ -71,6 +69,8 @@ class Diposal_tracker:
                        'UNIT OF MEASURE']
         flow_columns = [col for col in tri.columns if ('ON-SITE' in col) and ('BASIS OF ESTIMATE' not in col)]
         df_disposal = pd.DataFrame()
+        tri[flow_columns] = tri[flow_columns].where(pd.notnull(tri[flow_columns]), 0)
+        tri = tri.loc[pd.notnull(tri[flow_columns].apply(lambda s: pd.to_numeric(s, errors='coerce'))).all(axis=1)]
         for col in flow_columns:
             df_aux = tri[fix_columns +\
                          [col,
@@ -89,6 +89,7 @@ class Diposal_tracker:
 
         # Organizing the roundins flow values
         df_disposal = df_disposal.where(pd.notnull(df_disposal), None)
+        df_disposal['FLOW'] =  df_disposal['FLOW'].astype(float)
         df_disposal['FLOW'] = df_disposal.apply(lambda x:\
                                                 self._checking_rounding(x['FLOW'],
                                                                         x['RELIABILITY'],

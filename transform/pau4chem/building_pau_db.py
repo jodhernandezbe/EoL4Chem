@@ -7,8 +7,6 @@
 
 import warnings
 warnings.simplefilter(action = 'ignore', category = FutureWarning)
-from scipy.stats import norm
-from scipy.stats import lognorm
 import pandas as pd
 pd.options.mode.chained_assignment = None
 import os
@@ -18,11 +16,6 @@ import re
 import time
 import unicodedata
 from itertools import combinations
-import yaml
-import math
-import sys
-sys.path.append(os.path.dirname(
-                os.path.realpath(__file__)) + '/../..')
 from ancillary.normalizing_naics.normalizing import normalizing_naics
 
 

@@ -26,8 +26,7 @@ import os
 import time
 import sys
 import re
-sys.path.append(os.path.dirname(
-                os.path.realpath(__file__)) + '/../..')
+
 from ancillary.normalizing_naics.normalizing import normalizing_naics
 
 def organizing_NPV(value):

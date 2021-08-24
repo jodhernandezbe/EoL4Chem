@@ -3,11 +3,9 @@
 
 # Importing libraries
 import requests
-import sys
-import os
+from json.decoder import JSONDecodeError
 
-sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/..')
-from common import config
+from extract.common import config
 
 
 class NOMINATIM_API:
@@ -36,7 +34,7 @@ class NOMINATIM_API:
                 else:
                     address_city_state_zip.loc[idx, 'LATITUDE'] = None
                     address_city_state_zip.loc[idx, 'LONGITUDE'] = None
-            except IndexError:
+            except (IndexError, JSONDecodeError):
                 address_city_state_zip.loc[idx, 'LATITUDE'] = None
                 address_city_state_zip.loc[idx, 'LONGITUDE'] = None
         return address_city_state_zip

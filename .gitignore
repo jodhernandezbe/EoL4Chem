@@ -9,3 +9,5 @@
 *.pyc
 /transform/pau4chem/statistics/db_for_general/*.csv
 /transform/pau4chem/datasets/intermediate_pau_datasets/*.csv
+/transform/tri/**/*csv
+!/transform/tri/**/TRI_SRS_FRS_CompTox_RETDF_*_EoL.csv

@@ -1,4 +1,4 @@
-name: EoL4Chem
+name: EoL4Chem_env
 channels:
   - plotly
   - pyviz/label/dev

@@ -12,11 +12,10 @@ import pandas as pd
 import datetime, time
 import re
 import argparse
-import sys, os
+import os
 
-sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/../..')
-from auxiliary import organizing_input, checking_existing_chemicals_in_outfile
-from common import config
+from extract.auxiliary import organizing_input, checking_existing_chemicals_in_outfile
+from extract.common import config
 
 class CompTox_scraper:
 

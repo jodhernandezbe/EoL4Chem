@@ -3,25 +3,20 @@
 
 # Importing libraries
 
-import os, sys, io, shutil, errno, stat
+import os, shutil
 import pandas as pd
 pd.options.mode.chained_assignment = None
-import numpy as np
 import zipfile
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from webdriver_manager.chrome import ChromeDriverManager
-import chardet, codecs
 import re
 import time
 import datetime
-import csv
-import math
 import datetime
 import argparse
 
-sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/..')
-from common import config
+from extract.common import config
 
 class RCRAInfo_Scrapper:
 

@@ -9,11 +9,9 @@ import argparse
 import time
 import numpy as np
 import bisect
-import sys
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
-sys.path.append(os.path.dirname(
-                os.path.realpath(__file__)) + '/../..')
+
 from ancillary.releases.releases import emission_factor
 from ancillary.pau_flow_allocation.flow_allocation import building_pau_black_box
 from ancillary.plots.sankey_diagram import sankey_diagram
@@ -1256,7 +1254,7 @@ if __name__ == '__main__':
                         help='Enter the number of cycles you want to run.',
                         type=int,
                         required=False,
-                        default=1)
+                        default=100)
 
 
     args = parser.parse_args()

@@ -5,11 +5,9 @@
 import requests
 import math
 import os
-import sys
 import pandas as pd
 
-sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/..')
-from common import config
+from extract.common import config
 
 
 class OSRM_API:

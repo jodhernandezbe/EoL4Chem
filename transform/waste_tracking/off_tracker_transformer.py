@@ -5,14 +5,11 @@
 import pandas as pd
 import numpy as np
 import os
-import sys
 import re
 import warnings
 import argparse
-sys.path.append(os.path.dirname(
-                os.path.realpath(__file__))+'/../../extract/gps')
-from project_nominatim import NOMINATIM_API
-from project_osrm import OSRM_API
+from extract.gps.project_nominatim import NOMINATIM_API
+from extract.gps.project_osrm import OSRM_API
 warnings.simplefilter(action='ignore', category=FutureWarning)
 pd.options.mode.chained_assignment = None
 
@@ -32,6 +29,7 @@ class Off_tracker:
             return round(np.average(v, weights=w))
         except ZeroDivisionError:
             return round(v.mean())
+
 
     def _searching_lat_long(self, df, col_id, col_lat, col_long):
         non_lat_log = df.loc[pd.isnull(df[col_lat]), [col_id,
@@ -67,6 +65,7 @@ class Off_tracker:
             non_lat_log = pd.DataFrame()
         if not To_search.empty:
             Nominatim = NOMINATIM_API()
+            To_search.drop_duplicates(keep='first', inplace=True)
             To_search = Nominatim.request_coordinates(To_search)
         To_search.drop(columns=['ADDRESS', 'CITY',
                                 'STATE', 'ZIP'],
@@ -93,6 +92,7 @@ class Off_tracker:
         df.drop(columns=['LONGITUDE', 'LATITUDE'], inplace=True)
         return df
 
+
     def _generating_srs_database(self, Database_name=['TRI']):
         Dictionary_databases = {'TRI': 'TRI_Chemical_List',
                                 'RCRA_T': 'RCRA_T_Char_Characteristics_of_Hazardous_Waste_Toxicity_Characteristic',
@@ -111,6 +111,7 @@ class Off_tracker:
             df_SRS = pd.concat([df_SRS, df_db], ignore_index=True,
                                sort=True, axis=0)
         return df_SRS
+
 
     def _generating_frs_database(self, program):
         FSR_FACILITY = pd.read_csv(self._dir_path + '/../../extract/frs/csv/NATIONAL_FACILITY_FILE.CSV',
@@ -138,9 +139,14 @@ class Off_tracker:
                           on='REGISTRY_ID')
         return df_FRS
 
+
     def retrieving_needed_information(self):
         columns_converting = {'REPORTING YEAR': lambda x: str(int(x)),
                               'TRI_CHEM_ID': lambda x: x.lstrip('0')}
+
+        if not os.path.isdir(f'{self._dir_path}/csv/off_site_tracking'):
+                os.mkdir(f'{self._dir_path}/csv/off_site_tracking')
+
         if self.database == 'TRI':
             mapping = {'M': 1, 'M1': 1, 'M2': 1, 'E': 2,
                        'E1': 2, 'E2': 2, 'C': 3, 'O': 4,
@@ -277,7 +283,7 @@ class Off_tracker:
             Path_txt = self._dir_path + '/../../ancillary/rcrainfo/RCRAInfo_needed_columns.txt'
             columns_needed = pd.read_csv(Path_txt, header=None,
                                          sep='\t').iloc[:, 0].tolist()
-            Path_csv = self._dir_path + f'/../../extract/rcrainfo/csv/BR_REPORTING_{self.year}.csv'
+            Path_csv = self._dir_path + f'/../../extract/rcrainfo/csv/BR_REPORTING_{self.year}.csv.zip'
             df = pd.read_csv(Path_csv, header=0, sep=',', low_memory=False,
                              usecols=columns_needed)
             df['QUANTITY TRANSFERRED'] =\
@@ -332,13 +338,15 @@ class Off_tracker:
                                'LATITUDE83': 'SENDER LATITUDE',
                                'LONGITUDE83': 'SENDER LONGITUDE'},
                       inplace=True)
-            df.drop(['PGM_SYS_ID', 'EPA Handler ID'],
-                    axis=1, inplace=True)
-            df = self._searching_lat_long(df, 'SENDER FRS ID',
+            df = self._searching_lat_long(df, 'SENDER FRS ID', ###
                                           'SENDER LATITUDE',
                                           'SENDER LONGITUDE')
             df.rename(columns={'STATE_CODE': 'SENDER STATE'},
                       inplace=True)
+            df.drop(['PGM_SYS_ID', 'EPA Handler ID',
+                    'LOCATION_ADDRESS', 'CITY_NAME',
+                    'POSTAL_CODE'],
+                    axis=1, inplace=True)
             # Searching info for receiver
             df = pd.merge(df, RCRA, how='inner',
                           left_on='EPA ID Number of Facility to Which Waste was Shipped',
@@ -348,13 +356,14 @@ class Off_tracker:
                                'LONGITUDE83': 'RECEIVER LONGITUDE',
                                'Reporting Cycle Year': 'REPORTING YEAR'},
                       inplace=True)
-            df = self._searching_lat_long(df, 'RECEIVER FRS ID',
+            df = self._searching_lat_long(df, 'RECEIVER FRS ID', ####
                                           'RECEIVER LATITUDE',
                                           'RECEIVER LONGITUDE')
             df.rename(columns={'STATE_CODE': 'RECEIVER STATE'},
                       inplace=True)
             df.drop(['PGM_SYS_ID',
-                     'EPA ID Number of Facility to Which Waste was Shipped'],
+                     'EPA ID Number of Facility to Which Waste was Shipped',
+                     'LOCATION_ADDRESS', 'CITY_NAME', 'POSTAL_CODE'],
                     axis=1, inplace=True)
             df = pd.merge(df, TRI, how='left', left_on='RECEIVER FRS ID',
                           right_on='REGISTRY_ID')
@@ -463,6 +472,7 @@ class Off_tracker:
             else:
                 Tracking.to_csv(Path_distances, sep=',',
                                 index=False)
+
 
     def creating_dataset_for_statistics(self):
         Path_WM = self._dir_path + '/../../ancillary/others/TRI_RCRA_Management_Match.csv'
@@ -577,6 +587,42 @@ class Off_tracker:
                   index=False, sep=',')
 
 
+def off_tracker_pipeline(years, dbs):
+
+    # Organize only one database
+    print('Organizing only one database')
+    for db in dbs:
+        for year in years:
+
+            try:
+                print(f'{db}, {year}')
+                T = Off_tracker(year, db)
+                T.retrieving_needed_information()
+            except FileNotFoundError:
+                continue
+
+    # Join all the databases
+    print('Joining all the databases')
+    max_year = max([int(year) for year in years])
+    T = Off_tracker(str(max_year))
+    T.joining_databases()
+
+    # Search distances
+    print('Searching for the shortest distances')
+    T = Off_tracker()
+    T.searching_shortest_distance_from_maps()
+
+    # Organizing files with statistics
+    print('Organizing files with statistics')
+    T = Off_tracker()
+    T.creating_dataset_for_statistics()
+
+    # Searching for receiver input flows
+    print('Searching for receiver input flows')
+    T = Off_tracker()
+    T.creating_dataset_for_receivers()
+
+
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(argument_default=argparse.SUPPRESS)
@@ -586,11 +632,12 @@ if __name__ == '__main__':
                         [A]: Organize only one database\
                         [B]: Join all the databases\
                         [C]: Search distances\
-                        [D]: Organizing files with statistics\
-                        [E]: Searching for receiver input flows',
+                        [D]: Organize files with statistics\
+                        [E]: Search for receiver input flows\
+                        [F]: All options',
                         type=str)
 
-    parser.add_argument('-db', '--database', nargs='?',
+    parser.add_argument('-db', '--database', nargs='+',
                         help='What database want to use (TRI or RCRAInfo)?.',
                         type=str,
                         default=None,
@@ -607,7 +654,7 @@ if __name__ == '__main__':
     if args.Option == 'A':
 
         for Y in args.Year:
-            T = Off_tracker(Y, args.database)
+            T = Off_tracker(Y, args.database[0])
             T.retrieving_needed_information()
 
     elif args.Option == 'B':
@@ -629,3 +676,7 @@ if __name__ == '__main__':
 
         T = Off_tracker()
         T.creating_dataset_for_receivers()
+
+    elif args.Option == 'F':
+
+        off_tracker_pipeline(args.Year, args.database)
