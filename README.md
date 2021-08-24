@@ -59,7 +59,7 @@ The following is the project structure for the EoL4Chem folder. Only the most im
 
 ## Creating conda virtual environment
 
-This code was written using Python 3.x, Anaconda 3, and operating system Ubuntu 18.04. You can create a conda environment called EoL4Chem by running the following command after installing [Anaconda](https://www.anaconda.com/) in your computer:
+This code was written using Python 3.x, Anaconda 3, and operating system Ubuntu 18.04. You can create a conda environment called EoL4Chem_env by running the following command after installing [Anaconda](https://www.anaconda.com/) in your computer:
 
 ```
 conda env create -f environment.yml
