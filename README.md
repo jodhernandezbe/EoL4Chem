@@ -65,6 +65,32 @@ conda env create -f environment.yml
 
 The case study needs the files obtained by data engineering, which are in [transform](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform). The [extract](https://github.com/jodhernandezbe/EoL4Chem/tree/main/extract) folder contains all the files retrieved by web scraping and automatization, which together [ancillary](https://github.com/jodhernandezbe/EoL4Chem/tree/main/ancillary) folder files (e.g., fuzzy analytic hierarchy process (FAHP)) support the data engineering process.
 
+### Ovoiding ModuleNotFoundError and ImportError
+
+If you are working as a Python programmer, you should avoid both ```ModuleNotFoundError``` and ```ImportError```. Thus, follow the steps below to solve the above mentioned problems:
+
+<ol>
+   <li>
+    Open the .bashrc file with the text editor of your preference (e.g., Visual Studio Code)
+        
+    code ~/.bashrc
+   </li>
+   <li>
+    Scroll to the bottom of the file and add the following lines
+       
+    export PACKAGE=$(locate -br '^EoL4Chem$')
+    export PYTHONPATH="${PYTHONPATH}:$PACKAGE"
+   </li>
+   <li>
+    Save the file with the changes
+   </li>
+   <li>
+    You can open another terminal to verify that the variable has been successfully saved by running the following command
+    
+    echo $PYTHONPATH
+   </li>
+</ol>
+
 ## How to use
 
 To run the Python script for the n-hexane case study, you need to navigate to the directory containing circular.py, i.e., [circular](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/circular) folder whose full path is */EoL4Chem/transform/circular/*. Then, you execute the following command on Unix terminal:
