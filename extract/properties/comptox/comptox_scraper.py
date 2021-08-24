@@ -43,12 +43,12 @@ class CompTox_scraper:
                                                    'dsstox_substance_id',
                                                    'preferred_name'])
         DSSTox_Identifiers['casrn'] = DSSTox_Identifiers['casrn'].str.replace(r'\-', '')
-        DSSTox_Identifiers.rename(columns = {'casrn': 'CAS NUMBER',
+        DSSTox_Identifiers.rename(columns = {'casrn': 'TRI_CHEM_ID',
                                              'dsstox_substance_id': 'DSSTOX ID',
                                              'preferred_name': 'PREFERRED NAME'},
                                   inplace = True)
         self.chemicals = pd.merge(DSSTox_Identifiers, self.chemicals,
-                                  on = ['CAS NUMBER'], how = 'right')
+                                  on = ['TRI_CHEM_ID'], how = 'right')
 
 
     def _searching_properties(self):
@@ -154,7 +154,7 @@ class CompTox_scraper:
         options.add_argument('--hide-scrollbars')
         self._browser = webdriver.Chrome(ChromeDriverManager().install(), \
                                         options = options)
-        self.chemicals = pd.DataFrame({'CAS NUMBER': self.chemicals})
+        self.chemicals = pd.DataFrame({'TRI_CHEM_ID': self.chemicals})
         self._opening_dsstox_identifiers_and_casrn()
         df = pd.DataFrame(columns = columns_order)
         n_searches = 0
@@ -162,15 +162,15 @@ class CompTox_scraper:
         n_rows = self.chemicals.shape[0]
         for idx, row in self.chemicals.iterrows():
             dsstox_substance_id = row['DSSTOX ID']
-            cas = row['CAS NUMBER']
+            cas = row['TRI_CHEM_ID']
             preferred_name = row['PREFERRED NAME']
             n_searches = n_searches + 1
             try:
                 if not dsstox_substance_id:
-                    df_aux = pd.DataFrame({'CAS NUMBER': [cas],
+                    df_aux = pd.DataFrame({'TRI_CHEM_ID': [cas],
                                           'Consulted Date': [self._now]})
                 else:
-                    Properties = {'CAS NUMBER': [cas],
+                    Properties = {'TRI_CHEM_ID': [cas],
                                   'Data Source': ['{}/dsstoxdb/results?search={}'.format(self._url, dsstox_substance_id)],
                                   'Consulted Date': [self._now],
                                   'PREFERRED NAME': [preferred_name],
@@ -206,7 +206,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(argument_default = argparse.SUPPRESS)
 
     parser.add_argument('-FR', '--Reading_file_path', nargs = '+',
-                        help = 'Enter the file(s) with the CAS NUMBER.',
+                        help = 'Enter the file(s) with the TRI_CHEM_ID.',
                         type = str)
 
     parser.add_argument('-FS', '--Saving_file_path',

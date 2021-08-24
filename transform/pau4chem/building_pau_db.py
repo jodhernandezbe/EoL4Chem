@@ -117,7 +117,7 @@ class PAU_DB:
                               dtype={'Internal Tracking Number': 'int64'})
             df.loc[df['Internal Tracking Number'].isin( ITN['Internal Tracking Number'].tolist()), col] = 'YES'
         df.drop(columns='Internal Tracking Number', inplace=True)
-        df.rename(columns={'ID': 'CAS NUMBER'}, inplace=True)
+        df.rename(columns={'ID': 'TRI_CHEM_ID'}, inplace=True)
         return df
 
     def _changin_management_code_for_2004_and_prior(self, x, m_n):
@@ -277,9 +277,9 @@ class PAU_DB:
         df_PAUs['DOCUMENT CONTROL NUMBER'] = df_PAUs['DOCUMENT CONTROL NUMBER'].apply(lambda x: str(int(float(x))) if self.is_number(x) else x)
         dfs['1b'].drop_duplicates(keep = 'first', inplace = True)
         dfs['1b']['DOCUMENT CONTROL NUMBER'] = dfs['1b']['DOCUMENT CONTROL NUMBER'].apply(lambda x: str(int(float(x))) if self.is_number(x) else x)
-        df_PAUs = pd.merge(df_PAUs, dfs['1b'], on = ['TRIFID', 'DOCUMENT CONTROL NUMBER', 'CAS NUMBER'],
+        df_PAUs = pd.merge(df_PAUs, dfs['1b'], on = ['TRIFID', 'DOCUMENT CONTROL NUMBER', 'TRI_CHEM_ID'],
                                                how = 'inner')
-        columns_DB_F = ['REPORTING YEAR', 'TRIFID', 'PRIMARY NAICS CODE', 'CAS NUMBER',
+        columns_DB_F = ['REPORTING YEAR', 'TRIFID', 'PRIMARY NAICS CODE', 'TRI_CHEM_ID',
                          'CHEMICAL NAME', 'METAL INDICATOR', 'CLASSIFICATION',
                          'PRODUCE THE CHEMICAL', 'IMPORT THE CHEMICAL',
                          'ON-SITE USE OF THE CHEMICAL','SALE OR DISTRIBUTION OF THE CHEMICAL',
@@ -301,7 +301,7 @@ class PAU_DB:
             df_PAUs = df_PAUs.loc[df_PAUs['METHOD CODE - 2004 AND PRIOR'].str.contains(r'[A-Z]').where(df_PAUs['METHOD CODE - 2004 AND PRIOR'].str.contains(r'[A-Z]'), False)]
             df_PAUs['METHOD NAME - 2004 AND PRIOR'] = df_PAUs['METHOD CODE - 2004 AND PRIOR'].apply(lambda x: _checking(x, Method))
             df_PAUs = df_PAUs.loc[(df_PAUs['METHOD CODE - 2004 AND PRIOR'] != '') | (pd.notnull(df_PAUs['METHOD CODE - 2004 AND PRIOR']))]
-            columns_DB_F = ['REPORTING YEAR', 'TRIFID', 'PRIMARY NAICS CODE', 'CAS NUMBER',
+            columns_DB_F = ['REPORTING YEAR', 'TRIFID', 'PRIMARY NAICS CODE', 'TRI_CHEM_ID',
                              'CHEMICAL NAME', 'METAL INDICATOR', 'CLASSIFICATION',
                              'PRODUCE THE CHEMICAL', 'IMPORT THE CHEMICAL', 'ON-SITE USE OF THE CHEMICAL',
                              'SALE OR DISTRIBUTION OF THE CHEMICAL', 'AS A BYPRODUCT',
@@ -376,7 +376,7 @@ class PAU_DB:
                                 inplace = True)
             df_statistics.dropna(subset = ['EFFICIENCY RANGE', 'WASTE STREAM CODE'], how = 'any', axis = 0, inplace = True)
         df_statistics.rename(columns = {'PRIMARY NAICS CODE': 'NAICS',
-                                    'CAS NUMBER': 'CAS',
+                                    'TRI_CHEM_ID': 'CAS',
                                     'WASTE STREAM CODE': 'WASTE',
                                     'RANGE INFLUENT CONCENTRATION': 'CONCENTRATION'},
                             inplace = True)
@@ -444,7 +444,7 @@ class PAU_DB:
         df['LOWER EFFICIENCY OUTLIER?'] = df.apply(lambda x: 'YES' if x['LOWER EFFICIENCY'] < \
                                 x['Q1 - 1.5xIQR'] else 'NO', axis = 1)
         df['HIGH VARIANCE?'] = df.apply(lambda x: 'YES' if x['CV'] > 1 else 'NO', axis = 1)
-        df = df[['TRIFID', 'PRIMARY NAICS CODE', 'CAS NUMBER', 'ON-SITE - RECYCLED', 'UNIT OF MEASURE', \
+        df = df[['TRIFID', 'PRIMARY NAICS CODE', 'TRI_CHEM_ID', 'ON-SITE - RECYCLED', 'UNIT OF MEASURE', \
                 'LOWER EFFICIENCY', 'LOWER EFFICIENCY OUTLIER?', 'Q1 - 1.5xIQR', 'Q1', \
                 'Q2', 'Q3', 'Q3 + 1.5xIQR', 'UPPER EFFICIENCY', 'UPPER EFFICIENCY OUTLIER?', \
                 'IQR', 'MEAN OF EFFICIENCY', 'CV', 'HIGH VARIANCE?', 'METHOD']]
@@ -493,7 +493,7 @@ class PAU_DB:
                     Phases = ['W', 'S']
         naics_structure = ['National Industry', 'NAICS Industry', 'Industry Group',
                     'Subsector', 'Sector', 'Nothing']
-        df_cas = df_s.loc[df_s['CAS'] == row['CAS NUMBER'], ['NAICS', 'WASTE', 'VALUE']]
+        df_cas = df_s.loc[df_s['CAS'] == row['TRI_CHEM_ID'], ['NAICS', 'WASTE', 'VALUE']]
         df_cas = df_cas.groupby(['NAICS', 'WASTE'], as_index = False).sum()
         df_cas.reset_index(inplace = True)
         if (not df_cas.empty):
@@ -547,7 +547,7 @@ class PAU_DB:
             code = row['METHOD CODE - 2004 AND PRIOR']
         else:
             code = row['METHOD CODE - 2005 AND AFTER']
-        df_cas = df_s.loc[(df_s['CAS NUMBER'] == row['CAS NUMBER']) & (df_s['METHOD'] == code)]
+        df_cas = df_s.loc[(df_s['TRI_CHEM_ID'] == row['TRI_CHEM_ID']) & (df_s['METHOD'] == code)]
         if (not df_cas.empty):
             df_fid = df_cas.loc[df_cas['TRIFID'] == row['TRIFID']]
             if (not df_fid.empty):
@@ -584,7 +584,7 @@ class PAU_DB:
             phases = ['S', 'L'] # Industrial Kilns (specially rotatory kilns) are used to burn hazardous liquid and solid wastes
         naics_structure = ['National Industry', 'NAICS Industry', 'Industry Group',
                     'Subsector', 'Sector', 'Nothing']
-        df_cas = df_s.loc[df_s['CAS'] == row['CAS NUMBER'], ['NAICS', 'WASTE', 'VALUE', 'INCINERATION']]
+        df_cas = df_s.loc[df_s['CAS'] == row['TRI_CHEM_ID'], ['NAICS', 'WASTE', 'VALUE', 'INCINERATION']]
         df_cas = df_cas.groupby(['NAICS', 'WASTE', 'INCINERATION'], as_index = False).sum()
         df_cas.reset_index(inplace = True)
         if (not df_cas.empty):
@@ -653,7 +653,7 @@ class PAU_DB:
             df_s = df_s[['NAICS', 'CAS', 'WASTE', 'INCINERATION', 'IDEAL', 'EFFICIENCY RANGE', 'VALUE']]
             df_s['WASTE'] = df_s.groupby(['NAICS', 'CAS', 'WASTE', 'IDEAL', 'INCINERATION', 'EFFICIENCY RANGE'],
                     as_index = False).sum()
-        df_s = df_s.loc[(df_s['CAS'] == row['CAS NUMBER']) & \
+        df_s = df_s.loc[(df_s['CAS'] == row['TRI_CHEM_ID']) & \
                         (df_s['INCINERATION'] == 'YES') & \
                         (df_s['IDEAL'] == 'YES')]
         if (not df_s.empty):
@@ -705,18 +705,18 @@ class PAU_DB:
         # Calling PAU
         PAU = pd.read_csv(self._dir_path + '/datasets/intermediate_pau_datasets/PAUs_DB_' + str(self.Year) + '.csv',
                             low_memory = False,
-                            converters = {'CAS NUMBER': lambda x: x if re.search(r'^[A-Z]', x) else str(int(x))})
+                            converters = {'TRI_CHEM_ID': lambda x: x if re.search(r'^[A-Z]', x) else str(int(x))})
         columns_DB_F = PAU.columns.tolist()
         PAU['PRIMARY NAICS CODE'] = PAU['PRIMARY NAICS CODE'].astype('int')
         if self.Year <= 2004:
             grouping = ['TRIFID', 'METHOD CODE - 2004 AND PRIOR']
             PAU.sort_values(by = ['PRIMARY NAICS CODE', 'TRIFID',
-                            'METHOD CODE - 2004 AND PRIOR', 'CAS NUMBER'],
+                            'METHOD CODE - 2004 AND PRIOR', 'TRI_CHEM_ID'],
                             inplace = True)
         else:
             grouping = ['TRIFID', 'METHOD CODE - 2005 AND AFTER']
             PAU.sort_values(by = ['PRIMARY NAICS CODE', 'TRIFID',
-                            'METHOD CODE - 2005 AND AFTER', 'CAS NUMBER'],
+                            'METHOD CODE - 2005 AND AFTER', 'TRI_CHEM_ID'],
                             inplace = True)
         # Calling database for statistics
         Statistics = pd.read_csv(self._dir_path + '/statistics/db_for_general/DB_for_Statistics_' + str(self.Year) + '.csv',
@@ -732,16 +732,16 @@ class PAU_DB:
         # Recycling
         PAU_recycling = PAU.loc[PAU['TYPE OF MANAGEMENT'] == 'Recycling']
         if not PAU_recycling.empty:
-            PAU_recycling =  PAU_recycling.loc[~ ((PAU_recycling['METHOD CODE - 2005 AND AFTER'] == 'H20') & (PAU_recycling['CAS NUMBER'].isin(Solvent_recovery)))]
+            PAU_recycling =  PAU_recycling.loc[~ ((PAU_recycling['METHOD CODE - 2005 AND AFTER'] == 'H20') & (PAU_recycling['TRI_CHEM_ID'].isin(Solvent_recovery)))]
             PAU_recycling.reset_index(inplace = True, drop = True)
             PAU_recycling['BASED ON OPERATING DATA?'] = 'NO'
             # Calling database for recycling efficiency
             Recycling_statistics = pd.read_csv(self._dir_path + '/statistics/db_for_solvents/DB_for_Solvents_' + str(self.Year) +  '.csv',
                                     low_memory = False,
-                                    usecols = ['TRIFID', 'PRIMARY NAICS CODE', 'CAS NUMBER', \
+                                    usecols = ['TRIFID', 'PRIMARY NAICS CODE', 'TRI_CHEM_ID', \
                                                'UPPER EFFICIENCY', 'UPPER EFFICIENCY OUTLIER?',
                                                'METHOD', 'HIGH VARIANCE?', 'CV'],
-                                    converters = {'CAS NUMBER': lambda x: x if re.search(r'^[A-Z]', x) else str(int(x))})
+                                    converters = {'TRI_CHEM_ID': lambda x: x if re.search(r'^[A-Z]', x) else str(int(x))})
             Recycling_statistics['PRIMARY NAICS CODE'] = Recycling_statistics['PRIMARY NAICS CODE'].astype('int')
             Recycling_statistics = Recycling_statistics\
                                     .loc[(Recycling_statistics['UPPER EFFICIENCY OUTLIER?'] == 'NO') &
@@ -768,7 +768,7 @@ class PAU_DB:
                 PAU_recycling['RANGE INFLUENT CONCENTRATION'] = \
                           PAU_recycling.apply(lambda x: \
                          self._concentration_estimation_recycling(Statistics, \
-                                         x['CAS NUMBER'], \
+                                         x['TRI_CHEM_ID'], \
                                          x['PRIMARY NAICS CODE'],\
                                          x['WASTE STREAM CODE'], \
                                          x['NAICS STRUCTURE']), \
@@ -782,7 +782,7 @@ class PAU_DB:
         # Energy recovery
         PAU_energy = PAU.loc[PAU['TYPE OF MANAGEMENT'] == 'Energy recovery']
         if not PAU_energy.empty:
-            PAU_energy =  PAU_energy.loc[~ ((PAU_energy['METHOD CODE - 2005 AND AFTER'].isin(['U01', 'U02', 'U03'])) & (PAU_energy['CAS NUMBER'].isin(Energy_recovery)))]
+            PAU_energy =  PAU_energy.loc[~ ((PAU_energy['METHOD CODE - 2005 AND AFTER'].isin(['U01', 'U02', 'U03'])) & (PAU_energy['TRI_CHEM_ID'].isin(Energy_recovery)))]
             PAU_energy.reset_index(inplace = True, drop = True)
             PAU_energy['BASED ON OPERATING DATA?'] = 'NO'
             PAU_energy = \
@@ -794,7 +794,7 @@ class PAU_DB:
                 PAU_energy['RANGE INFLUENT CONCENTRATION'] = \
                          PAU_energy.apply(lambda x: \
                          self._concentration_estimation_energy(Statistics, \
-                                         x['CAS NUMBER'], \
+                                         x['TRI_CHEM_ID'], \
                                          x['PRIMARY NAICS CODE'],\
                                          x['WASTE STREAM CODE'], \
                                          x['NAICS STRUCTURE'], \
@@ -804,7 +804,7 @@ class PAU_DB:
                 PAU_energy['EFFICIENCY ESTIMATION'] = \
                         PAU_energy.apply(lambda x: \
                         self._energy_efficiency(Statistics, x), axis = 1).round(4)
-                PAU_energy = pd.merge(PAU_energy, SRS, on = 'CAS NUMBER', how = 'left')
+                PAU_energy = pd.merge(PAU_energy, SRS, on = 'TRI_CHEM_ID', how = 'left')
                 PAU_energy['EFFICIENCY ESTIMATION'] = PAU_energy.apply(lambda x: \
                                     self._efficiency_estimation_empties_based_on_EPA_regulation(\
                                     x['CLASSIFICATION'], x['HAP'], x['RCRA']) \
@@ -819,7 +819,7 @@ class PAU_DB:
                 PAU_energy['EFFICIENCY RANGE CODE'] = \
                         PAU_energy.apply(lambda x: \
                         self._energy_efficiency(Statistics, x), axis = 1)
-                PAU_energy = pd.merge(PAU_energy, SRS, on = 'CAS NUMBER', how = 'left')
+                PAU_energy = pd.merge(PAU_energy, SRS, on = 'TRI_CHEM_ID', how = 'left')
                 PAU_energy['EFFICIENCY RANGE CODE'] = PAU_energy.apply(lambda x: \
                                     self._efficiency_estimation_empties_based_on_EPA_regulation(\
                                     x['CLASSIFICATION'], x['HAP'], x['RCRA']) \
@@ -837,8 +837,8 @@ class PAU_DB:
         else:
             pass
         Chemicals_to_remove = ['MIXTURE', 'TRD SECRT']
-        df_N_PAU = df_N_PAU.loc[~df_N_PAU['CAS NUMBER'].isin(Chemicals_to_remove)]
-        df_N_PAU['CAS NUMBER'] = df_N_PAU['CAS NUMBER'].apply(lambda x: str(int(x)) if not 'N' in x else x)
+        df_N_PAU = df_N_PAU.loc[~df_N_PAU['TRI_CHEM_ID'].isin(Chemicals_to_remove)]
+        df_N_PAU['TRI_CHEM_ID'] = df_N_PAU['TRI_CHEM_ID'].apply(lambda x: str(int(x)) if not 'N' in x else x)
         df_N_PAU = normalizing_naics(df_N_PAU,
                                     naics_column='PRIMARY NAICS CODE',
                                     column_year='REPORTING YEAR')
@@ -846,13 +846,13 @@ class PAU_DB:
         df_N_PAU.to_csv(self._dir_path + '/datasets/final_pau_datasets/PAUs_DB_filled_' + str(self.Year) + '.csv',
                      sep = ',', index = False)
         # Chemicals and groups
-        Chemicals = df_N_PAU[['CAS NUMBER', 'CHEMICAL NAME']].drop_duplicates(keep = 'first')
+        Chemicals = df_N_PAU[['TRI_CHEM_ID', 'CHEMICAL NAME']].drop_duplicates(keep = 'first')
         Chemicals['TYPE OF CHEMICAL'] = None
         Path_c = self._dir_path + '/chemicals/Chemicals.csv'
         if os.path.exists(Path_c):
             df_c = pd.read_csv(Path_c)
             for index, row in Chemicals.iterrows():
-                if (df_c['CAS NUMBER'] != row['CAS NUMBER']).all():
+                if (df_c['TRI_CHEM_ID'] != row['TRI_CHEM_ID']).all():
                     df_c = df_c.append(pd.Series(row, index = row.index.tolist()), \
                                         ignore_index = True)
             df_c.to_csv(Path_c, sep = ',', index  = False)
@@ -865,7 +865,7 @@ class PAU_DB:
         for year in range(1987, 2005):
             df_tri_older_aux = pd.read_csv(f'{self._dir_path }/datasets/final_pau_datasets/PAUs_DB_filled_{year}.csv',
                                            usecols=['TRIFID',
-                                                    'CAS NUMBER',
+                                                    'TRI_CHEM_ID',
                                                     'WASTE STREAM CODE',
                                                     'METHOD CODE - 2004 AND PRIOR',
                                                     'METHOD NAME - 2004 AND PRIOR',
@@ -883,7 +883,7 @@ class PAU_DB:
         df_PAU.drop_duplicates(keep='first', inplace=True)
         df_PAU = pd.merge(df_PAU, df_tri_older, how='left',
                           on=['TRIFID',
-                              'CAS NUMBER',
+                              'TRI_CHEM_ID',
                               'WASTE STREAM CODE',
                               'METHOD CODE - 2005 AND AFTER'])
         del df_tri_older
@@ -910,7 +910,7 @@ class PAU_DB:
                       sep=',', index=False)
 
     def dataset_for_individual_statistics(self):
-        cols = ['TRIFID', 'CAS NUMBER',
+        cols = ['TRIFID', 'TRI_CHEM_ID',
                 'TYPE OF MANAGEMENT',
                 'EFFICIENCY RANGE CODE',
                 'METHOD NAME - 2005 AND AFTER',
@@ -957,7 +957,7 @@ class PAU_DB:
             df.drop(columns=['METHOD NAME - 2005 AND AFTER',
                              'METHOD NAME - 2004 AND PRIOR'],
                     inplace=True)
-            grouping = ['CAS NUMBER',
+            grouping = ['TRI_CHEM_ID',
                         'EFFICIENCY RANGE CODE',
                         'WASTE STREAM CODE',
                         'CHEMICAL/PHYSICAL']
@@ -966,7 +966,7 @@ class PAU_DB:
                       sep=',', index=False)
         # For treatment in general
         else:
-            grouping = ['CAS NUMBER',
+            grouping = ['TRI_CHEM_ID',
                         'EFFICIENCY RANGE CODE',
                         'METHOD NAME - 2005 AND AFTER',
                         'WASTE STREAM CODE']

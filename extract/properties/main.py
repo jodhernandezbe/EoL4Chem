@@ -23,7 +23,7 @@ if __name__ == '__main__':
                         type = str)
 
     parser.add_argument('-FR', '--Reading_file_path', nargs = '+',
-                        help = 'Enter the file(s) with the CAS NUMBER.',
+                        help = 'Enter the file(s) with the TRI_CHEM_ID.',
                         type = str,
                         required = False,
                         default = None)

@@ -1,4 +1,4 @@
-CAS NUMBER,EFFICIENCY RANGE CODE,METHOD NAME - 2005 AND AFTER,WASTE STREAM CODE,NUMBER
+TRI_CHEM_ID,EFFICIENCY RANGE CODE,METHOD NAME - 2005 AND AFTER,WASTE STREAM CODE,NUMBER
 100016,E2,Incineration - thermal destruction other than use as a fuel,L,1
 100016,E2,Incineration - thermal destruction other than use as a fuel,S,2
 100016,E2,Incineration - thermal destruction other than use as a fuel,W,1

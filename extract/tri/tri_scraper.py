@@ -19,7 +19,6 @@ class TRI_Scrapper:
     def __init__(self, year, Files):
         self.year = year
         self._dir_path = os.path.dirname(os.path.realpath(__file__)) # Working Directory
-        #self._dir_path = os.getcwd() # if you are working on Jupyter Notebook
         self._config = config()['web_sites']['TRI']
         self._queries = self._config['queries']
         self._url = self._config['url'] # Uniform Resource Locator (URL) of TRI Database
@@ -68,6 +67,8 @@ class TRI_Scrapper:
                             lineterminator = '\n',
                             usecols = range(len(self._TRI_File_Columns_Dictionary[key]))) # avoiding \r\n created in Windows OS
             df.columns = self._TRI_File_Columns_Dictionary[key]
+            if not os.path.isdir(f'{self._dir_path}/csv/'):
+                os.mkdir(f'{self._dir_path}/csv/')
             df.to_csv(self._dir_path + '/csv/US_' + key + '_' + self.year + '.csv',
                         sep = ',', index = False)
             time.sleep(30)

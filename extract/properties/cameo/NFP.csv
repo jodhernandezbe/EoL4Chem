@@ -1,4 +1,4 @@
-CAS NUMBER,DESCRIPTION,HAZARD,VALUE,DATE CONSULTED
+TRI_CHEM_ID,DESCRIPTION,HAZARD,VALUE,DATE CONSULTED
 98953,Can cause serious or permanent injury.,Health,3,06_29_2020
 98953,Must be moderately heated or exposed to relatively high ambient temperatures before ignition can occur.,Flammability,2,06_29_2020
 98953,Normally stable but can become unstable at elevated temperatures and pressures.,Instability,1,06_29_2020

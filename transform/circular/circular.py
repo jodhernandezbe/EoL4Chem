@@ -159,7 +159,7 @@ class Network:
 
         cou_path = f'{self._dir_path}/../waste_tracking/csv/on_site_tracking/Conditions_of_use_by_facility_and_chemical_{RETDF_reporting_year}.csv'
         df_cou = pd.read_csv(cou_path, low_memory=False,
-                             usecols=['TRIFID', 'CAS NUMBER',
+                             usecols=['TRIFID', 'TRI_CHEM_ID',
                                       'SALE OR DISTRIBUTION OF THE CHEMICAL',
                                       'USED AS A REACTANT',
                                       'ADDED AS A FORMULATION COMPONENT',
@@ -168,10 +168,10 @@ class Network:
                                       'USED AS A CHEMICAL PROCESSING AID',
                                       'USED AS A MANUFACTURING AID',
                                       'ANCILLARY OR OTHER USE'])
-        df_cou['CAS NUMBER'] = df_cou['CAS NUMBER'].str.lstrip('0')
-        df_cou = df_cou.loc[(df_cou['CAS NUMBER'] == self.chem) &
+        df_cou['TRI_CHEM_ID'] = df_cou['TRI_CHEM_ID'].str.lstrip('0')
+        df_cou = df_cou.loc[(df_cou['TRI_CHEM_ID'] == self.chem) &
                             (df_cou['TRIFID'] == RETDF_selected)]
-        df_cou.drop(columns=['TRIFID', 'CAS NUMBER'],
+        df_cou.drop(columns=['TRIFID', 'TRI_CHEM_ID'],
                     inplace=True)
         sale_distribution = df_cou['SALE OR DISTRIBUTION OF THE CHEMICAL'].values[0]
         distribution_list = ['SALE OR DISTRIBUTION OF THE CHEMICAL',
@@ -430,7 +430,7 @@ class Network:
         same facility
         '''
 
-        Denominator = x.loc[x['CAS NUMBER'] == self.chem,
+        Denominator = x.loc[x['TRI_CHEM_ID'] == self.chem,
                             'ON-SITE - RECYCLED'].values[0]
         x['RATIO'] = x['ON-SITE - RECYCLED']/Denominator
         return x
@@ -484,16 +484,16 @@ class Network:
                           low_memory=True,
                           usecols=['TRIFID',
                                    'PRIMARY NAICS CODE',
-                                   'CAS NUMBER',
+                                   'TRI_CHEM_ID',
                                    'ON-SITE - RECYCLED',
                                    'UNIT OF MEASURE',
                                    'METHOD'])
 
         # Organizing methods
-        pau['CAS NUMBER'] = pau['CAS NUMBER'].str.lstrip('0')
+        pau['TRI_CHEM_ID'] = pau['TRI_CHEM_ID'].str.lstrip('0')
         Grouping = ['TRIFID', 'METHOD',
                     'PRIMARY NAICS CODE']
-        pau = pau.loc[pau.groupby(Grouping)['CAS NUMBER']
+        pau = pau.loc[pau.groupby(Grouping)['TRI_CHEM_ID']
                       .transform(lambda x: (x == self.chem).any())]
         pau['METHOD'] = pau['METHOD'].map(Codes_change)
         pau.drop_duplicates(keep='first', inplace=True)
@@ -513,13 +513,13 @@ class Network:
                     'PRIMARY NAICS CODE']
         method = method.groupby(Grouping, as_index=False)\
             .apply(lambda x:  self._ratio(x))
-        aux = method.loc[method['CAS NUMBER'] == self.chem,
+        aux = method.loc[method['TRI_CHEM_ID'] == self.chem,
                          Grouping + ['ON-SITE - RECYCLED']]
         aux.rename(columns={'ON-SITE - RECYCLED': 'FLOW'},
                    inplace=True)
         method = pd.merge(method, aux, on=Grouping, how='inner')
         del aux
-        method = method.loc[method['CAS NUMBER'] != self.chem]
+        method = method.loc[method['TRI_CHEM_ID'] != self.chem]
         method.drop(columns=['ON-SITE - RECYCLED'], inplace=True)
 
         # Searching the ratio
@@ -558,7 +558,7 @@ class Network:
             n_rows = facility.shape[0]
             Result = {'Evidence': ['Yes']*n_rows,
                       'Evidence-degree': [Evidence_degree]*n_rows,
-                      'Chemical': facility['CAS NUMBER'].tolist(),
+                      'Chemical': facility['TRI_CHEM_ID'].tolist(),
                       'Ratio': facility['RATIO'].tolist()}
         else:
             Result = {'Evidence': ['No'], 'Evidence-degree': [None],
@@ -611,7 +611,7 @@ class Network:
                 else:
                     path_disposal = self._dir_path + '/../waste_tracking/csv/disposal_activities/'
                     df_disposal = pd.read_csv(path_disposal + f'Disposal_{year}.csv')
-                    df_disposal_chem = df_disposal.loc[df_disposal['CAS NUMBER'] == self.chem]
+                    df_disposal_chem = df_disposal.loc[df_disposal['TRI_CHEM_ID'] == self.chem]
                     if not df_disposal_chem.empty:
                         df_disposal_chem_RETDF = df_disposal_chem.loc[df_disposal_chem['TRIFID'] == TRIFID]
                         if not df_disposal_chem_RETDF.empty:
@@ -701,11 +701,11 @@ class Network:
         path_pau = self._dir_path + '/../pau4chem/datasets/final_pau_datasets/'
         df_pau = pd.read_csv(f'{path_pau}PAUs_DB_filled_{year}.csv',
                              usecols=['TRIFID', 'PRIMARY NAICS CODE',
-                                      'CAS NUMBER', 'WASTE STREAM CODE',
+                                      'TRI_CHEM_ID', 'WASTE STREAM CODE',
                                       'METHOD NAME - 2005 AND AFTER',
                                       'TYPE OF MANAGEMENT',
                                       'EFFICIENCY RANGE CODE'])
-        df_pau_chem = df_pau.loc[(df_pau['CAS NUMBER'] == self.chem) &
+        df_pau_chem = df_pau.loc[(df_pau['TRI_CHEM_ID'] == self.chem) &
                                  (df_pau['WASTE STREAM CODE'] != 'A')]
 
         # Searching PAU
@@ -1247,7 +1247,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(argument_default=argparse.SUPPRESS)
 
     parser.add_argument('-CAS',
-                        help='Enter the unhyphenated CAS Number(s) of the chemical(s) you want to analyze.',
+                        help='Enter the TRI ID of the chemical(s) you want to analyze.',
                         type=str,
                         required=False,
                         default='110543')

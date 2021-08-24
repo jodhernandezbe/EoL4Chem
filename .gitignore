@@ -1,6 +1,6 @@
 /extract/frs/csv/*.pdf
 /extract/frs/csv/*.CSV
-/extract/rcrainfo/csv/*.csv
+/extract/rcrainfo/csv/*.zip
 /extract/tri/csv/*.csv
 /transform/waste_tracking/csv/on_site_tracking/*.csv
 !transform/waste_tracking/csv/on_site_tracking/Conditions_of_use_by_facility_and_chemical_*.csv

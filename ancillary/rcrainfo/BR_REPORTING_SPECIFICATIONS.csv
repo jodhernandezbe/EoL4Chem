@@ -58,3 +58,6 @@ Management Category,803,35,Alphanumeric
 Waste Property,838,1,Alphanumeric
 Last Change,839,8,Date
 Federal Waste Codes,847,4000,Alphanumeric
+Country Code,4847,2,Alphanumeric
+Mixed Waste,4849,1,Alphanumeric
+

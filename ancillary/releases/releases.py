@@ -40,8 +40,8 @@ def calling_source_reduction_db(year, CAS, TRIFID):
     df = pd.read_csv(path + f'source_reduction_{year}.csv',
                      low_memory=False)
     df_chem_facility = df.loc[(df['TRIFID'] == TRIFID) &
-                              (df['CAS NUMBER'] == CAS)]
-    df_chem_facility.drop(columns=['TRIFID', 'CAS NUMBER',
+                              (df['TRI_CHEM_ID'] == CAS)]
+    df_chem_facility.drop(columns=['TRIFID', 'TRI_CHEM_ID',
                                    'REPORTING YEAR'],
                           inplace=True)
     if df_chem_facility.empty:

@@ -25,12 +25,12 @@ class SR_tracker:
         production/activity rate
         '''
 
-        columns_converting = {'CAS NUMBER': lambda x: x.lstrip('0')}
+        columns_converting = {'TRI_CHEM_ID': lambda x: x.lstrip('0')}
         df = pd.read_csv(self._dir_path + f'/../../extract/tri/csv/US_2a_{self.year}.csv',
                          header=0, sep=',',
                          converters=columns_converting,
                          low_memory=False,
-                         usecols=['TRIFID', 'CAS NUMBER', 'PROD RATIO/ACTIVITY INDEX',
+                         usecols=['TRIFID', 'TRI_CHEM_ID', 'PROD RATIO/ACTIVITY INDEX',
                                   'EST ANNUAL REDUCTION - FIRST SOURCE REDUCTION ACTIVITY - CODE',
                                   'EST ANNUAL REDUCTION - SECOND SOURCE REDUCTION ACTIVITY - CODE',
                                   'EST ANNUAL REDUCTION - THIRD SOURCE REDUCTION ACTIVITY - CODE',

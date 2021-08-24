@@ -43,7 +43,6 @@ class RCRAInfo_Scrapper:
         ### BR_REPORTING_2017
 
         self._dir_path = os.path.dirname(os.path.realpath(__file__)) # Working Directory
-        #self._dir_path = os.getcwd() # if you are working on Jupyter Notebook
         self.Year = Year
         self._config = config()['web_sites']['RCRAInfo']
         self._queries = self._config['queries']
@@ -60,7 +59,7 @@ class RCRAInfo_Scrapper:
         options.add_argument('--disable-software-rasterizer')
         options.add_argument("--log-level=3")
         options.add_argument('--hide-scrollbars')
-        prefs = {'download.default_directory' : self._dir_path + '/ZIP',
+        prefs = {'download.default_directory' : self._dir_path + '/zip',
                 'download.prompt_for_download': False,
                 'download.directory_upgrade': True,
                 'safebrowsing_for_trusted_sources_enabled': False,
@@ -88,19 +87,18 @@ class RCRAInfo_Scrapper:
                     now = datetime.datetime.now()
                     print('AttributeError occurred with selenium due to not appropriate charging of website.\nHour: {}:{}:{}'.format(now.hour,now.minute,now.second))
         # Download the desired zip
-        for Year in self.Year:
-            browser.get(Links['BR_REPORTING_' + Year])
-            condition = os.path.exists(self._dir_path + '/ZIP/BR_REPORTING_' + Year + '.zip')
-            while condition is False:
-                condition = os.path.exists(self._dir_path + '/ZIP/BR_REPORTING_' + Year + '.zip')
-            time.sleep(5)
-            self._extracting_files('BR_REPORTING_' + Year)
+        browser.get(Links['BR_REPORTING_' + self.Year])
+        condition = os.path.exists(self._dir_path + '/zip/BR_REPORTING_' + self.Year + '.zip')
+        while condition is False:
+            condition = os.path.exists(self._dir_path + '/zip/BR_REPORTING_' + self.Year + '.zip')
+        time.sleep(5)
+        self._extracting_files('BR_REPORTING_' + self.Year)
         browser.quit()
 
 
     def _extracting_files(self, ZIP):
-        PATH_UNZIPPING = self._dir_path + '/TXT/' + ZIP
-        PATH_ZIP = self._dir_path + '/ZIP/' + ZIP + '.zip'
+        PATH_UNZIPPING = self._dir_path + '/txt/' + ZIP
+        PATH_ZIP = self._dir_path + '/zip/' + ZIP + '.zip'
         try:
             os.mkdir(PATH_UNZIPPING)
         except OSError:
@@ -113,29 +111,39 @@ class RCRAInfo_Scrapper:
 
 
     def organizing_files(self):
-        for Year in self.Year:
-            Table = 'BR_REPORTING_' + Year
-            PATH_CSV = self._dir_path + '/CSV'
-            RCRA_TABLE_SPECIFICATIONS = pd.read_csv(self._dir_path + '/../../Ancillary/RCRAInfo/BR_REPORTING_SPECIFICATIONS.csv')
-            TABLE_COLUMNS = RCRA_TABLE_SPECIFICATIONS['English Name']
-            LENGHT_INFO = RCRA_TABLE_SPECIFICATIONS['Field Length'].astype(int)
-            # Checking files unzipped
-            Files = [file for file in os.listdir(self._dir_path + '/TXT/' + Table) if ((file.startswith(Table)) & file.endswith('.txt'))]
-            Files.sort()
-            # Concatenating files by year
-            df_br = pd.DataFrame()
-            PATH_TXT = self._dir_path + '/TXT/' + Table
-            for File in Files:
-                print('Processing file {}'.format(File))
-                df = pd.read_fwf(PATH_TXT + '/' + File, widths = LENGHT_INFO, \
-                             header = None, names = TABLE_COLUMNS)
-                df['Reporting Cycle Year'] = Year
-                df_br = pd.concat([df_br, df],  ignore_index = True,
-                                      sort = True, axis = 0)
-            PATH_DIRECTORY = PATH_CSV + '/' + Table + '.csv'
-            df_br.to_csv(PATH_DIRECTORY, sep = ',',
-                                            index = False)
-            shutil.rmtree(PATH_TXT)
+        Table = 'BR_REPORTING_' + self.Year
+        PATH_CSV = self._dir_path + '/csv'
+        if not os.path.isdir(PATH_CSV):
+            os.mkdir(PATH_CSV)
+        RCRA_TABLE_SPECIFICATIONS = pd.read_csv(self._dir_path + '/../../ancillary/rcrainfo/BR_REPORTING_SPECIFICATIONS.csv')
+        TABLE_COLUMNS = RCRA_TABLE_SPECIFICATIONS['English Name']
+        LENGHT_INFO = RCRA_TABLE_SPECIFICATIONS['Field Length'].astype(int)
+        # Checking files unzipped
+        Files = [file for file in os.listdir(self._dir_path + '/txt/' + Table) if ((file.startswith(Table)) & file.endswith('.txt'))]
+        Files.sort()
+        # Concatenating files by year
+        df_br = pd.DataFrame()
+        PATH_TXT = self._dir_path + '/txt/' + Table
+        for File in Files:
+            print('Processing file {}'.format(File))
+            df = pd.read_fwf(PATH_TXT + '/' + File, widths = LENGHT_INFO, \
+                            header = None, names = TABLE_COLUMNS)
+            df['Reporting Cycle Year'] = self.Year
+            df_br = pd.concat([df_br, df],  ignore_index = True,
+                                    sort = True, axis = 0)
+        PATH_DIRECTORY = PATH_CSV + '/' + Table + '.csv.zip'
+        df_br.to_csv(PATH_DIRECTORY, sep=',',
+                    index=False, compression='zip')
+        shutil.rmtree(PATH_TXT)
+
+
+    def  rcrabn_pipeline(self):
+        
+        # Extract information from RCRAInfo
+        self.visit()
+
+        # Organize files for csv
+        self.organizing_files()
 
 
 if __name__ == '__main__':
@@ -144,8 +152,9 @@ if __name__ == '__main__':
 
     parser.add_argument('Option',
                         help = 'What do you want to do:\
-                        [A] Extract information from RCRAInfo.\
-                        [B] Organize files for csv.',
+                        [A]: Extract information from RCRAInfo.\
+                        [B]: Organize files for csv.\
+                        [C]: All options',
                         type = str)
 
     parser.add_argument('-Y', '--Year', nargs = '+',
@@ -155,8 +164,14 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.Option == 'A':
-        Scrapper = RCRAInfo_Scrapper(args.Year)
-        Scrapper.visit()
+        for Year in args.Year:
+            Scrapper = RCRAInfo_Scrapper(Year)
+            Scrapper.visit()
     elif args.Option == 'B':
-        Scrapper = RCRAInfo_Scrapper(args.Year)
-        Scrapper.organizing_files()
+        for Year in args.Year:
+            Scrapper = RCRAInfo_Scrapper(Year)
+            Scrapper.organizing_files()
+    elif args.Option == 'C':
+        for Year in args.Year:
+            Scrapper = RCRAInfo_Scrapper(Year)
+            Scrapper.rcrabn_pipeline()

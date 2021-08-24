@@ -1,5 +1,5 @@
 PREFERRED NAME
-CAS NUMBER
+TRI_CHEM_ID
 DSSTOX ID
 Molecular Mass
 LogP: Octanol-Water

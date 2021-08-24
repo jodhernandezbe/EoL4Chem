@@ -50,7 +50,7 @@ class TRI_EoL:
         columns_converting = {'FACILITY ZIP CODE': lambda x:  '00' + x if len(x) == 3 else ('0' + x if len(x) == 4 else x),
                               'REPORTING YEAR': lambda x: str(int(x)),
                               'OFF-SITE ZIP CODE': lambda x:  '00' + x if len(x) == 3 else ('0' + x if len(x) == 4 else x),
-                              'CAS NUMBER': lambda x: x.lstrip('0'),
+                              'TRI_CHEM_ID': lambda x: x.lstrip('0'),
                               'PRIMARY NAICS CODE': lambda x: str(int(x))}
         # Reading .txt with needed columns
         Path_txt = self._dir_path + f'/../../ancillary/tri/TRI_File_{file}_needed_columns_EoL4Chem.txt'
@@ -63,7 +63,7 @@ class TRI_EoL:
                                 converters=columns_converting,
                                 usecols=needed_columns)
         DataFrame.drop_duplicates(keep='first', inplace=True)
-        DataFrame.sort_values(by=['TRIFID', 'CAS NUMBER'], inplace=True)
+        DataFrame.sort_values(by=['TRIFID', 'TRI_CHEM_ID'], inplace=True)
         return DataFrame
 
     def _file(self, df):
@@ -100,7 +100,7 @@ class TRI_EoL:
                            'FACILITY COUNTY': 'GENERATOR COUNTY',
                            'FACILITY STATE': 'GENERATOR STATE',
                            'FACILITY ZIP CODE': 'GENERATOR ZIP',
-                           'CAS NUMBER': 'TRI CHEMICAL ID NUMBER',
+                           'TRI_CHEM_ID': 'TRI CHEMICAL ID NUMBER',
                            'CHEMICAL NAME':  'TRI CHEMICAL NAME',
                            'CLASSIFICATION': 'TRI CLASSIFICATION',
                            'UNIT OF MEASURE': 'UNIT',
@@ -571,7 +571,7 @@ class TRI_EoL:
             if key == '1b':
                 cols = TRI_needed[key].columns.tolist()
                 func = fuctions_rows_grouping(TRI_needed[key])
-                TRI_needed[key] = TRI_needed[key].groupby(['TRIFID', 'CAS NUMBER'],
+                TRI_needed[key] = TRI_needed[key].groupby(['TRIFID', 'TRI_CHEM_ID'],
                                                 as_index = False) \
                                                 .agg(func)
                 TRI_needed[key] = TRI_needed[key][cols]
@@ -585,9 +585,9 @@ class TRI_EoL:
                         'X': '5', 'N':'5', 'NA':'5'}
                 Columns_for_scores = self._dq_columns(key) # Loading columns for data quality score
                 TRI_needed[key][Columns_for_scores] = TRI_needed[key][Columns_for_scores].apply(lambda x: x.str.strip().map(mapping), axis = 1)
-        # Joining TRI databases based on CAS Number, TRI Facility ID, and elemental metal included (for metal compounds)
+        # Joining TRI databases based on TRI_CHEM_ID, TRI Facility ID, and elemental metal included (for metal compounds)
         TRI_merged = reduce(lambda  left, right: pd.merge(left , right,
-                        on = ['TRIFID', 'CAS NUMBER'],
+                        on = ['TRIFID', 'TRI_CHEM_ID'],
                         how = 'inner'), list(TRI_needed.values()))
         TRI_merged.drop_duplicates(keep = 'first', inplace = True)
         del TRI_needed
@@ -638,7 +638,7 @@ class TRI_EoL:
         SRS_TRI_RCRA = pd.merge(SRS_TRI, RCRA_TRI, how = 'left', on = 'Internal Tracking Number')
         SRS_TRI_RCRA['SRS CHEMICAL ID'] = SRS_TRI_RCRA['Internal Tracking Number']
         SRS_TRI_RCRA['RCRAInfo CHEMICAL ID NUMBER'] = SRS_TRI_RCRA['ID_y']
-        SRS_TRI_RCRA['CAS NUMBER'] = SRS_TRI_RCRA['CAS']
+        SRS_TRI_RCRA['TRI_CHEM_ID'] = SRS_TRI_RCRA['CAS']
         SRS_TRI_RCRA['TRI CHEMICAL ID NUMBER'] = SRS_TRI_RCRA['ID_x']
         SRS_TRI_RCRA.drop(['ID_x', 'ID_y', 'Internal Tracking Number', 'CAS'], axis = 1,
                                           inplace = True)
@@ -814,7 +814,7 @@ class TRI_EoL:
         # Calling database
         TRI = pd.read_csv(self._dir_path + f'/{self.year}/TRI_SRS_FRS_CompTox_{self.year}_EoL.csv',
                           header=0, sep=',', low_memory=False)
-        cols_to_excluding_from_grouping = ['CAS NUMBER', 'SMILES',
+        cols_to_excluding_from_grouping = ['TRI_CHEM_ID', 'SMILES',
                                            'CHEMICAL CATEGORY 1',
                                            'CHEMICAL CATEGORY 2',
                                            'CHEMICAL CATEGORY 3']
@@ -959,7 +959,7 @@ class TRI_EoL:
             df_TRI.apply(lambda row:
                          abs(int(self.year) - row['REPORTING YEAR']),
                          axis=1)
-        grouping = ['TRIFID', 'CAS NUMBER', 'COMPARTMENT']
+        grouping = ['TRIFID', 'TRI_CHEM_ID', 'COMPARTMENT']
         # Selecting between years
         df_TRI = df_TRI.loc[df_TRI.groupby(grouping)\
                             .Year_difference.idxmin()]
@@ -982,7 +982,7 @@ class TRI_EoL:
                                'MAXIMUM AMOUNT ON-SITE': 'MAXIMUM AMOUNT PRESENT AT RETDF',
                                'FLOW TO COMPARTMENT': 'FLOW TO COMPARTMENT FROM RETDF',
                                'FLOW TO COMPARTMENT RELIABILITY': 'RELIABILITY OF FLOW TO COMPARTMENT FROM RETDF',
-                               'CAS NUMBER': 'TRI CHEMICAL ID NUMBER',
+                               'TRI_CHEM_ID': 'TRI CHEMICAL ID NUMBER',
                                'TRIFID': 'RETDF TRIFID',
                                'FACILITY NAME': 'RETDF NAME',
                                'FACILITY STREET': 'RETDF STREET',
@@ -1149,6 +1149,24 @@ class TRI_EoL:
                   sep=',', index=False)
 
 
+    def all_pipeline(self):
+
+        # Organize files [A]
+        self.generate_dataframe()
+
+        # Retrieve Chemical information from SRS [B]
+        self.srs_search()
+
+        # Add FRS infomation [C]
+        self.frs_search()
+
+        # Assigning TSCA groups [D]
+        self.comptox_tsca_groups()
+
+        # Search Flows [E]
+        self.flows_search()
+
+
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(argument_default=argparse.SUPPRESS)
@@ -1158,8 +1176,9 @@ if __name__ == '__main__':
                         [A]: Organize files.\
                         [B]: Retrieve Chemical information from SRS.\
                         [C]: Add FRS infomation.\
-                        [D]: Assigning TSCA groups\
-                        [E]: Search Flows',
+                        [D]: Assigning TSCA groups.\
+                        [E]: Search Flows.\
+                        [F]: All the options.',
                         type=str)
 
     parser.add_argument('Year',
@@ -1194,4 +1213,7 @@ if __name__ == '__main__':
     elif args.Option == 'E':
         TRI = TRI_EoL(TRIyear)
         TRI.flows_search()
+    elif args.Option == 'F':
+        TRI = TRI_EoL(TRIyear, Files=TRIfiles)
+        TRI.all_pipeline()
     print('Execution time: %s sec' % (time.time() - start_time))

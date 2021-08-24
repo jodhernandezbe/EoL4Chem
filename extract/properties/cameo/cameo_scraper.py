@@ -43,19 +43,19 @@ class CAMEO_scraper:
         self._browser.get(self._url)
         df_result = pd.DataFrame()
         print('-' * 45)
-        print('{:15s} {:15s}'.format('CAS Number', 'Found?'))
+        print('{:15s} {:15s}'.format('TRI_CHEM_ID', 'Found?'))
         print('-' * 45)
         for chemical in self.chemicals:
             result = self._searching_chemicals(chemical)
             if not result.empty:
                 print('{:15s} {:15s}'.format(chemical, 'Yes'))
-                result['CAS NUMBER'] = chemical
+                result['TRI_CHEM_ID'] = chemical
             else:
                 print('{:15s} {:15s}'.format(chemical, 'No'))
                 result = pd.DataFrame({'HAZARD': [None],
                                       'VALUE': [None],
                                       'DESCRIPTION': [None],
-                                      'CAS NUMBER': [chemical]})
+                                      'TRI_CHEM_ID': [chemical]})
             df_result = pd.concat([result, df_result], ignore_index = True,
                                        sort = True, axis = 0)
             href = self._browser.find_element_by_xpath(self._queries['new_search']).get_attribute('href')
@@ -148,7 +148,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(argument_default = argparse.SUPPRESS)
 
     parser.add_argument('-FR', '--Reading_file_path', nargs = '+',
-                        help = 'Enter the file(s) with the CAS NUMBER.',
+                        help = 'Enter the file(s) with the TRI_CHEM_ID.',
                         type = str)
 
     parser.add_argument('-FS', '--Saving_file_path',

@@ -255,7 +255,7 @@ class NIST_scraper:
                 headers, Name, Molecular_Weight = self._searching_headers(chemical)
                 Properties = {'Name': Name, 'Molecular Mass': Molecular_Weight,
                               'Consulted Date': self._now, 'Source': self._url,
-                              'CAS NUMBER': chemical}
+                              'TRI_CHEM_ID': chemical}
                 if len(headers) == 0:
                     df_aux = pd.DataFrame({key: [value] for key, value in Properties.items()})
                     df = pd.concat([df, df_aux], ignore_index = True,
@@ -284,7 +284,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(argument_default = argparse.SUPPRESS)
 
     parser.add_argument('-FR', '--Reading_file_path', nargs = '+',
-                        help = 'Enter the file(s) with the CAS NUMBER.',
+                        help = 'Enter the file(s) with the TRI_CHEM_ID.',
                         type = str)
 
     parser.add_argument('-FS', '--Saving_file_path',

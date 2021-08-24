@@ -61,7 +61,7 @@ class On_Tracker:
                 return result.group(1)
             except TypeError:
                 return None
-        columns_converting = {'CAS NUMBER': lambda x: x.lstrip('0')}
+        columns_converting = {'TRI_CHEM_ID': lambda x: x.lstrip('0')}
         if int(str(self.year)) >= 2011:
             Files = ['1a', '3a', '3c']
         else:
@@ -112,6 +112,7 @@ class On_Tracker:
             if File == '1a':
                 columns_releases_DQ = [col + ' - BASIS OF ESTIMATE'
                                        for col in columns_releases]
+                df = df.loc[pd.notnull(df[columns_releases].apply(lambda s: pd.to_numeric(s, errors='coerce'))).all(axis=1)]
                 df[columns_releases] =\
                     df.apply(lambda x: pd.Series(
                      self._organizing_flows(x['CLASSIFICATION'],
@@ -143,7 +144,7 @@ class On_Tracker:
         df = reduce(lambda left, right:
                     pd.merge(left,
                              right,
-                             on=['TRIFID', 'CAS NUMBER'],
+                             on=['TRIFID', 'TRI_CHEM_ID'],
                              how='left'), dfs)
         del dfs
         df[columns_flow_T] = df[columns_flow_T].fillna(value=0.0)
@@ -169,7 +170,7 @@ class On_Tracker:
         compartments = ['Fugitive air release', 'Stack air release',
                         'On-site surface water release',
                         'On-site soil release']
-        cols_to_conserve = ['CAS NUMBER', 'PRIMARY NAICS CODE',
+        cols_to_conserve = ['TRI_CHEM_ID', 'PRIMARY NAICS CODE',
                             'REPORTING YEAR', 'UNIT OF MEASURE',
                             'MAXIMUM AMOUNT ON-SITE', 'TRIFID',
                             'TOTAL WASTE', 'TOTAL WASTE RELIABILITY',
@@ -205,7 +206,7 @@ class On_Tracker:
                               on='PRIMARY NAICS CODE')
         columns = ['REPORTING YEAR', 'TRIFID',
                    'PRIMARY NAICS CODE', 'NAICS Title',
-                   'CAS NUMBER', 'MAXIMUM AMOUNT ON-SITE', 'UNIT OF MEASURE',
+                   'TRI_CHEM_ID', 'MAXIMUM AMOUNT ON-SITE', 'UNIT OF MEASURE',
                    'FLOW TO COMPARTMENT', 'FLOW TO COMPARTMENT RELIABILITY',
                    'COMPARTMENT', 'TOTAL WASTE', 'TOTAL WASTE RELIABILITY',
                    'TOTAL RELEASE', 'TOTAL RELEASE RELIABILITY']
@@ -214,6 +215,7 @@ class On_Tracker:
                              'PRIMARY NAICS CODE'].unique())
         df_release.to_csv(self._dir_path + f'/csv/on_site_tracking/TRI_releases_{self.year}.csv',
                           sep=',', index=False)
+
 
     def facility_information(self):
         df_TRI = pd.DataFrame()
@@ -232,13 +234,14 @@ class On_Tracker:
         df_TRI.to_csv(self._dir_path + '/csv/on_site_tracking/Facility_Information.csv',
                       sep=',', index=False)
 
+
     def conditions_of_use(self):
         Path_csv = f'{self._dir_path}/../../extract/tri/csv/US_1b_{self.year}.csv'
         df_TRI =\
             pd.read_csv(Path_csv, header=0, sep=',',
                         low_memory=False,
                         usecols=['TRIFID',
-                                 'CAS NUMBER', 'PRODUCE THE CHEMICAL',
+                                 'TRI_CHEM_ID', 'PRODUCE THE CHEMICAL',
                                  'IMPORT THE CHEMICAL', 'REPACKAGING',
                                  'ON-SITE USE OF THE CHEMICAL',
                                  'SALE OR DISTRIBUTION OF THE CHEMICAL',
@@ -252,16 +255,18 @@ class On_Tracker:
                                  'ANCILLARY OR OTHER USE'])
         df_TRI['REPORTING YEAR'] = self.year
         func = self._fuctions_rows_grouping(df_TRI, self.year)
-        df_TRI = df_TRI.groupby(['TRIFID', 'CAS NUMBER'],
+        df_TRI = df_TRI.groupby(['TRIFID', 'TRI_CHEM_ID'],
                                 as_index=False).agg(func)
         df_TRI.to_csv(f'{self._dir_path}/csv/on_site_tracking/Conditions_of_use_by_facility_and_chemical_{self.year}.csv',
                       sep=',', index=False)
+
 
     def _searching(sefl, df):
         if any(df.str.capitalize() == 'Yes'):
             return 'Yes'
         else:
             return 'No'
+
 
     def _fuctions_rows_grouping(self, x, year):
         f = {'REPORTING YEAR': lambda x: x.drop_duplicates(keep = 'first'),
@@ -284,6 +289,15 @@ class On_Tracker:
             f.update({'RECYCLING': lambda x: self._searching(x)})
         return f
 
+    
+    def on_tracker_pipeline(self):
+        
+        # Organize maximum and releases
+        self.organizing_releases()
+
+        # Condition of use
+        self.conditions_of_use()
+
 
 if __name__ == '__main__':
 
@@ -291,9 +305,10 @@ if __name__ == '__main__':
 
     parser.add_argument('Option',
                         help='What do you want to do:\
-                        [A]: Organize maximum and releases\
-                        [B]: Facility information\
-                        [C]: Condition of use',
+                        [A]: Organize maximum and releases.\
+                        [B]: Facility information.\
+                        [C]: Condition of use.\
+                        [D]: All options (except B).',
                         type=str)
 
     parser.add_argument('-Y', '--Year',
@@ -308,13 +323,24 @@ if __name__ == '__main__':
     TRIyears = args.Year
 
     if args.Option == 'A':
+
         for TRIyear in TRIyears:
             T = On_Tracker(TRIyear)
             T.organizing_releases()
+
     if args.Option == 'B':
+
         T = On_Tracker()
         T.facility_information()
+
     if args.Option == 'C':
+
         for TRIyear in TRIyears:
             T = On_Tracker(TRIyear)
             T.conditions_of_use()
+
+    if args.Option == 'D':
+
+        for TRIyear in TRIyears:
+            T = On_Tracker(TRIyear)
+            T.on_tracker_pipeline()

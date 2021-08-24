@@ -1,4 +1,4 @@
-CAS NUMBER,COUNTRY,TWA [ppm],TWA [mg/m³],STEL [ppm],STEL [mg/m³],SOURCE,DATE CONSULTED
+TRI_CHEM_ID,COUNTRY,TWA [ppm],TWA [mg/m³],STEL [ppm],STEL [mg/m³],SOURCE,DATE CONSULTED
 100016,Australia,,,,,http://limitvalue.ifa.dguv.de,07_03_2020
 100016,Austria,,,,,http://limitvalue.ifa.dguv.de,07_03_2020
 100016,Belgium,,3.0,,,http://limitvalue.ifa.dguv.de,07_03_2020

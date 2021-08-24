@@ -140,7 +140,7 @@ class Off_tracker:
 
     def retrieving_needed_information(self):
         columns_converting = {'REPORTING YEAR': lambda x: str(int(x)),
-                              'CAS NUMBER': lambda x: x.lstrip('0')}
+                              'TRI_CHEM_ID': lambda x: x.lstrip('0')}
         if self.database == 'TRI':
             mapping = {'M': 1, 'M1': 1, 'M2': 1, 'E': 2,
                        'E1': 2, 'E2': 2, 'C': 3, 'O': 4,
@@ -171,14 +171,14 @@ class Off_tracker:
                                     r'\s?[A-Z]{2,3}[0-9]{8,9}\s?',
                                     na=False)]
             df = df.loc[(df[column_flows] != 0).any(axis=1)]
-            columns = ['TRIFID', 'CAS NUMBER', 'UNIT OF MEASURE',
+            columns = ['TRIFID', 'TRI_CHEM_ID', 'UNIT OF MEASURE',
                        'REPORTING YEAR',
                        'LATITUDE', 'LONGITUDE', 'OFF-SITE RCRA ID NR',
                        'QUANTITY TRANSFERRED',
                        'RELIABILITY', 'FOR WHAT IS TRANSFERRED']
             _df = pd.DataFrame(columns=columns)
             for col in column_flows:
-                df_aux = df[['TRIFID', 'CAS NUMBER', 'UNIT OF MEASURE',
+                df_aux = df[['TRIFID', 'TRI_CHEM_ID', 'UNIT OF MEASURE',
                              'REPORTING YEAR',
                              'LATITUDE', 'LONGITUDE',
                              'OFF-SITE RCRA ID NR',
@@ -210,7 +210,7 @@ class Off_tracker:
                     self._weight_mean(x,
                                       _df.loc[x.index, 'QUANTITY TRANSFERRED'])
                     }
-            _df = _df.groupby(['TRIFID', 'CAS NUMBER', 'UNIT OF MEASURE',
+            _df = _df.groupby(['TRIFID', 'TRI_CHEM_ID', 'UNIT OF MEASURE',
                                'REPORTING YEAR', 'LATITUDE',
                                'LONGITUDE', 'OFF-SITE RCRA ID NR',
                                'FOR WHAT IS TRANSFERRED'],
@@ -218,10 +218,10 @@ class Off_tracker:
             # Searching EPA Internal Tracking Number of a Substance
             SRS = self._generating_srs_database()
             _df = pd.merge(SRS, _df, how='inner', left_on='ID',
-                           right_on='CAS NUMBER')
+                           right_on='TRI_CHEM_ID')
             _df['SRS INTERNAL TRACKING NUMBER'] =\
                 _df['Internal Tracking Number']
-            _df.drop(columns=['ID', 'CAS NUMBER', 'Internal Tracking Number'],
+            _df.drop(columns=['ID', 'TRI_CHEM_ID', 'Internal Tracking Number'],
                      inplace=True)
             # Searching info for sender
             FRS = self._generating_frs_database(['TRIS', 'RCRAINFO'])
@@ -376,6 +376,7 @@ class Off_tracker:
             df.to_csv(self._dir_path + f'/csv/off_site_tracking/RCRAInfo_{self.year}_Off-site_Tracking.csv',
                       sep=',', index=False)
 
+
     def joining_databases(self):
         Path_csv = self._dir_path + '/csv/off_site_tracking/'
         Files = os.listdir(Path_csv)
@@ -398,6 +399,7 @@ class Off_tracker:
                       inplace=True)
         Tracking.to_csv(self._dir_path+f'/csv/Tracking_{self.year[0]}.csv',
                         sep=',', index=False)
+
 
     def searching_shortest_distance_from_maps(self):
         Path_csv = self._dir_path + '/csv/off_site_tracking/'

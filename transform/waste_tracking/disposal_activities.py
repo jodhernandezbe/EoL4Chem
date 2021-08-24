@@ -56,7 +56,7 @@ class Diposal_tracker:
                                      sep='\t').iloc[:, 0].tolist()
 
         # Calling TRI File 1a
-        columns_converting = {'CAS NUMBER': lambda x: x.lstrip('0')}
+        columns_converting = {'TRI_CHEM_ID': lambda x: x.lstrip('0')}
         tri = pd.read_csv(Path_csv, usecols=needed_columns,
                          header=0, sep=',',
                          low_memory=False,
@@ -66,7 +66,7 @@ class Diposal_tracker:
         fix_columns = ['REPORTING YEAR',
                        'PRIMARY NAICS CODE',
                        'TRIFID',
-                       'CAS NUMBER',
+                       'TRI_CHEM_ID',
                        'CLASSIFICATION',
                        'UNIT OF MEASURE']
         flow_columns = [col for col in tri.columns if ('ON-SITE' in col) and ('BASIS OF ESTIMATE' not in col)]

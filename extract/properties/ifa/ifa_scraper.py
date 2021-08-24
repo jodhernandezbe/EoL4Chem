@@ -62,7 +62,7 @@ class IFA_scraper:
                                            sort = True, axis = 0)
             except NoSuchElementException:
                 continue
-        df.insert(0, 'CAS NUMBER', [cas_non_hyphen]*df.shape[0],
+        df.insert(0, 'TRI_CHEM_ID', [cas_non_hyphen]*df.shape[0],
                   allow_duplicates = True)
         df['SOURCE'] = url
         df['DATE CONSULTED'] = now
@@ -117,7 +117,7 @@ class IFA_scraper:
                                                sort = True, axis = 0)
                     self._browser.back()
             self._dynamic_wait(self._queries['Clear_button'], action = 'click')
-        df = df[['CAS NUMBER', 'COUNTRY', 'TWA [ppm]', 'TWA [mg/m³]', 'STEL [ppm]',
+        df = df[['TRI_CHEM_ID', 'COUNTRY', 'TWA [ppm]', 'TWA [mg/m³]', 'STEL [ppm]',
                         'STEL [mg/m³]', 'SOURCE', 'DATE CONSULTED']]
         if self._existing:
             df.to_csv(self.file_save, index = False, mode = 'a', sep = ',', header=False)
@@ -131,7 +131,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(argument_default = argparse.SUPPRESS)
 
     parser.add_argument('-FR', '--Reading_file_path', nargs = '+',
-                        help = 'Enter the file(s) with the CAS NUMBER.',
+                        help = 'Enter the file(s) with the TRI_CHEM_ID.',
                         type = str)
 
     parser.add_argument('-FS', '--Saving_file_path',

@@ -48,15 +48,15 @@ def calling_properties(CAS):
 
     dir_path = os.path.dirname(os.path.realpath(__file__))
     CompTox = pd.read_csv(dir_path + '/../../extract/properties/comptox/CompTox.csv',
-                          usecols=['CAS NUMBER',
+                          usecols=['TRI_CHEM_ID',
                                    'Melting Point',
                                    'Boiling Point',
                                    'Water Solubility',
                                    'Molecular Mass'],
-                          dtype={'CAS NUMBER': 'str'})
-    CompTox = CompTox.loc[CompTox['CAS NUMBER'] == CAS]
+                          dtype={'TRI_CHEM_ID': 'str'})
+    CompTox = CompTox.loc[CompTox['TRI_CHEM_ID'] == CAS]
     CompTox['Water Solubility'] = 1000*CompTox['Water Solubility']*CompTox['Molecular Mass']
-    CompTox.drop(columns=['CAS NUMBER',
+    CompTox.drop(columns=['TRI_CHEM_ID',
                           'Molecular Mass'],
                  inplace=True)
     Properties = CompTox.to_dict('records')[0]
@@ -84,10 +84,10 @@ def calling_dataset_for_individuals_or_others(CAS,
     if list_PAU:
         #path_off_on =
         df = df.loc[df[desired_column].isin(list_PAU)]
-    df_chem = df.loc[df['CAS NUMBER'] == CAS]
+    df_chem = df.loc[df['TRI_CHEM_ID'] == CAS]
     if df_chem.empty:
         df_chem = df
-    df_chem.drop(columns=['CAS NUMBER'], inplace=True)
+    df_chem.drop(columns=['TRI_CHEM_ID'], inplace=True)
     df_stream = df_chem.loc[df_chem['WASTE STREAM CODE'] == waste_stream]
     if df_stream.empty:
         df_stream = df_chem
