@@ -127,6 +127,10 @@ After running the Python script you obtain the following output files in the [ci
 | chord_recyled.csv | Labels for industry sectors in Figure 7 |
 | seaborn_heatmap_non_industrial.pdf | Plot for chemical cross-contamination or Figure 8 |
 
+# Note
+
+Feel free to optimize the codes for a better performance, create a relational database (e.g., MySQL) to use a relational database management system (RDMS), and perform a database normalization. 
+
 # Disclaimer
 
 The views expressed in this article are those of the authors and do not necessarily represent the views or policies of
