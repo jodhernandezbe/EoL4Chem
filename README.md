@@ -129,7 +129,7 @@ After running the Python script you obtain the following output files in the [ci
 
 # Note
 
-Feel free to optimize the codes for better performance, create a relational database to use a relational database management system (e.g. MySQL), and perform database normalization.
+Feel free to optimize the codes for better performance, create a relational database to use a relational database management system (e.g., MySQL), and perform database normalization.
 
 # Disclaimer
 
