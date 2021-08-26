@@ -32,11 +32,11 @@ class Off_tracker:
 
 
     def _searching_lat_long(self, df, col_id, col_lat, col_long):
-        non_lat_log = df.loc[pd.isnull(df[col_lat]), [col_id,
-                                                      'LOCATION_ADDRESS',
-                                                      'CITY_NAME',
-                                                      'STATE_CODE',
-                                                      'POSTAL_CODE']]
+        non_lat_log = df[pd.isnull(df[col_lat])][[col_id,
+                                                'LOCATION_ADDRESS',
+                                                'CITY_NAME',
+                                                'STATE_CODE',
+                                                'POSTAL_CODE']]
         non_lat_log.drop_duplicates(keep='first',
                                     inplace=True,
                                     subset=[col_id])
@@ -214,11 +214,13 @@ class Off_tracker:
             func = {'QUANTITY TRANSFERRED': 'sum',
                     'RELIABILITY': lambda x:
                     self._weight_mean(x,
-                                      _df.loc[x.index, 'QUANTITY TRANSFERRED'])
-                    }
-            _df = _df.groupby(['TRIFID', 'TRI_CHEM_ID', 'UNIT OF MEASURE',
-                               'REPORTING YEAR', 'LATITUDE',
-                               'LONGITUDE', 'OFF-SITE RCRA ID NR',
+                                      _df.loc[x.index, 'QUANTITY TRANSFERRED']),
+                    'UNIT OF MEASURE': lambda x: x.head(1).values[0],
+                    'REPORTING YEAR': lambda x: x.head(1).values[0],
+                    'LATITUDE': lambda x: x.head(1).values[0],
+                    'LONGITUDE': lambda x: x.head(1).values[0]}
+            _df = _df.groupby(['TRIFID', 'TRI_CHEM_ID', 
+                               'OFF-SITE RCRA ID NR',
                                'FOR WHAT IS TRANSFERRED'],
                               as_index=False).agg(func)
             # Searching EPA Internal Tracking Number of a Substance
@@ -235,17 +237,29 @@ class Off_tracker:
             TRI = FRS.loc[FRS['PGM_SYS_ACRNM'] == 'TRIS']
             del FRS
             RCRA.drop('PGM_SYS_ACRNM', axis=1, inplace=True)
-            TRI.drop(['PGM_SYS_ACRNM', 'LOCATION_ADDRESS', 'CITY_NAME',
-                      'POSTAL_CODE', 'LATITUDE83', 'LONGITUDE83'],
-                     axis=1, inplace=True)
+            TRI.drop(['PGM_SYS_ACRNM'], axis=1, inplace=True)
             TRI.rename(columns={'PGM_SYS_ID': 'TRIFID'}, inplace=True)
             _df = pd.merge(_df, TRI, how='inner', on='TRIFID')
+            _df.drop(['TRIFID'], axis=1, inplace=True)
             _df.rename(columns={'REGISTRY_ID': 'SENDER FRS ID',
                                 'LATITUDE': 'SENDER LATITUDE',
-                                'LONGITUDE': 'SENDER LONGITUDE',
-                                'STATE_CODE': 'SENDER STATE'},
-                       inplace=True)
-            _df.drop(['TRIFID'], axis=1, inplace=True)
+                                'LONGITUDE': 'SENDER LONGITUDE'},
+                       inplace=True)   
+            # Checking null lat and long for sender
+            idx = _df.loc[pd.notnull(_df.LATITUDE83) & pd.isnull(_df['SENDER LATITUDE'])].index.tolist()
+            if idx:
+                _df.loc[idx, 'SENDER LATITUDE'] = _df.loc[idx, 'LATITUDE83']
+                _df.loc[idx, 'SENDER LONGITUDE'] = _df.loc[idx, 'LONGITUDE83']
+            _df.drop(['LATITUDE83', 'LONGITUDE83'],
+                    axis=1, inplace=True)
+            _df = self._searching_lat_long(_df, 'SENDER FRS ID',
+                                        'SENDER LATITUDE',
+                                        'SENDER LONGITUDE')
+            _df.rename(columns={'STATE_CODE': 'SENDER STATE'},
+                       inplace=True)    
+            _df.drop(['LOCATION_ADDRESS', 'CITY_NAME',
+                    'POSTAL_CODE'],
+                    axis=1, inplace=True)
             # Searching info for receiver
             RCRA.rename(columns={'PGM_SYS_ID': 'OFF-SITE RCRA ID NR'},
                         inplace=True)
@@ -399,11 +413,11 @@ class Off_tracker:
                                                          row['REPORTING YEAR'])
                                                          - int(self.year[0])),
                                                      axis=1)
-        grouping = ['SENDER FRS ID', 'SRS INTERNAL TRACKING NUMBER',
-                    'CAS', 'RECEIVER FRS ID']
-        Tracking = Tracking.loc[Tracking.groupby(grouping,
-                                                 as_index=False)
-                                        .Year_difference.idxmin()]
+        grouping = ['SENDER FRS ID',
+                    'SRS INTERNAL TRACKING NUMBER',
+                    'RECEIVER FRS ID']
+        Tracking.reset_index(inplace=True, drop=True)
+        Tracking = Tracking.loc[Tracking.groupby(grouping).Year_difference.idxmin()].reset_index(drop=True)
         Tracking.drop(['Year_difference', 'REPORTING YEAR'], axis=1,
                       inplace=True)
         Tracking.to_csv(self._dir_path+f'/csv/Tracking_{self.year[0]}.csv',
@@ -595,7 +609,6 @@ def off_tracker_pipeline(years, dbs):
         for year in years:
 
             try:
-                print(f'{db}, {year}')
                 T = Off_tracker(year, db)
                 T.retrieving_needed_information()
             except FileNotFoundError:
