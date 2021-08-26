@@ -19,11 +19,10 @@ class NOMINATIM_API:
         address_city_state_zip['LATITUDE'] = None
         for idx, row in address_city_state_zip.iterrows():
             address = '+'.join(str(row['ADDRESS']).strip().split())
-            city = str(row['CITY']).strip()
+            city = '+'.join(str(row['CITY']).strip().split())
             state = str(row['STATE']).strip()
-            zip = str(row['ZIP']).strip()
-            search_parameter = f'{address},+{city},+{state},+{zip}'
-            query = self.url + f'/search?q={search_parameter}&format=json&addressdetails=1&limit=1&polygon_svg=1'
+            zip = str(row['ZIP']).strip()[0:5]
+            query = self.url + f'/search.php?street={address}&city={city}&state={state}&postalcode={zip}&format=jsonv2'
             result = requests.get(query)
             try:
                 if result.status_code == 200:
@@ -32,9 +31,32 @@ class NOMINATIM_API:
                     address_city_state_zip.loc[idx, 'LONGITUDE'] =\
                         float(result.json()[0]['lon'])
                 else:
-                    address_city_state_zip.loc[idx, 'LATITUDE'] = None
-                    address_city_state_zip.loc[idx, 'LONGITUDE'] = None
+                    lat, long = self.search_excluding_address(city, state, zip)
+                    address_city_state_zip.loc[idx, 'LATITUDE'] = lat
+                    address_city_state_zip.loc[idx, 'LONGITUDE'] = long
             except (IndexError, JSONDecodeError):
-                address_city_state_zip.loc[idx, 'LATITUDE'] = None
-                address_city_state_zip.loc[idx, 'LONGITUDE'] = None
+                lat, long = self.search_excluding_address(city, state, zip)
+                address_city_state_zip.loc[idx, 'LATITUDE'] = lat
+                address_city_state_zip.loc[idx, 'LONGITUDE'] = long
         return address_city_state_zip
+
+    
+    def search_excluding_address(self, city, state, zip):
+        options = [f'/search.php?city={city}&state={state}&postalcode={zip}&format=jsonv2',
+                   f'/search.php?postalcode={zip}&format=jsonv2']
+        for idx, option in enumerate(options):
+            query = self.url + option
+            result = requests.get(query)
+            try:
+                if result.status_code == 200:
+                        lat = float(result.json()[0]['lat'])
+                        long = float(result.json()[0]['lon'])
+                else:
+                    lat = None
+                    long = None
+            except (IndexError, JSONDecodeError):
+                lat = None
+                long = None
+            if (idx == 0) and (lat):
+                break
+        return lat, long

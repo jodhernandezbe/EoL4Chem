@@ -5,6 +5,7 @@
 /transform/waste_tracking/csv/on_site_tracking/*.csv
 !transform/waste_tracking/csv/on_site_tracking/Conditions_of_use_by_facility_and_chemical_*.csv
 /transform/waste_tracking/csv/off_site_tracking/*.csv
+/transform/waste_tracking/csv/Tracking_2018.csv
 **/__pycache__/
 *.pyc
 /transform/pau4chem/statistics/db_for_general/*.csv

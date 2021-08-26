@@ -331,6 +331,7 @@ class TRI_EoL:
                                  axis=0)
             del Quantity_null, Quantity_received
             # Selecting between years
+            Quantity.reset_index(inplace=True, drop=True)
             Quantity = Quantity.loc[Quantity.groupby(grouping)
                                     .Year_difference.idxmin()]
             Quantity.drop(columns=['REPORTING YEAR_x',
@@ -342,6 +343,7 @@ class TRI_EoL:
                                abs(row['REPORTING YEAR'] - int(self.year)),
                                axis=1)
             # Selecting between years
+            Quantity.reset_index(inplace=True, drop=True)
             Quantity = Quantity.loc[Quantity.groupby(grouping)
                                     .Year_difference.idxmin()]
             Quantity.drop(columns=['REPORTING YEAR'], inplace=True)
@@ -919,6 +921,7 @@ class TRI_EoL:
                                     - row['REPORTING YEAR']),
                                 axis=1)
         # Selecting between years
+        RCRA_facility.reset_index(inplace=True, drop=True)
         RCRA_facility = RCRA_facility.loc[RCRA_facility.groupby(grouping)
                                           .Year_difference.idxmin()]
         del grouping
@@ -959,6 +962,7 @@ class TRI_EoL:
                          axis=1)
         grouping = ['TRIFID', 'TRI_CHEM_ID', 'COMPARTMENT']
         # Selecting between years
+        df_TRI.reset_index(inplace=True, drop=True)
         df_TRI = df_TRI.loc[df_TRI.groupby(grouping)\
                             .Year_difference.idxmin()]
         del grouping
