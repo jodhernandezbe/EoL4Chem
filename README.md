@@ -56,7 +56,7 @@ The following is the project structure for the EoL4Chem folder. Only the most im
 
 ## EoL4Chem dataset structure and fields <sup>[1](#myfootnote1)</sup>
 
-If you are a Python programmer and you run the data engineering for a TRI year, you would obtain a .csv file with the following fields:
+If you are a Python programmer and you run the data engineering for a TRI year, you would obtain a .csv file insde the folder [transform/tri](https://github.com/jodhernandezbe/EoL4Chem/tree/main/transform/tri) with the following fields:
 
 | Field name | Data Type |
 |---|---|
