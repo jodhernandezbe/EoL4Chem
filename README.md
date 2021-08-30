@@ -220,5 +220,5 @@ Program at the Center for Environmental Solutions and Emergency Response, Office
 U.S. Environmental Protection Agency, administered by the Oak Ridge Institute for Science and Education through an Interagency Agreement No. DW-89-92433001 between the U.S. Department of Energy and the U.S. Environmental Protection Agency.
 
 -----------------------------------------------------------------------------------------------------------------------------
-<a name="myfootnote1">1</a>: Feel free to optimize the codes for better performance, create a relational database to use a relational database management system (e.g., MySQL), and perform database normalization..
+<a name="myfootnote1">1</a>: Feel free to optimize the codes for better performance, create a relational database to use a relational database management system (e.g., MySQL), and perform database normalization.
 
