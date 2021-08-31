@@ -14,6 +14,7 @@ def searching(df):
 
 def fuctions_rows_grouping(x):
     f = {'REPORTING YEAR': lambda x: x.drop_duplicates(keep = 'first'),
+        'FRS FACILITY ID': lambda x: x.drop_duplicates(keep = 'first'),
         'FACILITY NAME': lambda x: x.drop_duplicates(keep = 'first'),
         'FACILITY STREET': lambda x: x.drop_duplicates(keep = 'first'),
         'FACILITY CITY': lambda x: x.drop_duplicates(keep = 'first'),

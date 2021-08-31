@@ -78,11 +78,14 @@ class OSRM_API:
         return [distance, Maritime_distance]
 
     def harvesine_formula(self, Lat_1, Long_1, Lat_2, Long_2):
-        Average_earth_radius = 6371
-        Lat_1, Long_1, Lat_2, Long_2 = map(np.radians, [Lat_1, Long_1, Lat_2, Long_2])
-        dlon = Long_2 - Long_1
-        dlat = Lat_2 - Lat_1
-        a = np.sin(dlat/2)**2 + np.cos(Lat_1) * np.cos(Lat_2) * np.sin(dlon/2)**2
-        c = 2 * np.arcsin(np.sqrt(a))
-        distance = round(c * Average_earth_radius, 4) 
-        return distance
+        try:
+            Average_earth_radius = 6371
+            Lat_1, Long_1, Lat_2, Long_2 = map(np.radians, [Lat_1, Long_1, Lat_2, Long_2])
+            dlon = Long_2 - Long_1
+            dlat = Lat_2 - Lat_1
+            a = np.sin(dlat/2)**2 + np.cos(Lat_1) * np.cos(Lat_2) * np.sin(dlon/2)**2
+            c = 2 * np.arcsin(np.sqrt(a))
+            distance = round(c * Average_earth_radius, 4) 
+            return distance
+        except TypeError:
+            return None

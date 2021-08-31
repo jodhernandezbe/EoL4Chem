@@ -29,9 +29,10 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 
 class TRI_EoL:
 
-    def __init__(self, year, Files=None):
+    def __init__(self, year, Fraction=1.0, Files=None):
         self.year = year
         self.Files = Files
+        self.Fraction = Fraction
         self._dir_path = os.path.dirname(os.path.realpath(__file__))
 
     def _dq_columns(self, file):
@@ -84,7 +85,7 @@ class TRI_EoL:
                                    na=False)].index.tolist()
         df['OFF-SITE RCRA ID NR'].loc[idx] = None
         # Changing the units of measure to kg
-        Cols_Transfer = df.loc[:, 'OFF-SITE - STORAGE ONLY':'OFF-SITE - TRANSFER TO WASTE BROKER FOR WASTE TREATMENT':2].columns[24::2].tolist()
+        Cols_Transfer = df.loc[:, 'OFF-SITE - STORAGE ONLY':'OFF-SITE - TRANSFER TO WASTE BROKER FOR WASTE TREATMENT':2].columns.tolist()
         df[Cols_Transfer].fillna(0.0, inplace=True)
         df.loc[df['UNIT OF MEASURE'] == 'Pounds', Cols_Transfer] *= 0.453592
         df.loc[df['UNIT OF MEASURE'] == 'Grams', Cols_Transfer] *= 10**-3
@@ -92,6 +93,7 @@ class TRI_EoL:
         df['UNIT OF MEASURE'] = 'kg'
         # Renaming
         df.rename(columns={'TRIFID': 'GENERATOR TRIFID',
+                           'FRS FACILITY ID': 'GENERATOR FRS ID',
                            'FACILITY NAME': 'GENERATOR NAME',
                            'FACILITY STREET': 'GENERATOR STREET',
                            'FACILITY CITY': 'GENERATOR CITY',
@@ -114,7 +116,7 @@ class TRI_EoL:
                            'LONGITUDE': 'GENERATOR LONGITUDE'},
                   inplace=True)
         # Organizing flows
-        Cols_Facility = df.iloc[:, 0:24].columns.tolist()
+        Cols_Facility = df.iloc[:, 0:25].columns.tolist()
         TRI = pd.DataFrame()
         for Col in Cols_Transfer:
             df_aux = df[Cols_Facility + [Col, f'{Col} - BASIS OF ESTIMATE']]
@@ -202,11 +204,13 @@ class TRI_EoL:
                                                      Chemical_SRS_ID,
                                                      Generator_lat,
                                                      Generator_long):
+        df_aux = df # Saving a dataframe copy
+
         # Merging distances
         df = pd.merge(df, Distances,
                       on=['SENDER FRS ID',
                           'RECEIVER FRS ID'],
-                      how='inner')
+                      how='left')
         # Calculating cost
         df['COST'] = df.apply(lambda x:
                               self._transport_cost(
@@ -223,6 +227,9 @@ class TRI_EoL:
                                         x['RECEIVER LONGITUDE']
                                       ),
                                       axis=1)
+        # Handling the potential None-calculated distances
+        idx = df.loc[pd.isnull(df['NEW_DISTANCE'])].index.tolist()
+        df.loc[idx, 'NEW_DISTANCE'] = df.loc[idx, 'OLD_DISTANCE']*0.5
         # Checking the increase in the geographical distance between Generator
         # and the facility which is receiving the waste
         # Ensuring the receiver is further from the generator each time
@@ -254,20 +261,28 @@ class TRI_EoL:
             Min_value = 0
         df.loc[pd.isnull(df['TIME_C_W']), 'TIME_C_W'] = Min_value
         # Temporal correlation
-        df['T_CORRELATION'] = df.apply(lambda x: self._temporal_correlation(
-                                                        x['Year_difference']),
-                                       axis=1)
-        columns_for_fahp = ['COST', 'TIME_C_W', 'TIME_S_R', 'T_CORRELATION']
-        n_pathways = df.shape[0]
-        if n_pathways > 1:
-            df = fahp(n_pathways, columns_for_fahp, df)
-        else:
-            df['Weight'] = 1.0
-        df.drop(columns=['COST', 'TIME_C_W', 'TIME_S_R', 'T_CORRELATION',
-                         'DISTANCE', 'MARITIME FRACTION', 'RECEIVER LATITUDE',
-                         'RECEIVER LONGITUDE', 'NEW_DISTANCE'],
-                inplace=True)
-        return df
+        try:
+            df['T_CORRELATION'] = df.apply(lambda x: self._temporal_correlation(
+                                                            int(x['Year_difference'])),
+                                        axis=1)
+        except (KeyError, ValueError):
+            pass
+        if not df.empty:
+            columns_for_fahp = ['COST', 'TIME_C_W', 'TIME_S_R', 'T_CORRELATION']
+            n_pathways = df.shape[0]
+            if n_pathways > 1:
+                df = fahp(n_pathways, columns_for_fahp, df)
+            else:
+                df['Weight'] = 1.0
+            df.drop(columns=['COST', 'TIME_C_W', 'TIME_S_R', 'T_CORRELATION',
+                            'DISTANCE', 'MARITIME FRACTION', 'RECEIVER LATITUDE',
+                            'RECEIVER LONGITUDE', 'NEW_DISTANCE'],
+                    inplace=True)
+            return df
+        else: # Handling when it is not possible to perform FAHP
+            df_aux['Weight'] = 1/df_aux.shape[0] # Equal importance
+            return df_aux
+
 
     def _off_tracker(self, Management, Receiver_FRS_ID,
                      Chemical_SRS_ID, RCRA_ID, Track, df_WM, R_chem_wm,
@@ -337,16 +352,21 @@ class TRI_EoL:
             Quantity.drop(columns=['REPORTING YEAR_x',
                                    'REPORTING YEAR_y',
                                    'QUANTITY RECEIVED'], inplace=True)
+            if Quantity.empty: # Checking if the dataframe is not empty
+                return pd.DataFrame()
         else:
-            Quantity['Year_difference'] =\
-                Quantity.apply(lambda row:
-                               abs(row['REPORTING YEAR'] - int(self.year)),
-                               axis=1)
-            # Selecting between years
-            Quantity.reset_index(inplace=True, drop=True)
-            Quantity = Quantity.loc[Quantity.groupby(grouping)
-                                    .Year_difference.idxmin()]
-            Quantity.drop(columns=['REPORTING YEAR'], inplace=True)
+            if not Quantity.empty: # Checking if the dataframe is not empty
+                Quantity['Year_difference'] =\
+                    Quantity.apply(lambda row:
+                                abs(row['REPORTING YEAR'] - int(self.year)),
+                                axis=1)
+                # Selecting between years
+                Quantity.reset_index(inplace=True, drop=True)
+                Quantity = Quantity.loc[Quantity.groupby(grouping)
+                                        .Year_difference.idxmin()]
+                Quantity.drop(columns=['REPORTING YEAR'], inplace=True)
+            else:
+                return pd.DataFrame()
         del Quantity_transferred, Track
         # Ensuring the receiver is not the broker and the generator
         Source = Quantity.loc[Quantity['SENDER FRS ID'] == Receiver_FRS_ID]
@@ -364,7 +384,7 @@ class TRI_EoL:
                 Source['RELIABILITY']
             Source['TEMPORAL CORRELATION OF MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'] =\
                 Source.apply(lambda row: self._temporal_correlation(
-                                                row['Year_difference']),
+                                                int(row['Year_difference'])),
                              axis=1)
             Source =\
                 Source.groupby(['SENDER FRS ID'], as_index=False)\
@@ -438,7 +458,7 @@ class TRI_EoL:
                                      axis=1)
                     Source['TEMPORAL CORRELATION OF MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'] =\
                         Source.apply(lambda row:
-                                     max([self._temporal_correlation(row['Year_difference']),
+                                     max([self._temporal_correlation(int(row['Year_difference'])),
                                           row['TEMPORAL CORRELATION OF MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY']]),
                                      axis=1)
                     Source =\
@@ -541,30 +561,58 @@ class TRI_EoL:
         return df_SRS
 
     def _transport_cost(self, Distance, P_maritime, Flow):
-        # https://pdfs.semanticscholar.org/f629/6cff5417db9141322e3c8e70b17d64a7ec53.pdf
-        # We are considering stack trucks
-        Inflation_rate = 148.12 # from 1994 to 2020
-        Aver_load_carried_by_stake = 11.6
-        Distance = Distance*0.621371 # km to miles
-        Flow = Flow*0.001 # kg to metric tons
-        One_way_shipment_lenght = Distance*(1 - P_maritime)
-        cltm_stake =  ((3.02/Aver_load_carried_by_stake) + (129.38/One_way_shipment_lenght*Aver_load_carried_by_stake)) * ( 1 + Inflation_rate/100)
-        N_ton_miles_per_shipment = Aver_load_carried_by_stake*Distance
-        Cost_per_shipment = N_ton_miles_per_shipment*cltm_stake
-        Aver_number_of_shipments = math.ceil(Flow/Aver_load_carried_by_stake)
-        Total_land_shipment_cots = Aver_number_of_shipments*Cost_per_shipment
-        # We are considering the average maritime transport cost of manufacturing commodities between Dominican Republic
-        # and the U.S.. The distance is between the Port of Miami to Port of Santo Domingo, Dominican Republic
-        # https://stats.oecd.org/Index.aspx?DataSetCode=MTC#
-        Aver_unit_cost_for_maritime_transport = 0.6917 # USD/ton*mil
-        Total_maritime_shipment_cots = Distance*P_maritime*Aver_unit_cost_for_maritime_transport
-        Total_transport_cost = Total_maritime_shipment_cots + Total_land_shipment_cots
-        return Total_transport_cost
+        if Distance:
+            # https://pdfs.semanticscholar.org/f629/6cff5417db9141322e3c8e70b17d64a7ec53.pdf
+            # We are considering stack trucks
+            Inflation_rate = 148.12 # from 1994 to 2020
+            Aver_load_carried_by_stake = 11.6
+            Distance = Distance*0.621371 # km to miles
+            Flow = Flow*0.001 # kg to metric tons
+            One_way_shipment_lenght = Distance*(1 - P_maritime)
+            cltm_stake =  ((3.02/Aver_load_carried_by_stake) + (129.38/One_way_shipment_lenght*Aver_load_carried_by_stake)) * ( 1 + Inflation_rate/100)
+            N_ton_miles_per_shipment = Aver_load_carried_by_stake*Distance
+            Cost_per_shipment = N_ton_miles_per_shipment*cltm_stake
+            Aver_number_of_shipments = math.ceil(Flow/Aver_load_carried_by_stake)
+            Total_land_shipment_cots = Aver_number_of_shipments*Cost_per_shipment
+            # We are considering the average maritime transport cost of manufacturing commodities between Dominican Republic
+            # and the U.S.. The distance is between the Port of Miami to Port of Santo Domingo, Dominican Republic
+            # https://stats.oecd.org/Index.aspx?DataSetCode=MTC#
+            Aver_unit_cost_for_maritime_transport = 0.6917 # USD/ton*mil
+            Total_maritime_shipment_cots = Distance*P_maritime*Aver_unit_cost_for_maritime_transport
+            Total_transport_cost = Total_maritime_shipment_cots + Total_land_shipment_cots
+            return Total_transport_cost
+        else:
+            return None
+
+    def _looking_for_lat_long(self, df, col_id, col_lat, col_long):
+        # Looking in the saved file with lat and long
+        path_lat_long = f'{self._dir_path}/../waste_tracking/Latitude_&_Longitude.csv'
+        df_lat_long = pd.read_csv(path_lat_long, header=None,
+                                skiprows=[0], names=[col_id, 'LAT', 'LONG'])
+        df_lat_long[col_id] = df_lat_long[col_id].astype(int)
+        df_lat_long['LAT'] = df_lat_long['LAT'].astype(float)
+        df_lat_long['LONG'] = df_lat_long['LONG'].astype(float)
+        df = pd.merge(df, df_lat_long, on=col_id, how='left')
+        idx  = df.loc[pd.isnull(df[col_lat]) & pd.notnull(df['LAT'])].index.tolist()
+        df.loc[idx, col_lat] = df.loc[idx, 'LAT']
+        df.loc[idx, col_long] = df.loc[idx, 'LONG']
+        df.drop(columns=['LAT', 'LONG'], inplace=True)
+        # Looking in the FRS
+        df_FSR = pd.read_csv(f'{self._dir_path}/../../extract/frs/csv/NATIONAL_FACILITY_FILE.CSV',
+                            low_memory=False,
+                            dtype={'REGISTRY_ID': 'int'},
+                            usecols=['REGISTRY_ID',
+                                    'LATITUDE83', 'LONGITUDE83'])
+        df_FSR = df_FSR.drop_duplicates(subset=['REGISTRY_ID'], keep='first')
+        df_FSR.rename(columns={'REGISTRY_ID': col_id}, inplace=True)
+        df = pd.merge(df, df_FSR, on=col_id, how='left')
+        idx  = df.loc[pd.isnull(df[col_lat]) & pd.notnull(df['LATITUDE83'])].index.tolist()
+        df.loc[idx, col_lat] = df.loc[idx, 'LATITUDE83']
+        df.loc[idx, col_long] = df.loc[idx, 'LONGITUDE83']
+        df.drop(columns=['LATITUDE83', 'LONGITUDE83'], inplace=True)
+        return df        
 
     def generate_dataframe(self):
-        regex =  re.compile(r'TRI_File_(\d{1}[a-zA-Z]?)_Columns_for_DQ_Reliability.txt')
-        Path_DQ = self._dir_path + '/../../ancillary/tri'
-        File_DQ = [re.search(regex,file).group(1) for file in os.listdir(Path_DQ) if re.match(regex, file)]
         TRI_needed = {}
         for key in self.Files:
             TRI_needed[key] = self._building_needed_dataframe(key) # Loading dataframe with columns needed
@@ -575,7 +623,7 @@ class TRI_EoL:
                                                 as_index = False) \
                                                 .agg(func)
                 TRI_needed[key] = TRI_needed[key][cols]
-                Cols_CoU = TRI_needed[key].iloc[:, 13:24].columns.tolist()
+                Cols_CoU = TRI_needed[key].iloc[:, 14:].columns.tolist()
                 TRI_needed[key]['GENERATOR CONDITION OF USE'] = TRI_needed[key][Cols_CoU].apply(lambda row: ' + '.join(val.capitalize() \
                                                                     for val in Cols_CoU if row[val].strip() == 'YES'), axis = 1)
                 TRI_needed[key].drop(columns = Cols_CoU, inplace = True)
@@ -607,7 +655,8 @@ class TRI_EoL:
                         sep = ',', header = 0,
                         dtype = {'REPORTING YEAR':'int',
                                 'GENERATOR ZIP':'object',
-                                'RECEIVER ZIP':'object'})
+                                'RECEIVER ZIP':'object',
+                                'TRI CHEMICAL ID NUMBER': 'object'})
         TRI_CHEMICAL_IDS = list(TRI['TRI CHEMICAL ID NUMBER'].unique())
         SRS_TRI = Chemical_SRS_TRI.loc[Chemical_SRS_TRI['ID']. \
                                               isin(TRI_CHEMICAL_IDS)].drop_duplicates(keep = 'first')
@@ -811,9 +860,24 @@ class TRI_EoL:
                    sep=',', index=False)
 
     def flows_search(self):
+        # Waste tracking path (transfers)
+        Tracking_path = self._dir_path + '/../waste_tracking/csv/off_site_tracking/'
+        # Waste tracking path (releases)
+        Path_TRI = self._dir_path + '/../waste_tracking/csv/on_site_tracking/'
         # Calling database
         TRI = pd.read_csv(self._dir_path + f'/{self.year}/TRI_SRS_FRS_CompTox_{self.year}_EoL.csv',
                           header=0, sep=',', low_memory=False)
+        # Looking for lat and long for generator (if applied)
+        TRI['GENERATOR FRS ID'] = TRI['GENERATOR FRS ID'].astype(int)
+        TRI = self._looking_for_lat_long(TRI, 'GENERATOR FRS ID',
+                                    'GENERATOR LATITUDE',
+                                    'GENERATOR LONGITUDE')
+        # Looking for lat and long for receiver (if applied)
+        TRI['RECEIVER FRS ID'] = TRI['RECEIVER FRS ID'].astype(int)
+        TRI = self._looking_for_lat_long(TRI, 'RECEIVER FRS ID',
+                                    'RECEIVER LATITUDE',
+                                    'RECEIVER LONGITUDE')
+        TRI = TRI.sample(frac=self.Fraction, replace=True, random_state=1)
         cols_to_excluding_from_grouping = ['TRI_CHEM_ID', 'SMILES',
                                            'CHEMICAL CATEGORY 1',
                                            'CHEMICAL CATEGORY 2',
@@ -826,22 +890,7 @@ class TRI_EoL:
         No_broker = TRI.loc[~TRI['WASTE MANAGEMENT UNDER TRI']
                             .str.contains('broker', na=False)]
         del TRI
-        # ------------------------------- No brokers -------------------------#
-        # The off-site facility is RCRA?
-        RCRA_facility = No_broker.loc[pd.notnull(No_broker['RECEIVER RCRAInfo ID'])]
-        TRI_facility = No_broker.loc[pd.isnull(No_broker['RECEIVER RCRAInfo ID'])]
-        del No_broker
-        # Checking the TRI chemical is a RCRA hazardous waste
-        non_hazardous =\
-            RCRA_facility.loc[pd.isnull(RCRA_facility['RCRAInfo CHEMICAL ID NUMBER'])
-                              & pd.notnull(RCRA_facility['RECEIVER TRIFID'])]
-        RCRA_facility =\
-            RCRA_facility.loc[pd.notnull(RCRA_facility['RCRAInfo CHEMICAL ID NUMBER'])]
-        # Thenon_hazardous are concatenated to TRI_facility
-        TRI_facility = pd.concat([TRI_facility, non_hazardous],
-                                 ignore_index=True, axis=0)
-        del non_hazardous
-        # Calling .csv file with relation between RCRA Biennial management
+        # Calling .csv file with relation between RCRA biennial report management methode
         # codes and TRI transfer codes
         Path_WM = self._dir_path + '/../../ancillary/others/TRI_RCRA_Management_Match.csv'
         Management = pd.read_csv(Path_WM, header=0, sep=',',
@@ -849,323 +898,353 @@ class TRI_EoL:
                                          'RCRA Waste Management',
                                          'Type of waste management'])
         Management.drop_duplicates(keep='first', inplace=True)
-        # Searching information for RCRA facilities
-        Path_RCRA = self._dir_path + '/../waste_tracking/csv/off_site_tracking/'
-        Files = [File for File in os.listdir(Path_RCRA)
-                 if File.startswith('RCRAInfo')]
-        RCRAINFO = pd.DataFrame()
-        for F in Files:
-            RCRAINFO_year = pd.read_csv(Path_RCRA + F, header=0, sep=',',
-                                        low_memory=False,
-                                        usecols=['REPORTING YEAR',
-                                                 'SRS INTERNAL TRACKING NUMBER',
-                                                 'QUANTITY RECEIVED',
-                                                 'FOR WHAT IS TRANSFERRED',
-                                                 'RECEIVER TRIFID', 'RECEIVER FRS ID'])
-            RCRAINFO_year =\
-                RCRAINFO_year.loc[(RCRAINFO_year['QUANTITY RECEIVED'] != 0)
-                                  & (pd.notnull(RCRAINFO_year['QUANTITY RECEIVED']))]
-            RCRAINFO_year.rename(columns={'SRS INTERNAL TRACKING NUMBER': 'SRS CHEMICAL ID',
-                                          'FOR WHAT IS TRANSFERRED': 'RCRA Waste Management',
-                                          'REPORTING YEAR': 'RECEIVING YEAR',
-                                          'RECEIVER FRS ID': 'RETDF FRS ID',
-                                          'RECEIVER TRIFID': 'RETDF TRIFID'},
-                                 inplace=True)
-            RCRAINFO = pd.concat([RCRAINFO, RCRAINFO_year],
-                                 ignore_index=True, axis=0)
-            del RCRAINFO_year
-        RCRAINFO = pd.merge(RCRAINFO, Management, how='inner',
-                            on='RCRA Waste Management')
-        RCRAINFO.drop_duplicates(keep='first', inplace=True)
-        RCRA_facility = pd.merge(RCRA_facility, RCRAINFO, how='left',
-                                 left_on=['SRS CHEMICAL ID', 'RECEIVER TRIFID',
-                                          'WASTE MANAGEMENT UNDER TRI'],
-                                 right_on=['SRS CHEMICAL ID', 'RETDF TRIFID',
-                                           'TRI Waste Management'])
-        RCRA_facility.drop_duplicates(keep='first', inplace=True)
-        del RCRAINFO, Files
-        RCRA_facility.rename(columns={'Type of waste management': 'WASTE MANAGEMENT UNDER EPA WMH'},
-                             inplace=True)
-        RCRA_facility.drop(['TRI Waste Management', 'RCRA Waste Management'],
-                           axis=1, inplace=True)
-        No_successful = RCRA_facility.loc[pd.isnull(
-                                          RCRA_facility['RETDF TRIFID'])]
-        RCRA_facility = RCRA_facility.loc[pd.notnull(
-                                          RCRA_facility['RETDF TRIFID'])]
-        RCRA_facility['COHERENCY'] = 'F'
-        # Flow coherency
-        RCRA_facility.loc[RCRA_facility['QUANTITY RECEIVED']
-                          >= RCRA_facility['QUANTITY TRANSFER OFF-SITE'],
-                          'COHERENCY'] = 'T'
-        grouping = db_cols + ['WASTE MANAGEMENT UNDER EPA WMH',
-                              'RETDF TRIFID', 'RETDF FRS ID']
-        RCRA_facility = RCRA_facility.join(RCRA_facility.groupby(grouping)
-                                           ['COHERENCY']
-                                           .apply(lambda x: 'F' if (x == 'F')
-                                           .all() else 'T'),
-                                           on=grouping, rsuffix='_r')
-        No_coherent = RCRA_facility.loc[RCRA_facility['COHERENCY_r'] == 'F']
-        No_successful = pd.concat([No_successful, No_coherent],
-                                  ignore_index=True, axis=0)
-        del No_coherent
-        No_successful.drop(columns=['WASTE MANAGEMENT UNDER EPA WMH',
-                                    'RECEIVING YEAR', 'QUANTITY RECEIVED',
-                                    'RETDF FRS ID', 'RETDF TRIFID',
-                                    'COHERENCY', 'COHERENCY_r'],
-                           inplace=True)
-        No_successful.drop_duplicates(keep='first', inplace=True)
-        RCRA_facility = RCRA_facility.loc[RCRA_facility['COHERENCY'] == 'T']
-        RCRA_facility['Year_difference'] =\
-            RCRA_facility.apply(lambda row:
-                                abs(row['RECEIVING YEAR']
-                                    - row['REPORTING YEAR']),
+
+        # ------------------------------- No brokers -------------------------#
+        if not No_broker.empty:
+            # The off-site facility is RCRA?
+            RCRA_facility = No_broker.loc[pd.notnull(No_broker['RECEIVER RCRAInfo ID'])]
+            TRI_facility = No_broker.loc[pd.isnull(No_broker['RECEIVER RCRAInfo ID'])]
+            del No_broker
+            # Checking the TRI chemical is a RCRA hazardous waste
+            if not RCRA_facility.empty:
+                non_hazardous =\
+                    RCRA_facility.loc[pd.isnull(RCRA_facility['RCRAInfo CHEMICAL ID NUMBER'])
+                                    & pd.notnull(RCRA_facility['RECEIVER TRIFID'])]
+                RCRA_facility =\
+                    RCRA_facility.loc[pd.notnull(RCRA_facility['RCRAInfo CHEMICAL ID NUMBER'])]
+                # The non_hazardous are concatenated to TRI_facility
+                TRI_facility = pd.concat([TRI_facility, non_hazardous],
+                                        ignore_index=True, axis=0)
+                del non_hazardous
+                if not RCRA_facility.empty:
+                    # Searching information for RCRA facilities
+                    Files = [File for File in os.listdir(Tracking_path)
+                                if File.startswith('RCRAInfo')]
+                    RCRAINFO = pd.DataFrame()
+                    for F in Files:
+                        RCRAINFO_year = pd.read_csv(Tracking_path + F, header=0, sep=',',
+                                                    low_memory=False,
+                                                    usecols=['REPORTING YEAR',
+                                                            'SRS INTERNAL TRACKING NUMBER',
+                                                            'QUANTITY RECEIVED',
+                                                            'FOR WHAT IS TRANSFERRED',
+                                                            'RECEIVER TRIFID', 'RECEIVER FRS ID'])
+                        RCRAINFO_year =\
+                            RCRAINFO_year.loc[(RCRAINFO_year['QUANTITY RECEIVED'] != 0)
+                                                & 
+                                              (pd.notnull(RCRAINFO_year['QUANTITY RECEIVED']))]
+                        RCRAINFO_year.rename(columns={'SRS INTERNAL TRACKING NUMBER': 'SRS CHEMICAL ID',
+                                                        'FOR WHAT IS TRANSFERRED': 'RCRA Waste Management',
+                                                        'REPORTING YEAR': 'RECEIVING YEAR',
+                                                        'RECEIVER FRS ID': 'RETDF FRS ID',
+                                                        'RECEIVER TRIFID': 'RETDF TRIFID'},
+                                                inplace=True)
+                        RCRAINFO = pd.concat([RCRAINFO, RCRAINFO_year],
+                                                ignore_index=True, axis=0)
+                        del RCRAINFO_year
+                    RCRAINFO = pd.merge(RCRAINFO, Management, how='inner',
+                                        on='RCRA Waste Management')
+                    RCRAINFO.drop_duplicates(keep='first', inplace=True)
+                    RCRA_facility = pd.merge(RCRA_facility, RCRAINFO, how='left',
+                                                left_on=['SRS CHEMICAL ID', 'RECEIVER FRS ID',
+                                                        'WASTE MANAGEMENT UNDER TRI'],
+                                                right_on=['SRS CHEMICAL ID', 'RETDF FRS ID',
+                                                        'TRI Waste Management'])
+                    RCRA_facility.drop_duplicates(keep='first', inplace=True)
+                    del RCRAINFO, Files
+                    RCRA_facility.rename(columns={'Type of waste management': 'WASTE MANAGEMENT UNDER EPA WMH'},
+                                        inplace=True)
+                    RCRA_facility.drop(['TRI Waste Management', 'RCRA Waste Management'],
+                                    axis=1, inplace=True)
+                    No_successful = RCRA_facility.loc[pd.isnull(
+                                                    RCRA_facility['RETDF TRIFID'])]
+                    RCRA_facility = RCRA_facility.loc[pd.notnull(
+                                                    RCRA_facility['RETDF TRIFID'])]
+                    RCRA_facility['COHERENCY'] = 'F'
+                    # Flow coherency
+                    RCRA_facility.loc[RCRA_facility['QUANTITY RECEIVED']
+                                    >= RCRA_facility['QUANTITY TRANSFER OFF-SITE'],
+                                    'COHERENCY'] = 'T'
+                    grouping = db_cols + ['WASTE MANAGEMENT UNDER EPA WMH',
+                                        'RETDF TRIFID', 'RETDF FRS ID']
+                    # Excluding grouping columns with null values
+                    grouping_no_null = [g for g in grouping if pd.notnull(RCRA_facility[g]).all()]
+                    RCRA_facility['COHERENCY_r'] = RCRA_facility.groupby(grouping_no_null, as_index=False)['COHERENCY']\
+                        .transform(lambda x: 'F' if (x == 'F').all() else 'T')
+                    No_coherent = RCRA_facility.loc[RCRA_facility['COHERENCY_r'] == 'F']
+                    No_successful = pd.concat([No_successful, No_coherent],
+                                            ignore_index=True, axis=0)
+                    del No_coherent
+                    No_successful.drop(columns=['WASTE MANAGEMENT UNDER EPA WMH',
+                                                'RECEIVING YEAR', 'QUANTITY RECEIVED',
+                                                'RETDF FRS ID', 'RETDF TRIFID',
+                                                'COHERENCY', 'COHERENCY_r'],
+                                    inplace=True)
+                    No_successful.drop_duplicates(keep='first', inplace=True)
+                    RCRA_facility = RCRA_facility.loc[RCRA_facility['COHERENCY'] == 'T']
+                    RCRA_facility['Year_difference'] =\
+                        RCRA_facility.apply(lambda row:
+                                            abs(row['RECEIVING YEAR']
+                                                - row['REPORTING YEAR']),
+                                            axis=1)
+                    # Selecting between years
+                    RCRA_facility.reset_index(inplace=True, drop=True)
+                    RCRA_facility = RCRA_facility.loc[RCRA_facility.groupby(grouping)
+                                                    .Year_difference.idxmin()]
+                    del grouping
+                    RCRA_facility.drop(['Year_difference', 'RECEIVING YEAR', 'COHERENCY',
+                                        'COHERENCY_r', 'QUANTITY RECEIVED'],
+                                    axis=1, inplace=True)
+                    TRI_facility = pd.concat([TRI_facility, No_successful],
+                                            ignore_index=True, axis=0)
+                    del No_successful
+            # Searching for information for TRI facilities
+            TRI_facility['RETDF FRS ID'] = TRI_facility['RECEIVER FRS ID']
+            TRI_facility['RETDF TRIFID'] = TRI_facility['RECEIVER TRIFID']
+            TRI_facility = pd.merge(TRI_facility, Management, how='left',
+                                    left_on='WASTE MANAGEMENT UNDER TRI',
+                                    right_on='TRI Waste Management')
+            TRI_facility.rename(columns={'Type of waste management': 'WASTE MANAGEMENT UNDER EPA WMH'},
+                                inplace=True)
+            TRI_facility.drop(['TRI Waste Management', 'RCRA Waste Management'],
+                            axis=1, inplace=True)
+            TRI_facility.drop_duplicates(keep='first', inplace=True)
+            No_broker = pd.concat([TRI_facility, RCRA_facility],
+                                ignore_index=True, axis=0)
+            del TRI_facility, RCRA_facility
+
+            # Calling releases
+            Files_r = [File for File in os.listdir(Path_TRI)
+                    if File.startswith('TRI')]
+            df_TRI = pd.DataFrame()
+            for File_r in Files_r:
+                Releases = pd.read_csv(Path_TRI + File_r)
+                df_TRI = pd.concat([Releases, df_TRI], ignore_index=True, axis=0)
+                del Releases
+            del Files_r
+            df_TRI.drop(columns=['UNIT OF MEASURE'], inplace=True)
+            df_TRI['Year_difference'] =\
+                df_TRI.apply(lambda row:
+                            abs(int(self.year) - row['REPORTING YEAR']),
+                            axis=1)
+            grouping = ['TRIFID', 'TRI_CHEM_ID', 'COMPARTMENT']
+            # Selecting between years
+            df_TRI.reset_index(inplace=True, drop=True)
+            df_TRI = df_TRI.loc[df_TRI.groupby(grouping)\
+                                .Year_difference.idxmin()]
+            del grouping
+            df_TRI['TEMPORAL CORRELATION OF RETDF'] =\
+                df_TRI.Year_difference.apply(lambda x:
+                                            self._temporal_correlation(int(x)))
+            df_TRI.drop(['Year_difference'], axis=1, inplace=True)
+            df_TRI.rename(columns={'REPORTING YEAR': 'RETDF REPORTING YEAR'},
+                        inplace=True)
+            Facility = pd.read_csv(Path_TRI + 'Facility_Information.csv')
+            df_TRI = pd.merge(df_TRI, Facility, how='inner', on='TRIFID')
+            df_TRI.drop_duplicates(keep='first', inplace=True)
+            df_TRI.rename(columns={'NAICS Title': 'RETDF PRIMARY NAICS TITLE',
+                                'PRIMARY NAICS CODE': 'RETDF PRIMARY NAICS CODE',
+                                'TOTAL RELEASE': 'TOTAL RELEASE FROM RETDF',
+                                'TOTAL RELEASE RELIABILITY': 'RELIABILITY OF TOTAL RELEASE FROM RETDF',
+                                'TOTAL WASTE': 'TOTAL WASTE GENERATED BY RETDF',
+                                'TOTAL WASTE RELIABILITY': 'RELIABILITY OF TOTAL WASTE GENERATED BY RETDF',
+                                'MAXIMUM AMOUNT ON-SITE': 'MAXIMUM AMOUNT PRESENT AT RETDF',
+                                'FLOW TO COMPARTMENT': 'FLOW TO COMPARTMENT FROM RETDF',
+                                'FLOW TO COMPARTMENT RELIABILITY': 'RELIABILITY OF FLOW TO COMPARTMENT FROM RETDF',
+                                'TRI_CHEM_ID': 'TRI CHEMICAL ID NUMBER',
+                                'TRIFID': 'RETDF TRIFID',
+                                'FACILITY NAME': 'RETDF NAME',
+                                'FACILITY STREET': 'RETDF STREET',
+                                'FACILITY CITY': 'RETDF CITY',
+                                'FACILITY COUNTY': 'RETDF COUNTY',
+                                'FACILITY STATE': 'RETDF STATE',
+                                'FACILITY ZIP CODE': 'RETDF ZIP',
+                                'LATITUDE': 'RETDF LATITUDE',
+                                'LONGITUDE': 'RETDF LONGITUDE'},
+                        inplace=True)
+
+            No_broker = pd.merge(No_broker, df_TRI, how='inner',
+                                on=['TRI CHEMICAL ID NUMBER',
+                                    'RETDF TRIFID'])
+            No_broker.drop_duplicates(keep='first', inplace=True)
+            No_broker['MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'] =\
+                No_broker.apply(lambda row:
+                                min([row['TOTAL RELEASE FROM RETDF'],
+                                    row['QUANTITY TRANSFER OFF-SITE']]),
                                 axis=1)
-        # Selecting between years
-        RCRA_facility.reset_index(inplace=True, drop=True)
-        RCRA_facility = RCRA_facility.loc[RCRA_facility.groupby(grouping)
-                                          .Year_difference.idxmin()]
-        del grouping
-        RCRA_facility.drop(['Year_difference', 'RECEIVING YEAR', 'COHERENCY',
-                            'COHERENCY_r', 'QUANTITY RECEIVED'],
-                           axis=1, inplace=True)
-        TRI_facility = pd.concat([TRI_facility, No_successful],
-                                 ignore_index=True, axis=0)
-        del No_successful
-        # Searching information for TRI facilities
-        TRI_facility['RETDF FRS ID'] = TRI_facility['RECEIVER FRS ID']
-        TRI_facility['RETDF TRIFID'] = TRI_facility['RECEIVER TRIFID']
-        TRI_facility = pd.merge(TRI_facility, Management, how='left',
-                                left_on='WASTE MANAGEMENT UNDER TRI',
-                                right_on='TRI Waste Management')
-        TRI_facility.rename(columns={'Type of waste management': 'WASTE MANAGEMENT UNDER EPA WMH'},
-                            inplace=True)
-        TRI_facility.drop(['TRI Waste Management', 'RCRA Waste Management'],
-                          axis=1, inplace=True)
-        TRI_facility.drop_duplicates(keep='first', inplace=True)
-        No_broker = pd.concat([TRI_facility, RCRA_facility],
-                              ignore_index=True, axis=0)
-        del TRI_facility, RCRA_facility
-        # Calling releases
-        Path_TRI = self._dir_path + '/../waste_tracking/csv/on_site_tracking/'
-        Files_r = [File for File in os.listdir(Path_TRI)
-                   if File.startswith('TRI')]
-        df_TRI = pd.DataFrame()
-        for File_r in Files_r:
-            Releases = pd.read_csv(Path_TRI + File_r)
-            df_TRI = pd.concat([Releases, df_TRI], ignore_index=True, axis=0)
-            del Releases
-        del Files_r
-        df_TRI.drop(columns=['UNIT OF MEASURE'], inplace=True)
-        df_TRI['Year_difference'] =\
-            df_TRI.apply(lambda row:
-                         abs(int(self.year) - row['REPORTING YEAR']),
-                         axis=1)
-        grouping = ['TRIFID', 'TRI_CHEM_ID', 'COMPARTMENT']
-        # Selecting between years
-        df_TRI.reset_index(inplace=True, drop=True)
-        df_TRI = df_TRI.loc[df_TRI.groupby(grouping)\
-                            .Year_difference.idxmin()]
-        del grouping
-        df_TRI['TEMPORAL CORRELATION OF RETDF'] =\
-            df_TRI.Year_difference.apply(lambda x:
-                                         self._temporal_correlation(x))
-        df_TRI.drop(['Year_difference'], axis=1, inplace=True)
-        df_TRI.rename(columns={'REPORTING YEAR': 'RETDF REPORTING YEAR'},
-                      inplace=True)
-        Facility = pd.read_csv(Path_TRI + 'Facility_Information.csv')
-        df_TRI = pd.merge(df_TRI, Facility, how='inner', on='TRIFID')
-        df_TRI.drop_duplicates(keep='first', inplace=True)
-        df_TRI.rename(columns={'NAICS Title': 'RETDF PRIMARY NAICS TITLE',
-                               'PRIMARY NAICS CODE': 'RETDF PRIMARY NAICS CODE',
-                               'TOTAL RELEASE': 'TOTAL RELEASE FROM RETDF',
-                               'TOTAL RELEASE RELIABILITY': 'RELIABILITY OF TOTAL RELEASE FROM RETDF',
-                               'TOTAL WASTE': 'TOTAL WASTE GENERATED BY RETDF',
-                               'TOTAL WASTE RELIABILITY': 'RELIABILITY OF TOTAL WASTE GENERATED BY RETDF',
-                               'MAXIMUM AMOUNT ON-SITE': 'MAXIMUM AMOUNT PRESENT AT RETDF',
-                               'FLOW TO COMPARTMENT': 'FLOW TO COMPARTMENT FROM RETDF',
-                               'FLOW TO COMPARTMENT RELIABILITY': 'RELIABILITY OF FLOW TO COMPARTMENT FROM RETDF',
-                               'TRI_CHEM_ID': 'TRI CHEMICAL ID NUMBER',
-                               'TRIFID': 'RETDF TRIFID',
-                               'FACILITY NAME': 'RETDF NAME',
-                               'FACILITY STREET': 'RETDF STREET',
-                               'FACILITY CITY': 'RETDF CITY',
-                               'FACILITY COUNTY': 'RETDF COUNTY',
-                               'FACILITY STATE': 'RETDF STATE',
-                               'FACILITY ZIP CODE': 'RETDF ZIP',
-                               'LATITUDE': 'RETDF LATITUDE',
-                               'LONGITUDE': 'RETDF LONGITUDE'},
-                      inplace=True)
-        No_broker = pd.merge(No_broker, df_TRI, how='inner',
-                             on=['TRI CHEMICAL ID NUMBER',
-                                 'RETDF TRIFID'])
-        No_broker.drop_duplicates(keep='first', inplace=True)
-        No_broker['MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'] =\
-            No_broker.apply(lambda row:
-                            min([row['TOTAL RELEASE FROM RETDF'],
-                                 row['QUANTITY TRANSFER OFF-SITE']]),
-                            axis=1)
-        No_broker['RELIABILITY OF MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'] =\
-            No_broker.apply(lambda row:
-                            max([row['RELIABILITY OF TOTAL RELEASE FROM RETDF'],
-                                 row['RELIABILITY OF OFF-SITE TRANSFER']]),
-                            axis=1)
-        No_broker['TEMPORAL CORRELATION OF MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'] = No_broker['TEMPORAL CORRELATION OF RETDF']
-        No_broker = No_broker.where((pd.notnull(No_broker)), None)
-        No_broker = normalizing_naics(No_broker, title=True)
-        No_broker['PATHWAY RELATIVE IMPORTANCE'] = 1
-        No_broker['NUMBER OF BROKERS'] = 0
-        # Reading .txt with order for columns
-        Path_txt = self._dir_path + '/../../ancillary/others/Features_at_EoL.txt'
-        Columns = pd.read_csv(Path_txt,
-                              header=None,
-                              sep='\t').iloc[:, 0].tolist()
-        Columns = [col for col in Columns if col in No_broker.columns]
-        No_broker = No_broker[Columns]
-        No_broker.to_csv(self._dir_path + f'/{self.year}/TRI_SRS_FRS_CompTox_RETDF_{self.year}_EoL.csv',
-                         sep=',', index=False)
-        del No_broker
+            No_broker['RELIABILITY OF MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'] =\
+                No_broker.apply(lambda row:
+                                max([row['RELIABILITY OF TOTAL RELEASE FROM RETDF'],
+                                    row['RELIABILITY OF OFF-SITE TRANSFER']]),
+                                axis=1)
+            No_broker['TEMPORAL CORRELATION OF MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'] = No_broker['TEMPORAL CORRELATION OF RETDF']
+            No_broker = No_broker.where((pd.notnull(No_broker)), None)
+            No_broker = normalizing_naics(No_broker, title=True)
+            No_broker['PATHWAY RELATIVE IMPORTANCE'] = 1
+            No_broker['PATHWAY RELATIVE IMPORTANCE'] = No_broker['PATHWAY RELATIVE IMPORTANCE'].round(8)
+            No_broker['NUMBER OF BROKERS'] = 0
+
+            # Reading .txt with order for columns
+            Path_txt = self._dir_path + '/../../ancillary/others/Features_at_EoL.txt'
+            Columns = pd.read_csv(Path_txt,
+                                header=None,
+                                sep='\t').iloc[:, 0].tolist()
+            Columns = [col for col in Columns if col in No_broker.columns]
+            No_broker = No_broker[Columns]
+            No_broker.to_csv(self._dir_path + f'/{self.year}/TRI_SRS_FRS_CompTox_RETDF_{self.year}_EoL.csv',
+                            sep=',', index=False)
+            del No_broker
+
         # ------------------------------- Brokers --------------------------#
-        Broker = Broker.where((pd.notnull(Broker)), None)
-        Tracking_path = self._dir_path + '/../waste_tracking/csv/off_site_tracking/'
-        Track = pd.DataFrame()
-        # RCRAInfo files
-        Files = [File for File in os.listdir(Tracking_path)
-                 if (File.startswith('RCRAInfo'))]
-        for File in Files:
-            df = pd.read_csv(Tracking_path + File,
-                             usecols=['REPORTING YEAR', 'SENDER FRS ID',
-                                      'SRS INTERNAL TRACKING NUMBER',
-                                      'QUANTITY RECEIVED',
-                                      'QUANTITY TRANSFERRED', 'RELIABILITY',
-                                      'FOR WHAT IS TRANSFERRED',
-                                      'RECEIVER FRS ID', 'RECEIVER TRIFID'])
-            Track = pd.concat([Track, df], ignore_index=True, axis=0)
-        del df
-        # Organizing management dataset
-        WM_match = Management[['TRI Waste Management',
-                               'RCRA Waste Management']]
-        WM_match.drop_duplicates(keep='first', inplace=True,
-                                 subset='TRI Waste Management')
-        WM_match.loc[WM_match['TRI Waste Management'].str.contains('broker',  na=False), 'RCRA Waste Management'] =\
-            'Storage and Transfer -The site receiving this waste stored/bulked and transferred the waste with no reclamation, recovery, destruction, treatment, or disposal at that site'
-        # TRI files
-        Files = [File for File in os.listdir(Tracking_path)
-                 if File.startswith('TRI')]
-        for File in Files:
-            df = pd.read_csv(Tracking_path + File,
-                             usecols=['REPORTING YEAR', 'SENDER FRS ID',
-                                      'SRS INTERNAL TRACKING NUMBER',
-                                      'QUANTITY TRANSFERRED', 'RELIABILITY',
-                                      'FOR WHAT IS TRANSFERRED',
-                                      'RECEIVER FRS ID', 'RECEIVER TRIFID'])
-            df = pd.merge(df, WM_match, how='left',
-                          left_on='FOR WHAT IS TRANSFERRED',
-                          right_on='TRI Waste Management')\
-                .drop_duplicates(keep='first')
-            df['FOR WHAT IS TRANSFERRED'] = df['RCRA Waste Management']
-            df.drop(columns=['TRI Waste Management', 'RCRA Waste Management'],
-                    inplace=True)
-            Track = pd.concat([Track, df], ignore_index=True, axis=0)
-        del df, WM_match, Files, Tracking_path
-        Track.drop_duplicates(keep='first', inplace=True)
-        # Relation chemical-management
-        Statistical_path = self._dir_path + '/../waste_tracking/csv/'
-        R_chem_wm = pd.read_csv(Statistical_path + 'Relation_Chemical_Management.csv')
-        # Relation sender-receiver
-        R_send_receiv = pd.read_csv(Statistical_path + 'Relation_Sender_Receiver.csv')
-        # The shortest distances
-        Distances = pd.read_csv(Statistical_path + 'Tracking_distances.csv',
-                                usecols=['SENDER FRS ID', 'RECEIVER FRS ID',
-                                         'DISTANCE', 'MARITIME FRACTION',
-                                         'RECEIVER LATITUDE',
-                                         'RECEIVER LONGITUDE'])
-        for index, row in Broker.iterrows():
-            Old_distance = 0.0
-            # It is possible to find different pathways which lead to the same RETDF
-            # However the certainty is the highest when the number of broker is the lowest
-            # Although we allow to follow a pathway with up to brokers. The maximum number of brokers was 2
-            Paths = self._off_tracker(row['WASTE MANAGEMENT UNDER TRI'],
-                                      row['RECEIVER FRS ID'],
-                                      row['SRS CHEMICAL ID'],
-                                      row['RCRAInfo CHEMICAL ID NUMBER'],
-                                      Track,
-                                      Management,
-                                      R_chem_wm,
-                                      R_send_receiv,
-                                      Distances,
-                                      row['GENERATOR TRIFID'],
-                                      row['GENERATOR LATITUDE'],
-                                      row['GENERATOR LONGITUDE'],
-                                      Old_distance)
-            if not Paths.empty:
-                df = pd.merge(row.to_frame().T, Paths, how='inner',
-                              on=['WASTE MANAGEMENT UNDER TRI',
-                                  'RECEIVER FRS ID',
-                                  'SRS CHEMICAL ID',
-                                  'RCRAInfo CHEMICAL ID NUMBER'])
-                del Paths
-                df = pd.merge(df, df_TRI, how='inner',
-                              on=['TRI CHEMICAL ID NUMBER',
-                                  'RETDF TRIFID'])
-                df.drop_duplicates(keep='first', inplace=True)
-                if not df.empty:
-                    df['MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'] = \
-                        df.apply(lambda x: min([x['MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'],
-                                                x['TOTAL RELEASE FROM RETDF'],
-                                                x['QUANTITY TRANSFER OFF-SITE']]),
-                                 axis=1)
-                    df['RELIABILITY OF MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'] = \
-                        df.apply(lambda x: max([x['RELIABILITY OF MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'],
-                                                        x['RELIABILITY OF TOTAL RELEASE FROM RETDF'],
-                                                        x['RELIABILITY OF OFF-SITE TRANSFER']]),
-                                 axis=1)
-                    df['TEMPORAL CORRELATION OF MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'] = \
-                        df.apply(lambda x:
-                                 max([x['TEMPORAL CORRELATION OF MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'],
-                                      x['TEMPORAL CORRELATION OF RETDF']]),
-                                 axis=1)
-                    df = normalizing_naics(df, title=True)
-                    Columns = [col for col in Columns if col in df.columns]
-                    df.sort_values('RCRAInfo CHEMICAL ID NUMBER',
-                                          inplace=True,
-                                          ascending=False)
-                    df.drop_duplicates(subset=[col for col in Columns
-                                              if col != 'RCRAInfo CHEMICAL ID NUMBER'],
-                                              keep='first')
-                    df = df[Columns]
-                    df.to_csv(self._dir_path + f'/{self.year}/TRI_SRS_FRS_CompTox_RETDF_{self.year}_EoL.csv',
-                              sep=',', index=False, header=False, mode='a')
-                    del df
-                else:
-                    continue
+        if not Broker.empty:
+            Broker = Broker.where((pd.notnull(Broker)), None)
+            Track = pd.DataFrame()
+            # RCRAInfo files
+            Files = [File for File in os.listdir(Tracking_path)
+                    if (File.startswith('RCRAInfo'))]
+            for File in Files:
+                df = pd.read_csv(Tracking_path + File,
+                                usecols=['REPORTING YEAR', 'SENDER FRS ID',
+                                        'SRS INTERNAL TRACKING NUMBER',
+                                        'QUANTITY RECEIVED',
+                                        'QUANTITY TRANSFERRED', 'RELIABILITY',
+                                        'FOR WHAT IS TRANSFERRED',
+                                        'RECEIVER FRS ID', 'RECEIVER TRIFID'])
+                Track = pd.concat([Track, df], ignore_index=True, axis=0)
+            del df
+            # Organizing management dataset
+            WM_match = Management[['TRI Waste Management',
+                                'RCRA Waste Management']]
+            WM_match.drop_duplicates(keep='first', inplace=True,
+                                    subset='TRI Waste Management')
+            WM_match.loc[WM_match['TRI Waste Management'].str.contains('broker',  na=False), 'RCRA Waste Management'] =\
+                'Storage and Transfer -The site receiving this waste stored/bulked and transferred the waste with no reclamation, recovery, destruction, treatment, or disposal at that site'
+            # TRI files
+            Files = [File for File in os.listdir(Tracking_path)
+                    if File.startswith('TRI')]
+            for File in Files:
+                df = pd.read_csv(Tracking_path + File,
+                                usecols=['REPORTING YEAR', 'SENDER FRS ID',
+                                        'SRS INTERNAL TRACKING NUMBER',
+                                        'QUANTITY TRANSFERRED', 'RELIABILITY',
+                                        'FOR WHAT IS TRANSFERRED',
+                                        'RECEIVER FRS ID', 'RECEIVER TRIFID'])
+                df = pd.merge(df, WM_match, how='left',
+                            left_on='FOR WHAT IS TRANSFERRED',
+                            right_on='TRI Waste Management')\
+                    .drop_duplicates(keep='first')
+                df['FOR WHAT IS TRANSFERRED'] = df['RCRA Waste Management']
+                df.drop(columns=['TRI Waste Management', 'RCRA Waste Management'],
+                        inplace=True)
+                Track = pd.concat([Track, df], ignore_index=True, axis=0)
+            del df, WM_match, Files, Tracking_path
+            Track.drop_duplicates(keep='first', inplace=True)
+            # Relation chemical-management
+            Statistical_path = self._dir_path + '/../waste_tracking/csv/'
+            R_chem_wm = pd.read_csv(Statistical_path + 'Relation_Chemical_Management.csv')
+            # Relation sender-receiver
+            R_send_receiv = pd.read_csv(Statistical_path + 'Relation_Sender_Receiver.csv')
+            # The shortest distances
+            Distances = pd.read_csv(Statistical_path + 'Tracking_distances.csv',
+                                    usecols=['SENDER FRS ID', 'RECEIVER FRS ID',
+                                            'DISTANCE', 'MARITIME FRACTION',
+                                            'RECEIVER LATITUDE',
+                                            'RECEIVER LONGITUDE'])
+            # Iteration on the Broker dataframe
+            for _, row in Broker.iterrows():
+                Old_distance = 0.0
+                # It is possible to find different pathways which lead to the same RETDF
+                # However the certainty is the highest when the number of broker is the lowest
+                # Although we allow to follow a pathway with up to brokers. The maximum number of brokers was 2
+                Paths = self._off_tracker(row['WASTE MANAGEMENT UNDER TRI'],
+                                        row['RECEIVER FRS ID'],
+                                        row['SRS CHEMICAL ID'],
+                                        row['RCRAInfo CHEMICAL ID NUMBER'],
+                                        Track,
+                                        Management,
+                                        R_chem_wm,
+                                        R_send_receiv,
+                                        Distances,
+                                        row['GENERATOR TRIFID'],
+                                        row['GENERATOR LATITUDE'],
+                                        row['GENERATOR LONGITUDE'],
+                                        Old_distance)
+                if not Paths.empty:
+                    df = pd.merge(row.to_frame().T, Paths, how='inner',
+                                on=['WASTE MANAGEMENT UNDER TRI',
+                                    'RECEIVER FRS ID',
+                                    'SRS CHEMICAL ID',
+                                    'RCRAInfo CHEMICAL ID NUMBER'])
+                    del Paths
+                    df = pd.merge(df, df_TRI, how='inner',
+                                on=['TRI CHEMICAL ID NUMBER',
+                                    'RETDF TRIFID'])
+                    df.drop_duplicates(keep='first', inplace=True)
+                    if not df.empty:
+                        df['MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'] = \
+                            df.apply(lambda x: min([x['MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'],
+                                                    x['TOTAL RELEASE FROM RETDF'],
+                                                    x['QUANTITY TRANSFER OFF-SITE']]),
+                                    axis=1)
+                        df['RELIABILITY OF MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'] = \
+                            df.apply(lambda x: max([x['RELIABILITY OF MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'],
+                                                            x['RELIABILITY OF TOTAL RELEASE FROM RETDF'],
+                                                            x['RELIABILITY OF OFF-SITE TRANSFER']]),
+                                    axis=1)
+                        df['TEMPORAL CORRELATION OF MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'] = \
+                            df.apply(lambda x:
+                                    max([x['TEMPORAL CORRELATION OF MAXIMUM POSSIBLE FLOW FOLLOWING PATHWAY'],
+                                        x['TEMPORAL CORRELATION OF RETDF']]),
+                                    axis=1)
+                        df = normalizing_naics(df, title=True)
+                        Columns = [col for col in Columns if col in df.columns]
+                        df.sort_values('RCRAInfo CHEMICAL ID NUMBER',
+                                            inplace=True,
+                                            ascending=False)
+                        df.drop_duplicates(subset=[col for col in Columns
+                                                if col != 'RCRAInfo CHEMICAL ID NUMBER'],
+                                                keep='first')
+                        # Normalizing the values
+                        df['PATHWAY RELATIVE IMPORTANCE'] = df['PATHWAY RELATIVE IMPORTANCE'].round(8) 
+                        df = df[Columns]
+                        df.to_csv(self._dir_path + f'/{self.year}/TRI_SRS_FRS_CompTox_RETDF_{self.year}_EoL.csv',
+                                sep=',', index=False, header=False, mode='a')
+                        del df
+                    else:
+                        continue
         df = pd.read_csv(self._dir_path + f'/{self.year}/TRI_SRS_FRS_CompTox_RETDF_{self.year}_EoL.csv',
-                         header=0, sep=',', low_memory=False)
+                        header=0, sep=',', low_memory=False)
         df.sort_values('RCRAInfo CHEMICAL ID NUMBER',
-                       inplace=True,
-                       ascending=False)
+                    inplace=True,
+                    ascending=False)
         df.drop_duplicates(subset=[col for col in Columns
-                           if col != 'RCRAInfo CHEMICAL ID NUMBER'],
-                           keep='first')
+                        if col != 'RCRAInfo CHEMICAL ID NUMBER'],
+                        keep='first')
         df = df[Columns]
         df.to_csv(self._dir_path + f'/{self.year}/TRI_SRS_FRS_CompTox_RETDF_{self.year}_EoL.csv',
-                  sep=',', index=False)
+                sep=',', index=False)
 
 
     def all_pipeline(self):
 
         # Organize files [A]
+        print('Organizing files')
         self.generate_dataframe()
 
-        # Retrieve Chemical information from SRS [B]
+        # Retrieve chemical information from SRS [B]
+        print('Retrieving chemical information from SRS')
         self.srs_search()
 
         # Add FRS infomation [C]
+        print('Adding FRS infomation')
         self.frs_search()
 
         # Assigning TSCA groups [D]
+        print('Assigning TSCA groups')
         self.comptox_tsca_groups()
 
         # Search Flows [E]
+        print('Searching for flows')
         self.flows_search()
 
 
@@ -1176,16 +1255,22 @@ if __name__ == '__main__':
     parser.add_argument('Option',
                         help='What do you want to do:\
                         [A]: Organize files.\
-                        [B]: Retrieve Chemical information from SRS.\
+                        [B]: Retrieve chemical information from SRS.\
                         [C]: Add FRS infomation.\
-                        [D]: Assigning TSCA groups.\
-                        [E]: Search Flows.\
+                        [D]: Assign TSCA groups.\
+                        [E]: Search for flows.\
                         [F]: All the options.',
                         type=str)
 
     parser.add_argument('Year',
                         help='What TRI year do you want to organize?.',
                         type=str)
+
+    parser.add_argument('-Fr', '--Fraction',
+                        help='What fraction of the dataset samples would you like to use? (useful for testing).',
+                        type=float,
+                        required=False,
+                        default=1)
 
     parser.add_argument('-F', '--Files', nargs='+',
                         help='What TRI Files do you want (e.g., 1a, 2a, etc).\
@@ -1194,10 +1279,12 @@ if __name__ == '__main__':
                         required=False,
                         default=None)
 
+
     args = parser.parse_args()
 
     TRIyear = args.Year
     TRIfiles = args.Files
+    Fraction = args.Fraction
     start_time = time.time()
 
     if args.Option == 'A':
@@ -1213,9 +1300,9 @@ if __name__ == '__main__':
         TRI = TRI_EoL(TRIyear)
         TRI.comptox_tsca_groups()
     elif args.Option == 'E':
-        TRI = TRI_EoL(TRIyear)
+        TRI = TRI_EoL(TRIyear, Fraction=Fraction)
         TRI.flows_search()
     elif args.Option == 'F':
-        TRI = TRI_EoL(TRIyear, Files=TRIfiles)
+        TRI = TRI_EoL(TRIyear, Files=TRIfiles, Fraction=Fraction)
         TRI.all_pipeline()
     print('Execution time: %s sec' % (time.time() - start_time))
