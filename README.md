@@ -139,7 +139,7 @@ If you are a Python programmer and you run the data engineering for a TRI year (
 
 ## Using Git Large File Storage (git-lfs)
 
-You must use git lfs in order to retrieve all the files and save them in your computer. Take a look at the [.gitattributes](https://github.com/jodhernandezbe/EoL4Chem/blob/main/.gitattributes) file to see the list of files pushed using git-lfs command.
+You can use git-lfs if you prefer to get the [TRI_SRS_FRS_CompTox_RETDF_2018_EoL.csv](https://drive.google.com/file/d/1ThOQUhq4Qcv-rp7SHFT41uNfMw5iFUco/view?usp=sharing) and [Uses_information.csv](https://drive.google.com/file/d/1qsA7PkV3T6zV_LBer_FpYYsKUKLLZg_3/view?usp=sharing) or you can download the files using the shared links.
 
 ## Creating conda virtual environment
 
