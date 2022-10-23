@@ -1,9 +1,9 @@
 name: EoL4Chem_env
 channels:
 - pyviz/label/dev
-- conda-forge
 - plotly
 - anaconda
+- conda-forge
 - defaults
 dependencies:
 - async_generator=1.10=py_0
